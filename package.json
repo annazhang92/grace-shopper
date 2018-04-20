@@ -1,0 +1,28 @@
+{
+  "name": "grace-shopper",
+  "version": "1.0.0",
+  "description": "An e-commerce website built using React, Redux...*insert all technologies here.*",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-import": "^2.11.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tbakht926/grace-shopper.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/tbakht926/grace-shopper/issues"
+  },
+  "homepage": "https://github.com/tbakht926/grace-shopper#readme"
+}
