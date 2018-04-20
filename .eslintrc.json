@@ -2,6 +2,7 @@
   "extends": "airbnb",
   "parser": "babel-eslint",
   "rules": {
-    "semi": [1, "always"]
+    "semi": [1, "always"],
+    "import/newline-after-import": 0
   }
 }
