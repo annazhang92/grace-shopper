@@ -29,11 +29,11 @@ const seed = () => {
       price: 65.00
     })
   .then(() => {
-      // for(var i = 0; i < numCategories; i++){
-      //   Category.create({
-      //     name: faker.commerce.department()
-      //   });
-      // };
+      for(var i = 0; i < numCategories; i++){
+        Category.create({
+          name: faker.commerce.department()
+        });
+      };
     })
   .then(()=>{
       for(var i = 0; i < numProducts; i++){
@@ -41,7 +41,11 @@ const seed = () => {
           name: faker.commerce.productName(),
           description: faker.lorem.sentence(),
           price: faker.commerce.price()
+        })
+        .then( product => {
+          product.setCategory(Math.floor(Math.random() * numCategories) + 1)
         });
+
       };
     })
 
