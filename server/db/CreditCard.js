@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const conn = require('./conn');
 
-const CreditCard = db.define('creditCard', {
+const CreditCard = conn.define('creditCard', {
   creditCardNumber: {
     type: Sequelize.STRING,
     allowNull: false,

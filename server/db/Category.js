@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const conn = require('./conn');
 
-const Genre = db.define('genre', {
+const Genre = conn.define('genre', {
 
 });
 

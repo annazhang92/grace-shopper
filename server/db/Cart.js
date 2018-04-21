@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const conn = require('./conn');
 
-const Cart = db.define('cart', {
+const Cart = conn.define('cart', {
 
 });
 

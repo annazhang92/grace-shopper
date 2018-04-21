@@ -1,7 +1,7 @@
 const Sequelize = require('sequelize');
 const conn = require('./conn');
 
-const Address = db.define('address', {
+const Address = conn.define('address', {
   fullName: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -59,4 +59,4 @@ const Address = db.define('address', {
 });
 
 
-model.exports = Address;
+module.exports = Address;
