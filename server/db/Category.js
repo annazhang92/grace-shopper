@@ -1,8 +1,14 @@
 const Sequelize = require('sequelize');
 const conn = require('./conn');
 
-const Genre = conn.define('genre', {
-
+const Category = conn.define('category', {
+  name: {
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  }
 });
 
-module.exports = Genre;
+module.exports = Category;
