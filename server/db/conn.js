@@ -1,6 +1,4 @@
-const Sequelize = require('sequelize');
-const conn = new Sequelize(process.env.DATABASE_URL || 'postgres://localhost/grace-shopper', {
-    logging: false
-});
+onst Sequelize = require('sequelize');
+const conn = new Sequelize(process.env.DATABASE_URL);
 
-module.exports =  conn;
+module.exports = conn;
