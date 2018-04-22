@@ -1,6 +1,15 @@
 import React from 'react';
 import { render } from 'react-dom';
+import App from './components/App';
+import { Provider } from 'react-redux';
+import store from './store';
 
 const app = document.getElementById('app');
 
-render(<hr/>, app);
+// render(
+//   <Provider store={ store }>
+//     <App />
+//   </Provider>, app
+// );
+
+render(<hr/>,app);
