@@ -3,8 +3,6 @@ import { connect } from 'react-redux';
 import ProductCard from './ProductCard';
 
 const Products = ({ products }) => {
-
-  console.log(`Products dumb ${products}`);
   return(
     <div>
       {
