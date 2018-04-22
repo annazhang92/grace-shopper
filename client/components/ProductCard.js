@@ -7,7 +7,7 @@ const ProductCard = ( props ) => {
   console.log(`ProductCard props`, props)
   const { products } = props;
   return(
-    <div style={{display:'flex', flexDirection:'row'}}>
+    <div className='wrapper'>
       {
         products.length ?
         products.map( product => {
