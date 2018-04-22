@@ -4,9 +4,24 @@ import { connect } from 'react-redux';
 
 
 const ProductCard = ( props ) => {
+  console.log(`ProductCard props`, props)
+  const { products } = props;
   return(
     <div>
-      <h1> ProductCard </h1>
+      {
+        products.length ?
+        products.map( product => {
+          return(
+            <div key={ product.id }>
+              <span>
+                {product.name}
+              </span>
+            </div>
+          )
+        })
+        :
+        null
+      }
     </div>
   )
 };

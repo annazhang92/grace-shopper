@@ -26,20 +26,22 @@ const seed = () => {
     Product.create({
       name: 'Mascara',
       description: 'GrandeLASH - MD Lash Enhancing Serum',
-      price: 65.00
+      price: 65.00,
+      imageUrl: faker.image.imageUrl()
     })
-  .then(() => {
+    .then(() => {
       for(var i = 0; i < numCategories; i++){
         Category.create({
           name: faker.commerce.department()
         });
       };
     })
-  .then(()=>{
+    .then(()=>{
       for(var i = 0; i < numProducts; i++){
         Product.create({
           name: faker.commerce.productName(),
           description: faker.lorem.sentence(),
+          imageUrl: faker.image.imageUrl(),
           price: faker.commerce.price()
         })
         .then( product => {
