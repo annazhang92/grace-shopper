@@ -27,7 +27,8 @@ const seed = () => {
       name: 'Mascara',
       description: 'GrandeLASH - MD Lash Enhancing Serum',
       price: 65.00,
-      imageUrl: faker.image.imageUrl()
+      imageUrl: 'https://picsum.photos/200/300/?random'
+
     })
     .then(() => {
       for(var i = 0; i < numCategories; i++){
@@ -41,7 +42,7 @@ const seed = () => {
         Product.create({
           name: faker.commerce.productName(),
           description: faker.lorem.sentence(),
-          imageUrl: faker.image.imageUrl(),
+          imageUrl: 'https://picsum.photos/200/300/?random',
           price: faker.commerce.price()
         })
         .then( product => {
