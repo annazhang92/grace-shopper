@@ -6,10 +6,9 @@ import store from './store';
 
 const app = document.getElementById('app');
 
-// render(
-//   <Provider store={ store }>
-//     <App />
-//   </Provider>, app
-// );
+render(
+  <Provider store={ store }>
+    <App />
+  </Provider>, app
+);
 
-render(<hr/>,app);

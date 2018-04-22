@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 
 //------ constants ----
@@ -11,7 +11,7 @@ export const getProducts = () => {
     return axios.get('/api/products')
       .then( res => res.data)
       .then( products => {
-        disatch({
+        dispatch({
           type: GET_PRODUCTS,
           products
         })

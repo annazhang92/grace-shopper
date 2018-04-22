@@ -7,6 +7,7 @@ import Products from './Products';
 
 class App extends Component {
   componentDidMount() {
+    console.log('componentMount', this.props);
     this.props.getProducts();
   }
 
