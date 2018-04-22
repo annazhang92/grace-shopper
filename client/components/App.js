@@ -16,13 +16,13 @@ class App extends Component {
       <Router>
         <div>
           <Switch>
-            <Route exact path='/products' component={ Products } />
+            <Route exact path="/products" component={ Products } />
           </Switch>
         </div>
       </Router>
-    )
+    );
   }
-};
+}
 
 const mapDispatchToProps = ( dispatch ) => {
   return {
