@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getProducts } from '../store';
 
 import Products from './Products';
+import Nav from './Nav'
 
 class App extends Component {
   componentDidMount() {
@@ -15,6 +16,7 @@ class App extends Component {
     return (
       <Router>
         <div>
+          <Nav/>
           <Switch>
             <Route exact path="/products" component={ Products } />
           </Switch>
