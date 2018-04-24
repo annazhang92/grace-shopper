@@ -4,9 +4,11 @@ import loggerMiddleware from 'redux-logger';
 
 //reducers
 import products from './products';
+import categories from './categories'
 
 const reducer = combineReducers({
-  products
+  products,
+  categories
 });
 
 const store = createStore(reducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
