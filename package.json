@@ -37,7 +37,7 @@
   "scripts": {
     "webpack": "./node_modules/webpack/bin/webpack.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "npm run webpack -- -w & nodemon server.js --ignore dist/ --ignore src/"
+    "start:dev": "npm run webpack -- -w & DATABASE_URL=postgres://localhost/grace_shopper nodemon server/routes/server.js --ignore dist/ --ignore src/"
   },
   "repository": {
     "type": "git",
