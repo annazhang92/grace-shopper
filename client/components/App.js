@@ -11,6 +11,7 @@ import Menu from './Menu';
 import Filter from './Filter';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
+import Cart from './Cart';
 
 class App extends Component {
   componentDidMount() {
@@ -29,6 +30,7 @@ class App extends Component {
           <Route exact path="/products/categories/:id" render={ ({ match, history }) => <Products id={ match.params.id * 1 } history={ history } /> } />
           <Route exact path="/login" component={ LoginForm } />
           <Route exact path="/register" component={ RegisterForm } />
+          <Route exact path="/cart" component={ Cart } />
         </div>
       </Router>
     );
