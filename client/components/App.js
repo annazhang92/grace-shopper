@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Switch, Route } from 'react-router-dom';
+
+//store related
 import { connect } from 'react-redux';
 import { getProducts } from '../store';
 
