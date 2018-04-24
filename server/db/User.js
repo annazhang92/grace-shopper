@@ -40,8 +40,8 @@ const User = conn.define('user', {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
+      // character validation
       notEmpty: true
-      //character validation
     }
   }
 });

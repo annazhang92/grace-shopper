@@ -1,34 +1,32 @@
 import axios from 'axios';
 
 
-//------ constants ----
+// ------ constants ----
 const GET_PRODUCTS = 'GET_PRODUCTS';
 
 
-//---- action creators
+// ---- action creators
 export const getProducts = () => {
-  return (dispatch) => {
+  return dispatch => {
     return axios.get('/api/products')
-      .then( res => res.data)
-      .then( products => {
+      .then(res => res.data)
+      .then(products => {
         dispatch({
           type: GET_PRODUCTS,
           products
-        })
+        });
       })
       .catch(err => {
-        console.log(err)
-      })
+        console.log(err);
+      });
   };
 };
 
 // ------ products reducer
 const products = (state = [], action) => {
-  switch(action.type){
-
+  switch (action.type) {
     case GET_PRODUCTS:
       return action.products;
-
   }
   return state;
 };

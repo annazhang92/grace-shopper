@@ -16,11 +16,14 @@ const Menu = () => {
           <LinkContainer to="/products">
             <NavItem>Products</NavItem>
           </LinkContainer>
-          <LinkContainer to="/login">
-            <NavItem>Login</NavItem>
+          <LinkContainer to="/products/categories">
+            <NavItem>Categories</NavItem>
           </LinkContainer>
         </Nav>
         <Nav pullRight>
+          <LinkContainer to="/login">
+            <NavItem>Login</NavItem>
+          </LinkContainer>
           <LinkContainer to="/cart">
             <NavItem>Cart</NavItem>
           </LinkContainer>
