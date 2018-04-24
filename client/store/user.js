@@ -33,12 +33,6 @@ export const logout = () => {
   }
 }
 
-export const updateLoggedUser = (user) => {
-  return (dispatch) => {
-    dispatch(updateAuthUser(user));
-  }
-}
-
 const user = (state = {}, action) => {
   switch(action.type) {
     case SET_USER:
