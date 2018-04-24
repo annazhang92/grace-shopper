@@ -8,6 +8,8 @@ import { Provider } from 'react-redux';
 import Products from './Products';
 import Nav from './Nav';
 import Filter from './Filter';
+import LoginForm from './LoginForm';
+import RegisterForm from './RegisterForm';
 
 class App extends Component {
   componentDidMount() {
@@ -26,6 +28,8 @@ class App extends Component {
             <Route path="/products" component={ Filter } />
             <Route exact path="/products" component={ Products } />
             <Route exact path="/products/categories/:id" render={({ match, history })=> <Products id={ match.params.id*1} history={ history }/> } />
+            <Route exact path="/login" component={ LoginForm } />
+            <Route exact path="/register" component={ RegisterForm } />
         </div>
       </Router>
       // </Provider>
