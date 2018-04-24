@@ -8,7 +8,7 @@ import store from '../store';
 import { Provider } from 'react-redux';
 
 import Products from './Products';
-import Nav from './Nav';
+import Menu from './Menu';
 import Filter from './Filter';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
@@ -25,7 +25,7 @@ class App extends Component {
       // <Provider store={ store }> why we don't need provider here?
       <Router>
         <div>
-          <Nav/>
+            <Menu />
           {/* I took out Switch here...maybe we should add it back... */}
             <Route path="/products" component={ Filter } />
             <Route exact path="/products" component={ Products } />
