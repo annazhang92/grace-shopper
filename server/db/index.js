@@ -5,6 +5,8 @@ const Product = require('./Product');
 const Cart = require('./Cart');
 const Address = require('./Address');
 const CreditCard = require('./CreditCard');
+const LineItem = require('./LineItem');
+const Order = require('./Order');
 
 // Needed to fake data
 const faker = require('faker');
@@ -15,7 +17,26 @@ const numProducts = 10;
 Product.belongsTo(Category);
 Category.hasMany(Product);
 
-// TODO: Order, LineItems
+// Need to test the following:
+LineItem.hasOne(Product);
+LineItem.belongsTo(Order);
+
+Order.belongsTo(User);
+Order.hasOne(Address, { as: 'shippingAddress' })
+Order.hasOne(CreditCard, { as: 'paymentMethod' });
+Order.hasMany(LineItem);
+
+// Save user data
+User.hasMany(Order);
+User.hasMany(Address);
+User.hasMany(CreditCard);
+
+// Incorporate Cart
+User.hasOne(Cart);
+Cart.belongsTo(User);
+Cart.hasOne(Address, { as: 'shippingAddress' })
+Cart.hasOne(CreditCard, { as: 'paymentMethod' });
+Cart.hasMany(LineItem);
 
 const sync = () => {
   return conn.sync({ force: true });
