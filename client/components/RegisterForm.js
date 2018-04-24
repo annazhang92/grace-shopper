@@ -40,7 +40,7 @@ class RegisterForm extends Component {
           <div><p>Email</p><input name="email" value={ email } onChange={ onChange } /></div>
           <div><p>Password</p><input name="password" value={ password } onChange={ onChange } /></div>
           <button>Register</button>
-        </form>   
+        </form>
       </div>
     );
   }
