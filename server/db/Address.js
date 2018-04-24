@@ -27,35 +27,35 @@ const Address = conn.define('address', {
     }
   },
   city: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
-      },
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
   state: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true
-        }
-      },
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true
+    }
+  },
   zipCode: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-          isNumeric: true
-        }
-      },
+    type: Sequelize.INTEGER,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+      isNumeric: true
+    }
+  },
   phoneNumber: {
-        type: Sequelize.STRING,
-        allowNull: false,
-        validate: {
-          notEmpty: true,
-          isNumeric: true
-        }
-      }
+    type: Sequelize.STRING,
+    allowNull: false,
+    validate: {
+      notEmpty: true,
+      isNumeric: true
+    }
+  }
 });
 
 

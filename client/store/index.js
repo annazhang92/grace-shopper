@@ -2,9 +2,9 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import loggerMiddleware from 'redux-logger';
 
-//reducers
+// reducers
 import products from './products';
-import categories from './categories'
+import categories from './categories';
 
 const reducer = combineReducers({
   products,

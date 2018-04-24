@@ -5,19 +5,19 @@ const Product = conn.define('product', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
-    unique: true,
+    unique: true
   },
   description: {
     type: Sequelize.TEXT,
-    allowNull: false,
+    allowNull: false
   },
   imageUrl: {
+    // TODO: add default
     type: Sequelize.STRING
-    //TODO: add default
   },
   price: {
     type: Sequelize.DECIMAL,
-    isNumeric: true,
+    isNumeric: true
   }
 });
 
