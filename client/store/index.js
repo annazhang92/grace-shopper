@@ -15,3 +15,4 @@ const store = createStore(reducer, applyMiddleware(thunkMiddleware, loggerMiddle
 
 export default store;
 export * from './products';
+export * from './categories';

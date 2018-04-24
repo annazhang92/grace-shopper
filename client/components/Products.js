@@ -15,7 +15,8 @@ const Products = ({ products }) => {
   );
 };
 
-const mapStateToProps = ({ products }) => {
+const mapStateToProps = ({ products },{id}) => {
+  if(id){products=products.filter( product=> product.categoryId === id);}
   return {
     products
   };
