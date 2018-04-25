@@ -8,7 +8,7 @@ import { getProducts, getCategories } from '../store';
 import Home from './Home';
 import Products from './Products';
 import Menu from './Menu';
-import Filter from './Filter';
+import Categories from './Categories';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 import Cart from './Cart';
@@ -25,7 +25,7 @@ class App extends Component {
         <div>
           <Menu />
           <Route path="/" exact component={ Home } />
-          <Route path="/products" component={ Filter } />
+          <Route exact path="/products/categories" component={ Categories } />
           <Route exact path="/products" component={ Products } />
           <Route exact path="/products/categories/:id" render={ ({ match, history }) => <Products id={ match.params.id * 1 } history={ history } /> } />
           <Route exact path="/login" component={ LoginForm } />

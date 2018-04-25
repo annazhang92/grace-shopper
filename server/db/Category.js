@@ -8,6 +8,10 @@ const Category = conn.define('category', {
     validate: {
       notEmpty: true
     }
+  },
+  imageUrl: {
+    // TODO: add default
+    type: Sequelize.STRING
   }
 });
 
