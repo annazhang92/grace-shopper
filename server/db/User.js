@@ -34,7 +34,7 @@ const User = conn.define('user', {
         args: true,
         msg: 'Please enter a valid e-mail address.'
       }
-    },
+    }
   },
   password: {
     type: Sequelize.STRING,

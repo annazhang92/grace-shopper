@@ -21,10 +21,7 @@ const Address = conn.define('address', {
   },
   address2: {
     type: Sequelize.STRING,
-    allowNull: true,
-    validate: {
-      notEmpty: true
-    }
+    allowNull: true
   },
   city: {
     type: Sequelize.STRING,
@@ -57,6 +54,5 @@ const Address = conn.define('address', {
     }
   }
 });
-
 
 module.exports = Address;

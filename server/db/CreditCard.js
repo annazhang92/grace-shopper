@@ -7,7 +7,8 @@ const CreditCard = conn.define('creditCard', {
     allowNull: false,
     validate: {
       notEmpty: true,
-      isNumeric: true
+      isNumeric: true,
+      len: [15, 16]
     }
   },
   fullName: {
@@ -29,10 +30,7 @@ const CreditCard = conn.define('creditCard', {
   },
   address2: {
     type: Sequelize.STRING,
-    allowNull: false,
-    validate: {
-      notEmpty: true
-    }
+    allowNull: true
   },
   city: {
     type: Sequelize.STRING,
@@ -53,7 +51,8 @@ const CreditCard = conn.define('creditCard', {
     allowNull: false,
     validate: {
       notEmpty: true,
-      isNumeric: true
+      isNumeric: true,
+      len: [5]
     }
   },
   phoneNumber: {
