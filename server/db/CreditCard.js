@@ -68,7 +68,7 @@ const CreditCard = conn.define('creditCard', {
       notEmpty: true,
       isNumeric: true,
       len: {
-        args: [5],
+        args: [10],
         msg: 'Please enter a 10-digit phone number'
       }
     }
