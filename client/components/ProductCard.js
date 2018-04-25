@@ -1,37 +1,35 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 
-const ProductCard = ( props ) => {
-  console.log(`ProductCard props`, props)
+const ProductCard = props => {
   const { products } = props;
-  return(
-    <div className='wrapper'>
+  return (
+    <div className="wrapper">
       {
-        products.length ?
-        products.map( product => {
-          return(
+        products ?
+        products.map(product => {
+          return (
             <div key={ product.id }>
-              <div className='card card-1'>
-                  <span className='card-header'>
-                    <img src={product.imageUrl} />
-                  </span>
-                  <Link to={`/products/${product.id}`}>
-                   <h3>{product.name}</h3>
-                  </Link>
-                <span className='price'>
+              <div className="card card-1">
+                <span className="card-header">
+                  <img alt="product here" src={ product.imageUrl } />
+                </span>
+                <Link to={ `/products/${product.id}` }>
+                  <h3>{product.name}</h3>
+                </Link>
+                <span className="price">
                   Price: ${product.price}
                 </span>
               </div>
             </div>
-          )
+          );
         })
         :
         null
       }
     </div>
-  )
+  );
 };
 
 export default ProductCard;

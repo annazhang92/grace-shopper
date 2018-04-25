@@ -1,4 +1,4 @@
-// scraped this from picsum.photos...some of the photo indeces are missing
+// scraped this from picsum.photos...some of the photo indices are missing
 const imageIndex = [1084, 1083, 1082, 1081, 1080, 1079, 1078, 1077, 1076, 1075, 1074,
   1073, 1072, 1071, 1070, 1069, 1068, 1067, 1066, 1065, 1064, 1063, 1062, 1061, 1060,
   1059, 1058, 1057, 1056, 1055, 1054, 1053, 1052, 1051, 1050, 1049, 1048, 1047, 1045,

@@ -55,7 +55,8 @@ const seed = () => {
       .then(() => {
         for (let i = 0; i < numCategories; i++) {
           Category.create({
-            name: faker.commerce.department()
+            name: faker.commerce.department(),
+            imageUrl: randomImage()
           });
         }
       })
