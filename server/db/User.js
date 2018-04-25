@@ -36,12 +36,25 @@ const User = conn.define('user', {
       }
     }
   },
+  password_hash: Sequelize.STRING,
   password: {
-    type: Sequelize.STRING,
-    allowNull: false,
+    type: Sequelize.VIRTUAL,
+    set: function (val) { // eslint-disable-line object-shorthand, func-names
+      // Remember to set the data value, otherwise it won't be validated
+      this.setDataValue('password', val);
+      this.setDataValue('password_hash', this.salt + val);
+    },
     validate: {
-      // character validation
-      notEmpty: true
+      isLongEnough: function (val) { // eslint-disable-line object-shorthand, func-names
+        if (val.length < 8) {
+          throw new Error('Password must be at least 8 characters')
+        }
+      },
+      is: {
+        // Reference: http://stackoverflow.com/a/1559788
+        args: ['(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[-+_!@#$%^&*.,?]).+'],
+        msg: 'Password must contain one at least one uppercase, lowercase, number & special character'
+      }
     }
   }
 });

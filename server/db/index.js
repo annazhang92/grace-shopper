@@ -10,7 +10,11 @@ const Order = require('./Order');
 
 const randomImage = require('./scraped/images.js');
 
-// Needed to fake data
+/*
+Needed to fake data
+Note - latest faker module (installed from Github, NOT npm)
+supports unique values!
+*/
 const faker = require('faker');
 const numCategories = 10;
 const numProducts = 500;
@@ -55,7 +59,7 @@ const seed = () => {
       .then(() => {
         for (let i = 0; i < numCategories; i++) {
           Category.create({
-            name: faker.commerce.department(),
+            name: faker.unique(faker.commerce.department),
             imageUrl: randomImage()
           });
         }
@@ -63,7 +67,7 @@ const seed = () => {
       .then(() => {
         for (let i = 0; i < numProducts; i++) {
           Product.create({
-            name: faker.commerce.productName(),
+            name: faker.unique(faker.commerce.productName),
             description: faker.lorem.sentence(),
             imageUrl: randomImage(),
             price: faker.commerce.price()

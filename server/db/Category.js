@@ -5,13 +5,14 @@ const Category = conn.define('category', {
   name: {
     type: Sequelize.STRING,
     allowNull: false,
+    unique: true,
     validate: {
       notEmpty: true
     }
   },
   imageUrl: {
-    // TODO: add default
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    defaultValue: 'https://picsum.photos/300/175/?random'
   }
 });
 

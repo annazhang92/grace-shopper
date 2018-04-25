@@ -42,7 +42,11 @@ const Address = conn.define('address', {
     allowNull: false,
     validate: {
       notEmpty: true,
-      isNumeric: true
+      isNumeric: true,
+      len: {
+        args: [5],
+        msg: 'Please enter a 5-digit zip code'
+      }
     }
   },
   phoneNumber: {
@@ -50,7 +54,11 @@ const Address = conn.define('address', {
     allowNull: false,
     validate: {
       notEmpty: true,
-      isNumeric: true
+      isNumeric: true,
+      len: {
+        args: [5],
+        msg: 'Please enter a 10-digit phone number'
+      }
     }
   }
 });

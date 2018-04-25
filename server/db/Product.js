@@ -12,8 +12,8 @@ const Product = conn.define('product', {
     allowNull: false
   },
   imageUrl: {
-    // TODO: add default
-    type: Sequelize.STRING
+    type: Sequelize.STRING,
+    defaultValue: 'https://picsum.photos/300/175/?random'
   },
   price: {
     type: Sequelize.DECIMAL,

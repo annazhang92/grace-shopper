@@ -8,7 +8,10 @@ const CreditCard = conn.define('creditCard', {
     validate: {
       notEmpty: true,
       isNumeric: true,
-      len: [15, 16]
+      len: {
+        args: [15, 16],
+        msg: 'Credit card must be 15 or 16 digits'
+      }
     }
   },
   fullName: {
@@ -52,15 +55,22 @@ const CreditCard = conn.define('creditCard', {
     validate: {
       notEmpty: true,
       isNumeric: true,
-      len: [5]
+      len: {
+        args: [5],
+        msg: 'Please enter a 5-digit zip code'
+      }
     }
   },
   phoneNumber: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false,
     validate: {
       notEmpty: true,
-      isNumeric: true
+      isNumeric: true,
+      len: {
+        args: [5],
+        msg: 'Please enter a 10-digit phone number'
+      }
     }
   }
 });
