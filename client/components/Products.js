@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+// this fixes image render from pinging the website too much at once
+import LazyLoad from 'react-lazy-load';
 import ProductCard from './ProductCard';
 
 const Products = ({ products }) => {
@@ -7,7 +9,9 @@ const Products = ({ products }) => {
     <div>
       {
         products.length ?
-          <ProductCard products={ products } />
+          <LazyLoad>
+            <ProductCard products={ products } />
+          </LazyLoad>
         :
           <h2> There are no products currently available </h2>
       }
