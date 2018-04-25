@@ -12,6 +12,7 @@ import Categories from './Categories';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 import Cart from './Cart';
+import ProductDetail from './ProductDetail';
 
 class App extends Component {
   componentDidMount() {
@@ -27,6 +28,7 @@ class App extends Component {
           <Route path="/" exact component={ Home } />
           <Route exact path="/products/categories" component={ Categories } />
           <Route exact path="/products" component={ Products } />
+          <Route exact path="/products/:id" render={ ({ match, history }) => <ProductDetail id={ match.params.id * 1 } history={ history } /> } />
           <Route exact path="/products/categories/:id" render={ ({ match, history }) => <Products id={ match.params.id * 1 } history={ history } /> } />
           <Route exact path="/login" component={ LoginForm } />
           <Route exact path="/register" component={ RegisterForm } />
