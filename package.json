@@ -8,6 +8,7 @@
     "body-parser": "^1.18.2",
     "express": "^4.16.3",
     "faker": "github:Marak/faker.js",
+    "jwt-simple": "^0.5.1",
     "npm": "^6.0.0",
     "pg": "^7.4.1",
     "react": "^16.3.2",

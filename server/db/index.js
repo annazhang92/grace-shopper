@@ -57,6 +57,14 @@ const seed = () => {
       imageUrl: 'https://picsum.photos/300/175/?random'
     })
       .then(() => {
+        User.create({
+          firstName: 'dopest',
+          lastName: 'squad',
+          email: 'dopestsquad@gmail.com',
+          password: 'd0p3stSqu*d'
+        })
+      })
+      .then(() => {
         for (let i = 0; i < numCategories; i++) {
           Category.create({
             name: faker.unique(faker.commerce.department),

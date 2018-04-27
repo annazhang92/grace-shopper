@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import store from '../store';
+import { attemptLogin } from '../store';
 
 
 class LoginForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       email: '',
       password: ''
@@ -18,13 +18,17 @@ class LoginForm extends Component {
 
   onSave(ev) {
     ev.preventDefault();
-    const userInfor = { email: this.state.email, password: this.state.password };
-    // this.props.authenticate(userInfor)
+    console.log('login')
+    const { email, password } = this.state;
+    const { attemptLogin } = this.props;
+    attemptLogin({ email, password });
+    this.setState({ email: '', password: '' })
   }
 
   onChange(ev) {
-    const nameKey = ev.target.name;
-    this.setState({ [nameKey]: ev.target.value });
+    const change = {};
+    change[ev.target.name] = ev.target.value;
+    this.setState(change);
   }
 
   render() {
@@ -39,7 +43,7 @@ class LoginForm extends Component {
           <button>Login</button>
         </form>
 
-        <p>Do not have an account?<Link to={`/register`}>Create One</Link></p> 
+        <p>Do not have an account?<Link to={`/register`}>Create One</Link></p>
       </div>
     );
   }
@@ -47,8 +51,8 @@ class LoginForm extends Component {
 
 const mapDispatchToProps = (dispatch, { history }) => {
   return {
-    authenticate: (userInfor)=> dispatch(authenticate(userInfor, history)),
+    attemptLogin: (credentials)=> dispatch(attemptLogin(credentials, history))
   };
 };
-      
-export default connect(null, mapDispatchToProps)(LoginForm)
+
+export default connect(null, mapDispatchToProps)(LoginForm);

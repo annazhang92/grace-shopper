@@ -5,10 +5,12 @@ import loggerMiddleware from 'redux-logger';
 // reducers
 import products from './products';
 import categories from './categories';
+import user from './user';
 
 const reducer = combineReducers({
   products,
-  categories
+  categories,
+  user
 });
 
 const store = createStore(reducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
@@ -16,3 +18,4 @@ const store = createStore(reducer, applyMiddleware(thunkMiddleware, loggerMiddle
 export default store;
 export * from './products';
 export * from './categories';
+export * from './user';
