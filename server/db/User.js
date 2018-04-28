@@ -36,6 +36,10 @@ const User = conn.define('user', {
       }
     }
   },
+  isAdmin: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: false
+  },
   password:{
     type: Sequelize.STRING,
     allowNull: false
