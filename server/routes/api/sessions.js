@@ -10,6 +10,7 @@ app.get('/:token', (req, res, next) => {
     const id = jwt.decode(req.params.token, secret).id
     User.findById(id)
       .then( user => {
+        console.log(`user found`, user)
         if (user) return res.send(user)
         const error = { status: 401 }
         throw error

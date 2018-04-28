@@ -7,22 +7,21 @@ export const getUserFromToken = (token) => {
     return axios.get(`/api/sessions/${token}`)
       .then( res => res.data)
       .then( user => {
-        console.log(`user from token ${user}`)
         dispatch({
           type: SET_USER,
           user
         })
       })
   }
-}
+};
 
-export const attemptLogin = (credentials) => {
+export const attemptLogin = (credentials, history) => {
   return (dispatch) => {
-    console.log(`credentials passed: ${credentials}`, credentials.password);
     return axios.post('/api/sessions', credentials)
       .then( res => {
         console.log('SETTING WINDOW TOKEN', res.data);
-        window.localStorage.setItem('token', res.data)
+        window.localStorage.setItem('token', res.data);
+        history.push(`/home`);
       })
       .then( () => dispatch(getUserFromToken(window.localStorage.getItem('token'))))
   }
@@ -31,7 +30,10 @@ export const attemptLogin = (credentials) => {
 export const logout = () => {
   return (dispatch) => {
     window.localStorage.removeItem('token');
-    dispatch(setUser({}))
+    dispatch({
+      type: SET_USER,
+      user: ''
+    })
   }
 }
 

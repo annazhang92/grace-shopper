@@ -18,7 +18,6 @@ class LoginForm extends Component {
 
   onSave(ev) {
     ev.preventDefault();
-    console.log('login')
     const { email, password } = this.state;
     const { attemptLogin } = this.props;
     attemptLogin({ email, password });

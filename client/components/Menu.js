@@ -1,8 +1,11 @@
 import React from 'react';
 import { Navbar, Nav, NavItem } from 'react-bootstrap';
 import { LinkContainer } from 'react-router-bootstrap';
+import { connect } from 'react-redux';
+import { logout } from '../store';
 
-const Menu = () => {
+const Menu = ({ user, logout }) => {
+  const loggedIn = !!user.id;
   return (
     <Navbar inverse collapseOnSelect>
       <Navbar.Header>
@@ -21,10 +24,25 @@ const Menu = () => {
           </LinkContainer>
         </Nav>
         <Nav pullRight>
-          <LinkContainer to="/login">
+        {
+          loggedIn ?
+          (
+            <Nav>
+              <LinkContainer to='/account'>
+                <NavItem>{user.firstName}</NavItem>
+              </LinkContainer>
+              <LinkContainer to='/login' onClick={logout}>
+                <NavItem>Logout</NavItem>
+              </LinkContainer>
+            </Nav>
+          )
+          :(
+          <LinkContainer to='/login'>
             <NavItem>Login</NavItem>
           </LinkContainer>
-          <LinkContainer to="/cart">
+          )
+        }
+          <LinkContainer to='/cart'>
             <NavItem>Cart</NavItem>
           </LinkContainer>
         </Nav>
@@ -33,4 +51,15 @@ const Menu = () => {
   );
 };
 
-export default Menu;
+const mapStateToProps = ({ user }) => {
+  const loggedIn = !!user.id;
+  return { user, loggedIn };
+};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    logout: () => dispatch(logout())
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Menu);

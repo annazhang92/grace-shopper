@@ -3,7 +3,7 @@ import { HashRouter as Router, Route } from 'react-router-dom';
 
 // store-related
 import { connect } from 'react-redux';
-import { getProducts, getCategories } from '../store';
+import { getProducts, getCategories, getUserFromToken } from '../store';
 
 import Home from './Home';
 import Products from './Products';
@@ -18,6 +18,7 @@ class App extends Component {
   componentDidMount() {
     this.props.getProducts();
     this.props.getCategories();
+    this.props.getUser();
   }
 
   render() {
@@ -30,7 +31,7 @@ class App extends Component {
           <Route exact path="/products" component={ Products } />
           <Route exact path="/products/:id" render={ ({ match, history }) => <ProductDetail id={ match.params.id * 1 } history={ history } /> } />
           <Route exact path="/products/categories/:id" render={ ({ match, history }) => <Products id={ match.params.id * 1 } history={ history } /> } />
-          <Route exact path="/login" component={ LoginForm } />
+          <Route exact path="/login" render={({ history }) => <LoginForm history={ history } /> } />
           <Route exact path="/register" component={ RegisterForm } />
           <Route exact path="/cart" component={ Cart } />
         </div>
@@ -42,7 +43,12 @@ class App extends Component {
 const mapDispatchToProps = (dispatch) => {
   return {
     getProducts: () => dispatch(getProducts()),
-    getCategories: () => dispatch(getCategories())
+    getCategories: () => dispatch(getCategories()),
+    getUser: () => {
+      if (window.localStorage.getItem('token')) {
+        dispatch(getUserFromToken(window.localStorage.getItem('token')))
+      }
+    }
   };
 };
 
