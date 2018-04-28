@@ -40,6 +40,14 @@ const User = conn.define('user', {
     type: Sequelize.STRING,
     allowNull: false
   }
+}, {
+    getterMethods: {
+      fullName(value) {
+        return `${this.firstName} ${this.lastName}`
+      }
+    }
+});
+
   // password: {
   //   type: Sequelize.VIRTUAL,
   //   set: function (val) { // eslint-disable-line object-shorthand, func-names
@@ -60,6 +68,5 @@ const User = conn.define('user', {
   //     }
   //   }
   // }
-});
 
 module.exports = User;

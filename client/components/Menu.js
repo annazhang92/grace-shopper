@@ -29,7 +29,7 @@ const Menu = ({ user, logout }) => {
           (
             <Nav>
               <LinkContainer to='/account'>
-                <NavItem>{user.firstName}</NavItem>
+                <NavItem>{user.fullName}</NavItem>
               </LinkContainer>
               <LinkContainer to='/login' onClick={logout}>
                 <NavItem>Logout</NavItem>
@@ -56,7 +56,7 @@ const mapStateToProps = ({ user }) => {
   return { user, loggedIn };
 };
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = ( dispatch ) => {
   return {
     logout: () => dispatch(logout())
   }
