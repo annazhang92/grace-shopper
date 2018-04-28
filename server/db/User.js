@@ -40,7 +40,7 @@ const User = conn.define('user', {
     type: Sequelize.BOOLEAN,
     defaultValue: false
   },
-  password:{
+  password: {
     type: Sequelize.STRING,
     allowNull: false
   }
