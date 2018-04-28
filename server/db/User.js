@@ -40,6 +40,7 @@ const User = conn.define('user', {
     type: Sequelize.BOOLEAN,
     defaultValue: false
   },
+  //Instead of deleting users, update the status to I = Inactive
   status: {
     type: Sequelize.CHAR(1),
     defaultValue: 'A'
