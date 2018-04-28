@@ -6,11 +6,13 @@ import loggerMiddleware from 'redux-logger';
 import products from './products';
 import categories from './categories';
 import user from './user';
+import orders from './orders';
 
 const reducer = combineReducers({
   products,
   categories,
-  user
+  user,
+  orders
 });
 
 const store = createStore(reducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
@@ -19,3 +21,4 @@ export default store;
 export * from './products';
 export * from './categories';
 export * from './user';
+export * from './orders';
