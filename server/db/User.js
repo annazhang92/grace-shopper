@@ -40,6 +40,10 @@ const User = conn.define('user', {
     type: Sequelize.BOOLEAN,
     defaultValue: false
   },
+  status: {
+    type: Sequelize.CHAR(1),
+    defaultValue: 'A'
+  },
   password: {
     type: Sequelize.STRING,
     allowNull: false
