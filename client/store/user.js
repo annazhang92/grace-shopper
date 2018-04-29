@@ -25,7 +25,7 @@ export const attemptLogin = (credentials, history) => {
       })
       .then( () => dispatch(getUserFromToken(window.localStorage.getItem('token'))))
   }
-}
+};
 
 export const logout = () => {
   return (dispatch) => {
@@ -35,7 +35,7 @@ export const logout = () => {
       user: ''
     })
   }
-}
+};
 
 const user = (state = {}, action) => {
   switch(action.type) {

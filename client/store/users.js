@@ -16,19 +16,22 @@ export const getUsers = () => {
   };
 };
 
-export const register = ( user, history ) => {
-  return ( dispatch ) => {
-    return axios.post('/api/users', user )
+export const createUser = (user, history) => {
+  return (dispatch) => {
+    console.log(`create user ${user}`)
+    return axios.post('/api/users',user)
       .then( res => res.data)
-      .then( users => dispatch({
-        type: CREATE_USER,
-        user
-      }));
-      history.push(`/products`);
+      .then( user => {
+        dispatch({
+          type: CREATE_USER,
+          user
+        });
+        history.push('/products')
+      })
   };
 };
 // --- products reducer
-const users = ( state = [], action ) => {
+const usersReducer = ( state = [], action ) => {
   switch (action.type) {
     case GET_USERS:
       return action.users;
@@ -38,4 +41,4 @@ const users = ( state = [], action ) => {
   return state;
 };
 
-export default users;
+export default usersReducer;

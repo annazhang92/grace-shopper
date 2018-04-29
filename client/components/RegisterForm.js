@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { register } from '../store';
-
+import { Link } from 'react-router-dom';
+import { createUser } from '../store';
 
 class RegisterForm extends Component {
   constructor(props) {
@@ -19,37 +19,36 @@ class RegisterForm extends Component {
 
   onSave(ev) {
     ev.preventDefault();
-    const { register } = this.props;
     const userInfo = {
-      firstName: this.state.firstname,
-      lastName: this.state.lastname,
+      firstName: this.state.firstName,
+      lastName: this.state.lastName,
       email: this.state.email,
       password: this.state.password
     };
-    register(userInfo);
+    this.props.createUser(userInfo);
     this.setState({
       firstName: '',
       lastName: '',
       email: '',
       password: ''
     });
-    // this.props.register(userInfo)
   }
 
   onChange(ev) {
-    const nameKey = ev.target.name;
-    this.setState({ [nameKey]: ev.target.value });
+    const change = {};
+    change[ev.target.name] = ev.target.value;
+    this.setState(change);
   }
 
   render() {
     const { onSave, onChange } = this;
-    const { firstname, lastname, email, password } = this.state;
+    const { firstName, lastName, email, password } = this.state;
     return (
       <div>
         <h2>Enter Your Information</h2>
         <form onSubmit={ onSave }>
-          <div><p>First Name</p><input name="firstName" value={ firstname } onChange={ onChange } /></div>
-          <div><p>Last Name</p><input name="lastName" value={ lastname } onChange={ onChange } /></div>
+          <div><p>First Name</p><input name="firstName" value={ firstName } onChange={ onChange } /></div>
+          <div><p>Last Name</p><input name="lastName" value={ lastName } onChange={ onChange } /></div>
           <div><p>Email</p><input name="email" value={ email } onChange={ onChange } /></div>
           <div><p>Password</p><input name="password" value={ password } onChange={ onChange } /></div>
           <button> Register </button>
@@ -61,7 +60,7 @@ class RegisterForm extends Component {
 
 const mapDispatchToProps = (dispatch, { history }) => {
   return {
-    register: ( userInfo )=> dispatch(register(userInfo, history)),
+    createUser: (userInfo)=> dispatch(createUser(userInfo, history))
   };
 };
 
