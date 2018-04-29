@@ -4,8 +4,8 @@ import { register } from '../store';
 
 
 class RegisterForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       firstName: '',
       lastName: '',
