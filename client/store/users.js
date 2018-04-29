@@ -30,6 +30,21 @@ export const createUser = (user, history) => {
       })
   };
 };
+
+export const updateUser = ( user, history ) => {
+  return (dispatch) => {
+    console.log(`create user ${user}`)
+    return axios.put('/api/users/${user.id}', user)
+      .then( res => res.data)
+      .then( user => {
+        dispatch({
+          type: UPDATE_USER,
+          user
+        });
+        history.push('/products')
+      })
+  };
+};
 // --- products reducer
 const usersReducer = ( state = [], action ) => {
   switch (action.type) {
