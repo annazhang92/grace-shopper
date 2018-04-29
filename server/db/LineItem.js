@@ -8,6 +8,10 @@ const LineItem = conn.define('lineItem', {
     // validate: {
     //   notEmpty: true
     // }
+  },
+  price: {
+    type: Sequelize.DECIMAL,
+    isNumeric: true
   }
 });
 

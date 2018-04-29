@@ -5,10 +5,15 @@ import ProductCard from './ProductCard';
 
 
 const Cart = ({ products, thisUserProducts, thisUserlineItems }) => {
+  const totalPrice = thisUserlineItems.reduce(function (acc, thisUserlineItem) {
+    return acc + Number(thisUserlineItem.price)* thisUserlineItem.quantity;
+  }, 0);
+
   return (
     <div>
       <PageHeader>Cart Items</PageHeader>
       {thisUserlineItems && thisUserProducts ? <ProductCard products={ thisUserProducts } lineItems={thisUserlineItems}/> : <h2>Your cart is empty!</h2>}
+      <h2>TotalPrice: {totalPrice}</h2>
     </div>
   );
 };
