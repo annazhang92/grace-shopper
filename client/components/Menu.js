@@ -43,7 +43,7 @@ const Menu = ({ user, logout, thisUserlineItems }) => {
           )
         }
           <LinkContainer to='/cart'>
-            <NavItem>Cart {thisUserlineItems? thisUserlineItems.length: null}</NavItem>
+            <NavItem>Cart {thisUserlineItems ? <span style={{color: 'orange'}}>{thisUserlineItems.length}</span> : null}</NavItem>
           </LinkContainer>
         </Nav>
       </Navbar.Collapse>
