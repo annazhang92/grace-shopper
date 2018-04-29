@@ -42,7 +42,7 @@ class LoginForm extends Component {
           <button>Login</button>
         </form>
 
-        <p>Do not have an account?<Link to={`/register`}>Create One</Link></p>
+        <p>Do not have an account?<Link to={`/register`}> Create One </Link></p>
       </div>
     );
   }
