@@ -10,7 +10,7 @@ const ProductDetail = ({ product, createLineItem, user, loggedIn }) => {
       <div>
         <h2>{product.name}</h2>
         <div>
-          <button className="btn btn-warning" onClick={ () => loggedIn? createLineItem({ productId: product.id, userId: user.id, quantity: 1, price: product.price }) : console.log ('please login') }>Add to Cart</button>
+          <button className="btn btn-warning" onClick={ () => loggedIn? createLineItem({ productId: product.id, userId: user.id, quantity: 1, price: product.price, name: product.name }) : console.log ('please login') }>Add to Cart</button>
           {/* onClick={()=>createLineItem(this.props.product.id,1)} */}
         </div>
         <img src={product.imageUrl}></img>

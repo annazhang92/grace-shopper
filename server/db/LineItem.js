@@ -3,7 +3,7 @@ const conn = require('./conn');
 
 const LineItem = conn.define('lineItem', {
   quantity: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.INTEGER
     // allowNull: false,
     // validate: {
     //   notEmpty: true
@@ -12,6 +12,9 @@ const LineItem = conn.define('lineItem', {
   price: {
     type: Sequelize.DECIMAL,
     isNumeric: true
+  },
+  name: {
+    type: Sequelize.STRING
   }
 });
 

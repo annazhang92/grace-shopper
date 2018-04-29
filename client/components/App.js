@@ -3,7 +3,7 @@ import { HashRouter as Router, Route } from 'react-router-dom';
 
 // store-related
 import { connect } from 'react-redux';
-import { getProducts, getCategories, getUserFromToken, getUsers, getLineItems } from '../store';
+import { getProducts, getCategories, getUserFromToken, getUsers, getLineItems, getOrders } from '../store';
 
 import Home from './Home';
 import Products from './Products';
@@ -13,6 +13,7 @@ import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 import Cart from './Cart';
 import ProductDetail from './ProductDetail';
+import CheckOut from './CheckOut';
 
 class App extends Component {
   componentDidMount() {
@@ -21,6 +22,7 @@ class App extends Component {
     this.props.getUser();
     this.props.getUsers();
     this.props.getLineItems();
+    this.props.getOrders();
     // this.props.getUsers();
   }
 
@@ -37,6 +39,7 @@ class App extends Component {
           <Route exact path="/login" render={({ history }) => <LoginForm history={ history } /> } />
           <Route exact path="/register" component={ RegisterForm } />
           <Route exact path="/cart" component={ Cart } />
+          <Route exact path="/orders/:id" render={ ({ match, history }) => <CheckOut id={ match.params.id * 1 } history={ history } /> } />
         </div>
       </Router>
     );
@@ -48,6 +51,7 @@ const mapDispatchToProps = (dispatch) => {
     getProducts: () => dispatch(getProducts()),
     getCategories: () => dispatch(getCategories()),
     getLineItems: () => dispatch(getLineItems()),
+    getOrders: () =>dispatch(getOrders()),
     getUsers: () => dispatch(getUsers()),
     getUser: () => {
       if (window.localStorage.getItem('token')) {
