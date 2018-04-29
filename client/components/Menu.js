@@ -4,7 +4,7 @@ import { LinkContainer } from 'react-router-bootstrap';
 import { connect } from 'react-redux';
 import { logout } from '../store';
 
-const Menu = ({ user, logout }) => {
+const Menu = ({ user, logout, thisUserlineItems }) => {
   const loggedIn = !!user.id;
   return (
     <Navbar inverse collapseOnSelect>
@@ -43,7 +43,7 @@ const Menu = ({ user, logout }) => {
           )
         }
           <LinkContainer to='/cart'>
-            <NavItem>Cart</NavItem>
+            <NavItem>Cart {thisUserlineItems? thisUserlineItems.length: null}</NavItem>
           </LinkContainer>
         </Nav>
       </Navbar.Collapse>
@@ -51,9 +51,10 @@ const Menu = ({ user, logout }) => {
   );
 };
 
-const mapStateToProps = ({ user }) => {
+const mapStateToProps = ({ lineItems, user }) => {
   const loggedIn = !!user.id;
-  return { user, loggedIn };
+  const thisUserlineItems = lineItems ? lineItems.filter(lineItem => lineItem.userId === user.id): null;
+  return { user, loggedIn, thisUserlineItems };
 };
 
 const mapDispatchToProps = ( dispatch ) => {

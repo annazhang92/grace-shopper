@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import store from '../store';
+import store, { createLineItem } from '../store';
 import { connect } from 'react-redux';
 
 
-const ProductDetail = ({ product }) => {
+const ProductDetail = ({ product, createLineItem, user, loggedIn }) => {
   return (
     <div className="container">
       {product &&
       <div>
         <h2>{product.name}</h2>
         <div>
-          <button className="btn btn-warning">Add to Cart</button>
-          {/* onClick={()=>addProductToCart(this.props.product.id)} */}
+          <button className="btn btn-warning" onClick={ () => loggedIn? createLineItem({ productId: product.id, userId: user.id, quantity: 1 }) : console.log ('please login') }>Add to Cart</button>
+          {/* onClick={()=>createLineItem(this.props.product.id,1)} */}
         </div>
         <img src={product.imageUrl}></img>
         <p><strong>Price</strong> {product.price}</p>
@@ -22,16 +22,19 @@ const ProductDetail = ({ product }) => {
   );
 }
 
-const mapStateToProps = ({ products }, { id }) => {
+const mapStateToProps = ({ products, user }, { id }) => {
   const product = products.find( product => product.id === id);
+  const loggedIn = !!user.id;
   return {
-    product
+    product,
+    user,
+    loggedIn
   };
 }
   
-const mapDispatchToProps = (dispatch, { history })=> {
+const mapDispatchToProps = (dispatch, { history }) => {
   return {
-    // addProductToCart:(id)=>dispatch(addProductToCart(id,history)),
+    createLineItem: (lineItem) => dispatch(createLineItem(lineItem,history)),
   };
 };
 

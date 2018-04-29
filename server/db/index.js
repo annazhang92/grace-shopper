@@ -24,13 +24,13 @@ Product.belongsTo(Category);
 Category.hasMany(Product);
 
 // Need to test the following:
-LineItem.hasOne(Product);
-LineItem.belongsTo(Order);
+LineItem.belongsTo(Product);
+LineItem.belongsTo(User);
 
 Order.belongsTo(User);
 Order.hasOne(Address, { as: 'shippingAddress' })
 Order.hasOne(CreditCard, { as: 'paymentMethod' });
-Order.hasMany(LineItem);
+// Order.hasMany(LineItem);
 
 // Save user data
 User.hasMany(Order);
@@ -42,7 +42,7 @@ User.hasOne(Cart);
 Cart.belongsTo(User);
 Cart.hasOne(Address, { as: 'shippingAddress' })
 Cart.hasOne(CreditCard, { as: 'paymentMethod' });
-Cart.hasMany(LineItem);
+
 
 const sync = () => {
   return conn.sync({ force: true });
