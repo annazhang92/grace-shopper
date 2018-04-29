@@ -8,12 +8,14 @@ import categories from './categories';
 import user from './user';
 import orders from './orders';
 import usersReducer from './users';
+import lineItems from './lineItems';
 
 const reducer = combineReducers({
   products,
   categories,
   user,
   orders,
+  lineItems,
   users: usersReducer
 });
 
@@ -25,3 +27,4 @@ export * from './categories';
 export * from './user';
 export * from './users';
 export * from './orders';
+export * from './lineItems';

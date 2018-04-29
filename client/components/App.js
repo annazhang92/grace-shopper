@@ -3,7 +3,7 @@ import { HashRouter as Router, Route } from 'react-router-dom';
 
 // store-related
 import { connect } from 'react-redux';
-import { getProducts, getCategories, getUserFromToken, getUsers } from '../store';
+import { getProducts, getCategories, getUserFromToken, getUsers, getLineItems } from '../store';
 
 import Home from './Home';
 import Products from './Products';
@@ -20,6 +20,7 @@ class App extends Component {
     this.props.getCategories();
     this.props.getUser();
     this.props.getUsers();
+    this.props.getLineItems();
     // this.props.getUsers();
   }
 
@@ -46,6 +47,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     getProducts: () => dispatch(getProducts()),
     getCategories: () => dispatch(getCategories()),
+    getLineItems: () => dispatch(getLineItems()),
     getUsers: () => dispatch(getUsers()),
     getUser: () => {
       if (window.localStorage.getItem('token')) {
