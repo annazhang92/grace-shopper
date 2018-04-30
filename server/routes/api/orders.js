@@ -18,3 +18,14 @@ app.post('/', (req, res, next) => {
     .then(order => res.send(order))
     .catch(next);
 });
+
+
+app.put('/:id', (req, res, next) => {
+  Order.findById(req.params.id)
+    .then(order => {
+      Object.assign(order, req.body)
+      return order.save();
+    })
+    .then(order => res.send(order))
+    .catch(next);
+});

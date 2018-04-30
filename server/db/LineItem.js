@@ -15,6 +15,10 @@ const LineItem = conn.define('lineItem', {
   },
   name: {
     type: Sequelize.STRING
+  },
+  active: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: true
   }
 });
 

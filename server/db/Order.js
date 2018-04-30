@@ -3,20 +3,24 @@ const conn = require('./conn');
 
 const Order = conn.define('order', {
   description: {
-    type: Sequelize.TEXT,
+    type: Sequelize.TEXT
   },
   price: {
     type: Sequelize.DECIMAL,
     isNumeric: true
   },
   fullName: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING
   },
   address: {
-    type: Sequelize.STRING,
+    type: Sequelize.STRING
   },
   creditCardNumber: {
-    type: Sequelize.STRING,
+    type: Sequelize.INTEGER
+  },
+  active: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: true
   }
   /*
   leaving this empty...should auto-generate:

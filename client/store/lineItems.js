@@ -71,7 +71,7 @@ export const deleteLineItem = ( id, history ) => {
 
 
 // ------ products reducer
-const orders = (state = [], action) => {
+const lineItems = (state = [], action) => {
   switch (action.type) {
     case GET_LINEITEMS:
       return action.lineItems;
@@ -85,4 +85,4 @@ const orders = (state = [], action) => {
   return state;
 };
 
-export default orders;
+export default lineItems;

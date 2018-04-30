@@ -53,7 +53,8 @@ const Menu = ({ user, logout, thisUserlineItems }) => {
 
 const mapStateToProps = ({ lineItems, user }) => {
   const loggedIn = !!user.id;
-  const thisUserlineItems = lineItems ? lineItems.filter(lineItem => lineItem.userId === user.id): null;
+  const thisUserlineItemsAll = lineItems ? lineItems.filter(lineItem => lineItem.active === true) : null
+  const thisUserlineItems = thisUserlineItemsAll.filter(lineItem => lineItem.userId === user.id);
   return { user, loggedIn, thisUserlineItems };
 };
 

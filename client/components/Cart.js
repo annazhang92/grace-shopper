@@ -19,14 +19,15 @@ const Cart = ({ products, thisUserProducts, thisUserlineItems, loggedIn, createO
       <PageHeader>Cart Items</PageHeader>
       {thisUserlineItems && thisUserProducts ? <ProductCard products={ thisUserProducts } lineItems={thisUserlineItems}/> : <h2>Your cart is empty!</h2>}
       <h2>TotalPrice: {totalPrice} dollar</h2>
-      <Link to={ `/orders/${user.id}` }><button onClick= { () => loggedIn? createOrder ({ description: orderDescription, price: totalPrice, userId: user.id }) : console.log ('please login') }>CheckOut</button></Link>
+      <Link to={ `/orders/${user.id}` }><button onClick= { () => loggedIn? createOrder ({ description: orderDescription, price: totalPrice, userId: user.id, fullName: 'placeholder', address: 'placeholder', creditCardNumber: 12345678 }) : console.log ('please login') }>CheckOut</button></Link>
     </div>
   );
 };
 
 
 const mapStateToProps = ({ lineItems, user, products }) => {
-  const thisUserlineItems = lineItems.filter(lineItem => lineItem.userId === user.id);
+  const thisUserlineItemsAll = lineItems.filter(lineItem => lineItem.active === true)
+  const thisUserlineItems = thisUserlineItemsAll.filter(lineItem => lineItem.userId === user.id);
   const idArr = thisUserlineItems.map(thisUserlineItems => thisUserlineItems.productId);
   const thisUserProducts = products.filter(product => idArr.includes(product.id));
   const loggedIn = !!user.id;
