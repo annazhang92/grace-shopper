@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import store, { updateOrder } from '../store';
+import store, { updateOrder, setLineItem, setOrder } from '../store';
 
 
 class CheckOut extends Component {
-  constructor({ order, id, updateOrder }) {
+  constructor({ order, id, updateOrder, thisUserlineItems }) {
     super();
     this.state = {
       fullName: '',
@@ -30,8 +30,9 @@ class CheckOut extends Component {
   }
 
   onClick() {
-    this.props.updateOrder(this.props.id, { fullName: this.state.fullName, address: this.state.address, creditCardNumber: this.state.creditCardNumber });
-    // this.props.setLineItem()
+    this.props.updateOrder(this.props.order.id, { fullName: this.state.fullName, address: this.state.address, creditCardNumber: this.state.creditCardNumber });
+    this.props.thisUserlineItems.map((thisUserlineItem)=>this.props.setLineItem(thisUserlineItem.id, { active: false }));
+    this.props.setOrder(this.props.order.id, { active: false });
   }
 
   render() {
@@ -59,17 +60,23 @@ class CheckOut extends Component {
 }
 
 
-const mapStateToProps = ({ orders }, { id }) => {
-  const order = orders.find(order => order.id === id);
+const mapStateToProps = ({ orders, lineItems }, { id }) => {
+  const thisUserlineItemsAll = lineItems.filter(lineItem => lineItem.active === true)
+  const thisUserlineItems = thisUserlineItemsAll.filter(lineItem => lineItem.userId === id);
+  const thisUserOrders = orders.filter(order => order.active === true);
+  const order = thisUserOrders.find(thisUserOrder => thisUserOrder.userId === id);
   return {
     order,
-    id
+    id,
+    thisUserlineItems
   };
 }
 
 const mapDispatchToProps = (dispatch, { history }) => {
   return {
     updateOrder: (id, order) => dispatch(updateOrder(id, order, history)),
+    setLineItem: (id, lineItem) => dispatch(setLineItem(id, lineItem, history)),
+    setOrder: (id, order) => dispatch(setOrder(id, order, history)),
   };
 };
 

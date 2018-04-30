@@ -35,3 +35,14 @@ app.delete('/:id', (req, res, next)=> {
     .then(lineItem => res.send(lineItem))
     .catch(next);
 });
+
+
+app.put('/status/:id', (req, res, next) => {
+  LineItem.findById(req.params.id)
+    .then(lineItem => {
+      Object.assign(lineItem, req.body)
+      return lineItem.save();
+    })
+    .then(lineItem => res.send(lineItem))
+    .catch(next);
+});

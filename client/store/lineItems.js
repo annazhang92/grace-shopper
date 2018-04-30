@@ -6,6 +6,7 @@ const GET_LINEITEMS = 'GET_LINEITEMS';
 const CREATE_LINEITEM = 'CREATE_LINEITEM';
 const UPDATE_LINEITEM = 'UPDATE_LINEITEM';
 const DELETE_LINEITEM = 'DELETE_LINEITEM';
+const SET_LINEITEM = 'SET_LINEITEM';
 
 
 // ---- action creators
@@ -53,6 +54,20 @@ export const updateLineItem = (id, lineItem, history ) => {
   };
 };
 
+export const setLineItem = (id, lineItem, history ) => {
+  return (dispatch) => {
+    return axios.put(`/api/lineItems/status/${id}`, lineItem)
+    .then(res => res.data)
+    .then(lineItem =>
+      dispatch({
+        type: SET_LINEITEM,
+        lineItem
+      })
+    )
+    .catch(err => console.log(err))
+  };
+};
+
 export const deleteLineItem = ( id, history ) => {
   return (dispatch) => {
     return axios.delete(`/api/lineItems/${id}`)
@@ -69,7 +84,6 @@ export const deleteLineItem = ( id, history ) => {
 
 
 
-
 // ------ products reducer
 const lineItems = (state = [], action) => {
   switch (action.type) {
@@ -81,6 +95,8 @@ const lineItems = (state = [], action) => {
       return state.map(lineItem => lineItem.id === action.lineItem.id ? action.lineItem : lineItem); 
     case DELETE_LINEITEM:
       return state.filter(lineItem => lineItem.id !== action.lineItem.id); 
+    case SET_LINEITEM:
+      return state.map(lineItem => lineItem.id === action.lineItem.id ? action.lineItem : lineItem); 
   }
   return state;
 };
