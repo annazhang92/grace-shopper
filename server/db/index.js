@@ -74,7 +74,7 @@ const seed = () => {
             address2: faker.address.secondaryAddress(),
             city: faker.address.city(),
             state: faker.address.state(),
-            zipCode: faker.address.zipCode(),
+            zipCode: faker.address.zipCode('#####'),
             phoneNumber: faker.phone.phoneNumber()
           }).then(address=> {
             address.setUser(1);

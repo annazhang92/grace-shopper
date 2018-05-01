@@ -12,6 +12,10 @@ const Address = conn.define('address', {
       }
     }
   },*/
+  isPrimary: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: true
+  },
   address1: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -38,7 +42,7 @@ const Address = conn.define('address', {
     }
   },
   zipCode: {
-    type: Sequelize.INTEGER,
+    type: Sequelize.STRING,
     allowNull: false,
     validate: {
       notEmpty: true,
@@ -59,6 +63,8 @@ const Address = conn.define('address', {
       }
     }
   }
+}, {
+  timestamps: false
 });
 
 module.exports = Address;
