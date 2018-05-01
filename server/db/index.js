@@ -63,6 +63,7 @@ const seed = () => {
         User.create({
           firstName: 'dopest',
           lastName: 'squad',
+          isAdmin: true,
           email: 'dopestsquad@gmail.com',
           password: 'd0p3stSqu*d'
         })
@@ -74,7 +75,7 @@ const seed = () => {
             address2: faker.address.secondaryAddress(),
             city: faker.address.city(),
             state: faker.address.state(),
-            zipCode: faker.address.zipCode('#####'),
+            zipCode: faker.address.zipCode('#####')*1,
             phoneNumber: faker.phone.phoneNumber()
           }).then(address=> {
             address.setUser(1);

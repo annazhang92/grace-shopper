@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateUser } from '../store';
-import { Input, Button } from 'mdbreact';
+//import { Input, Button } from 'mdbreact';
 
 class UserForm extends Component {
   constructor(props) {
@@ -45,8 +45,10 @@ class UserForm extends Component {
     ev.preventDefault()
     const { updateUser } = this.props;
     const newUserInfo = this.state;
+    console.log(newUserInfo)
     updateUser(newUserInfo);
     this.setState({ updating: false })
+    //ALSO NEED TO UPDATE ADDRESS DATABASE!!
   }
 
   render() {
@@ -80,7 +82,7 @@ class UserForm extends Component {
                 className={`form-control${updating ? `` : `-plaintext` }`}
                 onChange={onChange}
                 value={this.state[field]}
-                type={field === 'password' ? 'password' : field === 'email' ? 'email' : 'text' }
+//                type={field === 'password' ? 'password' : field === 'email' ? 'email' : 'text' }
                 />
                 </div>
               )
@@ -91,7 +93,7 @@ class UserForm extends Component {
             updating ? (
               <button onClick={ onUpdate } className='btn btn-primary'>Save</button>
             ) : (
-              <button onClick={() => this.setState({ updating: true })} className='btn btn-primary'>Update</button>
+              <button onClick={() => this.setState({ updating: true })} className='btn btn-primary'>Update Info</button>
             )
           }
       </div>
@@ -109,7 +111,7 @@ const mapState = ({ user, addresses }) => {
 
 const mapDispatch = (dispatch) => {
   return {
-    updateUser: (user) => dispatch(update(user)),
+    updateUser: (user) => dispatch(updateUser(user)),
   }
 }
 

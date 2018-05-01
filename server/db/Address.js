@@ -42,7 +42,7 @@ const Address = conn.define('address', {
     }
   },
   zipCode: {
-    type: Sequelize.STRING,
+    type: Sequelize.INTEGER,
     allowNull: false,
     validate: {
       notEmpty: true,
