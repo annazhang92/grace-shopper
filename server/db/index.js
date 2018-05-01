@@ -18,7 +18,7 @@ supports unique values!
 const faker = require('faker');
 const numCategories = 10;
 const numProducts = 500;
-const numAddresses = 2;
+const numAddresses = 1;
 
 // Model relationships
 Product.belongsTo(Category);

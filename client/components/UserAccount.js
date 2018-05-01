@@ -6,19 +6,20 @@ import { Input, Button } from 'mdbreact';
 class UserForm extends Component {
   constructor(props) {
     super(props);
-    const { user } = props;
+    const { user, userAddress } = props;
     this.state = {
       id: user.id ? user.id : '',
       firstName: user.id ? user.firstName : '',
       lastName: user.id ? user.lastName : '',
       password: user.id ? user.password : '',
       email: user.id ? user.email : '',
-      address1: user.id ? user.address1 : '',
-      address2: user.id ? user.address2: '',
-      city: user.id ? user.city: '',
-      state: user.id ? user.state : '',
-      zipCode: user.id ? user.zipCode : '',
-      phoneNumber: user.id ? user.phoneNumber : '',
+      isPrimary: user.id ? userAddress.isPrimary : '',
+      address1: user.id ? userAddress.address1 : '',
+      address2: user.id ? userAddress.address2: '',
+      city: user.id ? userAddress.city: '',
+      state: user.id ? userAddress.state : '',
+      zipCode: user.id ? userAddress.zipCode : '',
+      phoneNumber: user.id ? userAddress.phoneNumber : '',
       updating: false 
     }
     this.onChange = this.onChange.bind(this);
@@ -50,12 +51,13 @@ class UserForm extends Component {
 
   render() {
     const { onChange, onUpdate } = this;
-    const { firstName, lastName, email, password, address1, address2, city, state, zipCode, phoneNumber, updating } = this.state;
+    const { firstName, lastName, email, password, isPrimary, address1, address2, city, state, zipCode, phoneNumber, updating } = this.state;
     const fields = {
-      firstName: 'First name',
-      lastName: 'Last name',
-      email: 'Email address',
+      firstName: 'First Name',
+      lastName: 'Last Name',
+      email: 'Email Address',
       password: 'Password',
+      isPrimary: 'Primary Address',
       address1: 'Street Address',
       address2: 'Apartment Number',
       city: 'City',
@@ -97,9 +99,11 @@ class UserForm extends Component {
   }
 }
 
-const mapState = ({ user }) => {
+const mapState = ({ user, addresses }) => {
+  const userAddress = addresses.find(address => user.id === address.userId && address.isPrimary === true) 
   return { 
-    user 
+    user,
+    userAddress
   }
 }
 

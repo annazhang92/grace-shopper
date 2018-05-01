@@ -45,7 +45,7 @@ export const updateUser = ( user, history ) => {
       })
   };
 };
-// --- products reducer
+// --- users reducer
 const usersReducer = ( state = [], action ) => {
   switch (action.type) {
     case GET_USERS:
