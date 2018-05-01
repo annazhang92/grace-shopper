@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import store, { updateLineItem, deleteLineItem } from '../store';
 import { connect } from 'react-redux';
 
+import StarRatingComponent from 'react-star-rating-component';
 
 const ProductCard = ({ products, lineItems, updateLineItem, deleteLineItem }) => {
 
@@ -24,6 +25,14 @@ const ProductCard = ({ products, lineItems, updateLineItem, deleteLineItem }) =>
                 <span className="price">
                   Price: ${product.price}
                 </span>
+                <div style={{fontSize: 16}}>
+                  <StarRatingComponent
+                    name="rate1"
+                    editing={false}
+                    starCount={5}
+                    value={4.5}
+                  />
+              </div>
                 <br></br>
                 {lineItem ?
                   <div>

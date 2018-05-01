@@ -110,7 +110,7 @@ img {
   animation-iteration-count: infinite;
   animation-timing-function: linear;
   animation-name: ticker;
-  animation-duration: 35s;
+  animation-duration: 50s;
 }
 .ticker-wrap .ticker__item {
   display: inline-block;
