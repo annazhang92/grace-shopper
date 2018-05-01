@@ -18,6 +18,7 @@ supports unique values!
 const faker = require('faker');
 const numCategories = 10;
 const numProducts = 500;
+const numAddresses = 2;
 
 // Model relationships
 Product.belongsTo(Category);
@@ -34,8 +35,10 @@ Order.hasOne(CreditCard, { as: 'paymentMethod' });
 
 // Save user data
 User.hasMany(Order);
-User.hasMany(Address);
 User.hasMany(CreditCard);
+
+Address.belongsTo(User);
+User.hasMany(Address);
 
 // Incorporate Cart
 User.hasOne(Cart);
@@ -65,6 +68,20 @@ const seed = () => {
         })
       })
       .then(() => {
+        for (let i = 0; i < numAddresses; i++) {
+          Address.create({
+            address1: faker.address.streetAddress(),
+            address2: faker.address.secondaryAddress(),
+            city: faker.address.city(),
+            state: faker.address.state(),
+            zipCode: faker.address.zipCode(),
+            phoneNumber: faker.phone.phoneNumber()
+          }).then(address=> {
+            address.setUser(1);
+          });
+        }
+      })
+      .then(() => {
         for (let i = 0; i < numCategories; i++) {
           Category.create({
             name: faker.unique(faker.commerce.department),
@@ -84,6 +101,7 @@ const seed = () => {
           });
         }
       })
+
   ]);
 };
 
