@@ -27,7 +27,7 @@ export const createUser = (user, history) => {
           type: CREATE_USER,
           user
         });
-        history.push('/products')
+//        history.push('/products')
       })
   };
 };

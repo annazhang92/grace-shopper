@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateUser, updateAddress } from '../store';
+import { updateUser, updateAddress, createUser, createAddress } from '../store';
 //import { Input, Button } from 'mdbreact';
 
 class UserForm extends Component {
@@ -43,12 +43,11 @@ class UserForm extends Component {
 
   onUpdate(ev) {
     ev.preventDefault()
-    const { updateUser, updateAddress, userAddress } = this.props;
-    const newUserInfo = this.state;
-    updateUser(newUserInfo);
-    updateAddress(newUserInfo);
+    const { user, updateUser, updateAddress, userAddress, createAddress, createUser } = this.props;
+    const newUserInfo = this.state; 
+    user.id ? updateUser(newUserInfo) : createUser(newUserInfo);
+    user.id ? updateAddress(newUserInfo) : createAddress(newUserInfo);
     this.setState({ updating: false })
-    //ALSO NEED TO UPDATE ADDRESS DATABASE!!
   }
 
   render() {
@@ -112,7 +111,9 @@ const mapState = ({ user, addresses }) => {
 const mapDispatch = (dispatch) => {
   return {
     updateUser: (user) => dispatch(updateUser(user)),
-    updateAddress: (address) => dispatch(updateAddress(address))
+    updateAddress: (address) => dispatch(updateAddress(address)),
+    createUser: (user) => dispatch(createUser(user)),
+    createAddress: (address) => dispatch(createAddress(address))
   }
 }
 

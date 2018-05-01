@@ -13,7 +13,7 @@ app.post('/', (req, res, next) => {
   Address.create(req.body)
     .then(address => res.send(address))
     .catch(next);
-})
+});
 
 app.put('/:id', (req, res, next) => {
   Address.findById(req.params.id)
