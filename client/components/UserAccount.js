@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateUser } from '../store';
+import { updateUser, updateAddress } from '../store';
 //import { Input, Button } from 'mdbreact';
 
 class UserForm extends Component {
@@ -28,7 +28,7 @@ class UserForm extends Component {
 
   componentWillReceiveProps(nextProps) {
     //edit mode automatically?
-    const { user } = nextProps;
+    const { user, userAddress } = nextProps;
     // if (user.id) {
     //   const { id, firstName, lastName, email, password } = user;
     //   this.setState({ id, firstName, lastName, email, password })
@@ -43,10 +43,10 @@ class UserForm extends Component {
 
   onUpdate(ev) {
     ev.preventDefault()
-    const { updateUser } = this.props;
+    const { updateUser, updateAddress, userAddress } = this.props;
     const newUserInfo = this.state;
-    console.log(newUserInfo)
     updateUser(newUserInfo);
+    updateAddress(newUserInfo);
     this.setState({ updating: false })
     //ALSO NEED TO UPDATE ADDRESS DATABASE!!
   }
@@ -112,6 +112,7 @@ const mapState = ({ user, addresses }) => {
 const mapDispatch = (dispatch) => {
   return {
     updateUser: (user) => dispatch(updateUser(user)),
+    updateAddress: (address) => dispatch(updateAddress(address))
   }
 }
 

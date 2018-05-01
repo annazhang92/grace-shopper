@@ -40,7 +40,7 @@ export const updateUser = (user) => {
           type: UPDATE_USER,
           user
         });
-      })
+      });
   };
 };
 // --- users reducer
@@ -48,10 +48,13 @@ const usersReducer = ( state = [], action ) => {
   switch (action.type) {
     case GET_USERS:
       state = action.users;
+      break;
     case CREATE_USER:
       state = [...state, action.user];
+      break;
     case UPDATE_USER:
-      state = state.map(user => user.id === action.updateUser.id ? action.user : user)
+      state = state.map(user => user.id === action.user.id ? action.user : user);
+      break;
   }
   return state;
 };
