@@ -4,11 +4,13 @@ import loggerMiddleware from 'redux-logger';
 
 // reducers
 import products from './products';
+import addresses from './addresses';
 import categories from './categories';
 import user from './user';
 import orders from './orders';
 import usersReducer from './users';
 import lineItems from './lineItems';
+
 
 const reducer = combineReducers({
   products,
@@ -16,15 +18,19 @@ const reducer = combineReducers({
   user,
   orders,
   lineItems,
+  addresses,
   users: usersReducer
 });
 
 const store = createStore(reducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
 
 export default store;
+export * from './addresses';
 export * from './products';
 export * from './categories';
 export * from './user';
 export * from './users';
 export * from './orders';
 export * from './lineItems';
+
+

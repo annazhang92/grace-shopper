@@ -6,5 +6,6 @@ app.use('/sessions', require('./sessions'));
 app.use('/orders', require('./orders'));
 app.use('/users', require('./users'));
 app.use('/lineItems', require('./lineItems'));
+app.use('/addresses', require('./addresses'));
 
 module.exports = app;

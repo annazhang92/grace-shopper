@@ -1,0 +1,1 @@
+- When new user is created with log-in form, state does not pass user in.  When you console.log(user), you get {}.

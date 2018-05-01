@@ -2,7 +2,7 @@ const Sequelize = require('sequelize');
 const conn = require('./conn');
 
 const Address = conn.define('address', {
-  fullName: {
+  /*fullName: {
     type: Sequelize.STRING,
     allowNull: false,
     validate: {
@@ -11,6 +11,10 @@ const Address = conn.define('address', {
         msg: 'Please enter a valid name.'
       }
     }
+  },*/
+  isPrimary: {
+    type: Sequelize.BOOLEAN,
+    defaultValue: true
   },
   address1: {
     type: Sequelize.STRING,
@@ -42,7 +46,6 @@ const Address = conn.define('address', {
     allowNull: false,
     validate: {
       notEmpty: true,
-      isNumeric: true,
       len: {
         args: [5],
         msg: 'Please enter a 5-digit zip code'
@@ -54,13 +57,14 @@ const Address = conn.define('address', {
     allowNull: false,
     validate: {
       notEmpty: true,
-      isNumeric: true,
       len: {
         args: [10],
         msg: 'Please enter a 10-digit phone number'
       }
     }
   }
+}, {
+  timestamps: false
 });
 
 module.exports = Address;

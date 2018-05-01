@@ -1,17 +1,26 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateUser, updateLoggedUser } from '../store';
+import { updateUser, updateAddress, createUser, createAddress } from '../store';
+//import { Input, Button } from 'mdbreact';
 
 class UserForm extends Component {
-  constructor() {
-    super();
-    const { user } = this.props;
+  constructor(props) {
+    super(props);
+    const { user, userAddress } = props;
     this.state = {
       id: user.id ? user.id : '',
       firstName: user.id ? user.firstName : '',
       lastName: user.id ? user.lastName : '',
       password: user.id ? user.password : '',
-      email: user.id ? user.email : ''
+      email: user.id ? user.email : '',
+      isPrimary: user.id ? userAddress.isPrimary : '',
+      address1: user.id ? userAddress.address1 : '',
+      address2: user.id ? userAddress.address2: '',
+      city: user.id ? userAddress.city: '',
+      state: user.id ? userAddress.state : '',
+      zipCode: user.id ? userAddress.zipCode : '',
+      phoneNumber: user.id ? userAddress.phoneNumber : '',
+      updating: false 
     }
     this.onChange = this.onChange.bind(this);
     this.onUpdate = this.onUpdate.bind(this);
@@ -19,7 +28,7 @@ class UserForm extends Component {
 
   componentWillReceiveProps(nextProps) {
     //edit mode automatically?
-    const { user } = nextProps;
+    const { user, userAddress } = nextProps;
     // if (user.id) {
     //   const { id, firstName, lastName, email, password } = user;
     //   this.setState({ id, firstName, lastName, email, password })
@@ -34,41 +43,76 @@ class UserForm extends Component {
 
   onUpdate(ev) {
     ev.preventDefault()
-    const { updateUser } = this.props;
-    const { id, firstName, lastName, username, email, password } = this.state;
-    updateUser({ id, firstName, lastName, username, email, password });
+    const { user, updateUser, updateAddress, userAddress, createAddress, createUser } = this.props;
+    const newUserInfo = this.state; 
+    user.id ? updateUser(newUserInfo) : createUser(newUserInfo);
+    user.id ? updateAddress(newUserInfo) : createAddress(newUserInfo);
+    this.setState({ updating: false })
   }
 
   render() {
     const { onChange, onUpdate } = this;
-    const { firstName, lastName, email, password } = this.state;
+    const { firstName, lastName, email, password, isPrimary, address1, address2, city, state, zipCode, phoneNumber, updating } = this.state;
     const fields = {
-      firstName: 'First name',
-      lastName: 'Last name',
-      email: 'Email address',
-      password: 'Password'
+      firstName: 'First Name',
+      lastName: 'Last Name',
+      email: 'Email Address',
+      password: 'Password',
+      isPrimary: 'Primary Address',
+      address1: 'Street Address',
+      address2: 'Apartment Number',
+      city: 'City',
+      state: 'State',
+      zipCode: 'Zip Code',
+      phoneNumber: 'Phone Number'
     }
-    return (
+    return (    
       <div>
         <h2>User Account</h2>
-        <h3>ACCOUNT TYPE IN HERE</h3>
         <form>
           {
-            //TODO:
+            Object.keys(fields).map(field => {
+              return (
+                <div className="" key={field}>
+                <label className="font-weight-bold">{fields[field]}</label>
+                <input
+                name={field}
+                readOnly={updating ? false : true}
+                className={`form-control${updating ? `` : `-plaintext` }`}
+                onChange={onChange}
+                value={this.state[field]}
+                />
+                </div>
+              )
+            })
           }
         </form>
+          {
+            updating ? (
+              <button onClick={ onUpdate } className='btn btn-primary'>Save</button>
+            ) : (
+              <button onClick={() => this.setState({ updating: true })} className='btn btn-primary'>Update Info</button>
+            )
+          }
       </div>
     )
   }
 }
 
-const mapState = ({ user }) => {
-  return { user }
+const mapState = ({ user, addresses }) => {
+  const userAddress = addresses.find(address => user.id === address.userId && address.isPrimary === true) 
+  return { 
+    user,
+    userAddress
+  }
 }
 
 const mapDispatch = (dispatch) => {
   return {
-    updateUser: (user) => dispatch(update(user)),
+    updateUser: (user) => dispatch(updateUser(user)),
+    updateAddress: (address) => dispatch(updateAddress(address)),
+    createUser: (user) => dispatch(createUser(user)),
+    createAddress: (address) => dispatch(createAddress(address))
   }
 }
 
