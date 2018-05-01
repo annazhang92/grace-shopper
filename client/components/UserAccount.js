@@ -81,7 +81,6 @@ class UserForm extends Component {
                 className={`form-control${updating ? `` : `-plaintext` }`}
                 onChange={onChange}
                 value={this.state[field]}
-//                type={field === 'password' ? 'password' : field === 'email' ? 'email' : 'text' }
                 />
                 </div>
               )
