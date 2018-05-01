@@ -25,13 +25,14 @@ const ProductCard = ({ products, lineItems, updateLineItem, deleteLineItem }) =>
                 <span className="price">
                   Price: ${product.price}
                 </span>
-                <div style={{fontSize: 16}}>
+                <div style={{fontSize: 16, display:'flex',justifyContent:'center'}}>
                   <StarRatingComponent
                     name="rate1"
                     editing={false}
                     starCount={5}
                     value={4.5}
                   />
+                  <span>({Math.floor(Math.random() * 200) + 1})</span>
               </div>
                 <br></br>
                 {lineItem ?
