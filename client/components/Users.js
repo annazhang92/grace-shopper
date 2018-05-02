@@ -10,6 +10,7 @@ class Users extends Component {
     }
   }
   render() {
+    const { users } = this.props;
     return (
       <div>
         <h2>Users</h2>

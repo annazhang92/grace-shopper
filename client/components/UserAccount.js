@@ -38,9 +38,9 @@ class UserForm extends Component {
 
   onUpdate(ev) {
     ev.preventDefault()
-    const { user, updateUser, updateAddress, userAddress, createAddress, createUser } = this.props;
+    const { user, updateUser, updateAddress, userAddress } = this.props;
     const { id, firstName, lastName, password, email, address1, address2, city, state, zipCode, phoneNumber } = this.state;
-    const userId = id
+    const userId = id;
     const newUserInfo = { id, firstName, lastName, password, email };
     const newAddressInfo = { id, address1, address2, city, state, zipCode, phoneNumber, userId };
     updateUser(newUserInfo);
