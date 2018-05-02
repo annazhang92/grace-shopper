@@ -13,13 +13,13 @@ class UserForm extends Component {
       lastName: user.id ? user.lastName : '',
       password: user.id ? user.password : '',
       email: user.id ? user.email : '',
-      isPrimary: user.id ? userAddress.isPrimary : '',
-      address1: user.id ? userAddress.address1 : '',
-      address2: user.id ? userAddress.address2: '',
-      city: user.id ? userAddress.city: '',
-      state: user.id ? userAddress.state : '',
-      zipCode: user.id ? userAddress.zipCode : '',
-      phoneNumber: user.id ? userAddress.phoneNumber : '',
+//      isPrimary: userAddress ? userAddress.isPrimary : '',
+      address1: userAddress ? userAddress.address1 : '',
+      address2: userAddress ? userAddress.address2 : '',
+      city: userAddress ? userAddress.city: '',
+      state: userAddress ? userAddress.state : '',
+      zipCode: userAddress ? userAddress.zipCode : '',
+      phoneNumber: userAddress ? userAddress.phoneNumber : '',
       updating: false 
     }
     this.onChange = this.onChange.bind(this);
@@ -27,12 +27,7 @@ class UserForm extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    //edit mode automatically?
     const { user, userAddress } = nextProps;
-    // if (user.id) {
-    //   const { id, firstName, lastName, email, password } = user;
-    //   this.setState({ id, firstName, lastName, email, password })
-    // }
   }
 
   onChange(ev) {
@@ -44,21 +39,26 @@ class UserForm extends Component {
   onUpdate(ev) {
     ev.preventDefault()
     const { user, updateUser, updateAddress, userAddress, createAddress, createUser } = this.props;
-    const newUserInfo = this.state; 
+    const { id, firstName, lastName, password, email, address1, address2, city, state, zipCode, phoneNumber } = this.state;
+    const userId = id
+    const newUserInfo = { id, firstName, lastName, password, email };
+    console.log(newUserInfo);
+    console.log(newAddressInfo);
+    const newAddressInfo = { id, address1, address2, city, state, zipCode, phoneNumber, userId }
     user.id ? updateUser(newUserInfo) : createUser(newUserInfo);
-    user.id ? updateAddress(newUserInfo) : createAddress(newUserInfo);
+    userAddress ? updateAddress(newAddressInfo) : createAddress(newAddressInfo);
     this.setState({ updating: false })
   }
 
   render() {
     const { onChange, onUpdate } = this;
     const { firstName, lastName, email, password, isPrimary, address1, address2, city, state, zipCode, phoneNumber, updating } = this.state;
-    const fields = {
+    const inputs = {
       firstName: 'First Name',
       lastName: 'Last Name',
       email: 'Email Address',
       password: 'Password',
-      isPrimary: 'Primary Address',
+//      isPrimary: 'Primary Address',
       address1: 'Street Address',
       address2: 'Apartment Number',
       city: 'City',
@@ -71,16 +71,16 @@ class UserForm extends Component {
         <h2>User Account</h2>
         <form>
           {
-            Object.keys(fields).map(field => {
+            Object.keys(inputs).map(input => {
               return (
-                <div className="" key={field}>
-                <label className="font-weight-bold">{fields[field]}</label>
+                <div className="" key={input}>
+                <label className="font-weight-bold">{inputs[input]}</label>
                 <input
-                name={field}
+                name={input}
                 readOnly={updating ? false : true}
                 className={`form-control${updating ? `` : `-plaintext` }`}
                 onChange={onChange}
-                value={this.state[field]}
+                value={this.state[input]}
                 />
                 </div>
               )

@@ -16,8 +16,7 @@ import ProductDetail from './ProductDetail';
 import CheckOut from './CheckOut';
 import OrderComplete from './OrderComplete';
 import UserForm from './UserAccount';
-
-
+import Users from './Users';
 
 class App extends Component {
   componentDidMount() {
@@ -46,6 +45,7 @@ class App extends Component {
           <Route exact path="/cart" component={ Cart } />
           <Route exact path="/orders/:id" render={ ({ match, history }) => <CheckOut id={ match.params.id * 1 } history={ history } /> } />
           <Route exact path="/complete" component={ OrderComplete } />
+          <Route exact path="/users" component={ Users } />
           <Route exact path="/userform" component={ UserForm } />
         </div>
       </Router>

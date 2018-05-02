@@ -1,1 +1,1 @@
-- When new user is created with log-in form, state does not pass user in.  When you console.log(user), you get {}.
+- Logged in user on top right doesn't change even though info changes on user form.
