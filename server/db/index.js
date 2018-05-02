@@ -7,6 +7,7 @@ const Address = require('./Address');
 const CreditCard = require('./CreditCard');
 const LineItem = require('./LineItem');
 const Order = require('./Order');
+const Review = require('./Review');
 
 const randomImage = require('./scraped/images.js');
 
@@ -45,6 +46,10 @@ User.hasOne(Cart);
 Cart.belongsTo(User);
 Cart.hasOne(Address, { as: 'shippingAddress' })
 Cart.hasOne(CreditCard, { as: 'paymentMethod' });
+
+//Review - rating support
+Review.belongsTo(User);
+Review.belongsTo(Product);
 
 
 const sync = () => {
@@ -99,6 +104,12 @@ const seed = () => {
             price: faker.commerce.price()
           }).then(product => {
             product.setCategory(Math.floor(Math.random() * numCategories) + 1);
+            Review.create({
+              userId: 1,
+              productId: product.id,
+              title: faker.lorem.sentence(),
+              description: faker.lorem.paragraph()
+            });
           });
         }
       })
@@ -118,6 +129,7 @@ module.exports = {
     Address,
     CreditCard,
     LineItem,
-    Order
+    Order,
+    Review
   }
 };

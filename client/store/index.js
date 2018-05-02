@@ -10,6 +10,7 @@ import user from './user';
 import orders from './orders';
 import usersReducer from './users';
 import lineItems from './lineItems';
+import reviews from './reviews';
 
 
 const reducer = combineReducers({
@@ -19,7 +20,8 @@ const reducer = combineReducers({
   orders,
   lineItems,
   addresses,
-  users: usersReducer
+  users: usersReducer,
+  reviews: reviews
 });
 
 const store = createStore(reducer, applyMiddleware(thunkMiddleware, loggerMiddleware));
@@ -32,5 +34,6 @@ export * from './user';
 export * from './users';
 export * from './orders';
 export * from './lineItems';
+export * from './reviews';
 
 

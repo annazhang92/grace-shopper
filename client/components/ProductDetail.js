@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import store, { createLineItem } from '../store';
 import { connect } from 'react-redux';
 
+import StarRatingComponent from 'react-star-rating-component';
+
 
 const ProductDetail = ({ product, createLineItem, user, loggedIn }) => {
   return (
@@ -31,7 +33,7 @@ const mapStateToProps = ({ products, user }, { id }) => {
     loggedIn
   };
 }
-  
+
 const mapDispatchToProps = (dispatch, { history }) => {
   return {
     createLineItem: (lineItem) => dispatch(createLineItem(lineItem,history)),
