@@ -42,12 +42,10 @@ class UserForm extends Component {
     const { id, firstName, lastName, password, email, address1, address2, city, state, zipCode, phoneNumber } = this.state;
     const userId = id
     const newUserInfo = { id, firstName, lastName, password, email };
-    console.log(newUserInfo);
-    console.log(newAddressInfo);
-    const newAddressInfo = { id, address1, address2, city, state, zipCode, phoneNumber, userId }
-    user.id ? updateUser(newUserInfo) : createUser(newUserInfo);
-    userAddress ? updateAddress(newAddressInfo) : createAddress(newAddressInfo);
-    this.setState({ updating: false })
+    const newAddressInfo = { id, address1, address2, city, state, zipCode, phoneNumber, userId };
+    updateUser(newUserInfo);
+    updateAddress(newAddressInfo);
+    this.setState({ updating: false });
   }
 
   render() {
@@ -111,8 +109,6 @@ const mapDispatch = (dispatch) => {
   return {
     updateUser: (user) => dispatch(updateUser(user)),
     updateAddress: (address) => dispatch(updateAddress(address)),
-    createUser: (user) => dispatch(createUser(user)),
-    createAddress: (address) => dispatch(createAddress(address))
   }
 }
 
