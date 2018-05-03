@@ -80,14 +80,14 @@ const seed = () => {
             address2: faker.address.secondaryAddress(),
             city: faker.address.city(),
             state: faker.address.state(),
-            zipCode: faker.address.zipCode('#####')*1,
+            zipCode: 12345,
             phoneNumber: faker.phone.phoneNumber()
           }).then(address=> {
             address.setUser(1);
           });
         }
       })
-      .then(() => {
+/*      .then(() => {
         for (let i = 0; i < numCategories; i++) {
           Category.create({
             name: faker.unique(faker.commerce.department),
@@ -122,7 +122,7 @@ const seed = () => {
             });
           });
         }
-      })
+      })*/
 
   ]);
 };

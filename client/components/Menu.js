@@ -28,7 +28,7 @@ const Menu = ({ user, logout, thisUserlineItems }) => {
           loggedIn ?
           (
             <Nav>
-              <LinkContainer to='/account'>
+              <LinkContainer to='/userform'>
                 <NavItem>{user.fullName}</NavItem>
               </LinkContainer>
               <LinkContainer to='/login' onClick={logout}>
