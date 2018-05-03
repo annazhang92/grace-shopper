@@ -67,8 +67,6 @@ class AdminUserAccount extends Component {
   }
 }
 
-
-
 const mapState = ({ user }) => {
   return {
     user
