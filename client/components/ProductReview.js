@@ -11,7 +11,7 @@ class ProductReview extends React.Component {
     this.state = {
       description: '',
       title: '',
-      rating: 1,
+      rating: 0,
       errors: {},
       show: false,
       userId: user ? user.id : null,
@@ -62,6 +62,11 @@ class ProductReview extends React.Component {
 
     console.log(`SAVING REVIEW`,this.state);
     this.props.createReview(this.state);
+    this.setState({
+      rating: 0,
+      title: '',
+      description: ''
+    })
     this.handleClose();
   };
 
@@ -74,7 +79,16 @@ class ProductReview extends React.Component {
   }
 
   onStarHover(nextValue, prevValue, name) {
+    console.log(nextValue,prevValue,name)
     this.setState({rating: nextValue});
+  };
+
+  onStarHoverOut(nextValue, prevValue, name) {
+    if(nextValue === 1 && prevValue === 1){
+      this.setState({rating: 0});
+    } else {
+      this.setState({rating: nextValue});
+    }
   };
 
   onStarClick(nextValue, prevValue, name) {
@@ -90,10 +104,9 @@ class ProductReview extends React.Component {
     // const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
     const { handleChange, onSubmit } = this;
     const { rating } = this.state;
-    console.log('PROPS', this.props);
     return (
       <div>
-        <Button bsStyle="primary" bsSize="medium" onClick={this.handleShow}>
+        <Button bsStyle='primary' bsSize="medium" onClick={this.handleShow}>
           Write a review
         </Button>
         <Modal show={this.state.show} onHide={this.handleClose}>
@@ -126,10 +139,11 @@ class ProductReview extends React.Component {
             starCount={5}
             value={rating}
             onStarHover={this.onStarHover.bind(this)}
+            onStarHoverOut={this.onStarHoverOut.bind(this)}
             onStarClick={this.onStarClick.bind(this)}
           />
           </div>
-            <Button type="submit">Submit</Button>
+            <Button bsStyle="warning" type="submit">Submit</Button>
             </form>
           </Modal.Body>
           <Modal.Footer>
