@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 
 import StarRatingComponent from 'react-star-rating-component';
 import Reviews from './Reviews';
+import ProductReview from './ProductReview';
 
 
 const ProductDetail = ({ product, createLineItem, user, loggedIn }) => {
@@ -19,6 +20,8 @@ const ProductDetail = ({ product, createLineItem, user, loggedIn }) => {
         <img src={product.imageUrl}></img>
         <p><strong>Price</strong> {product.price}</p>
         <p><strong>Description:</strong> {product.description}</p>
+        <ProductReview product={ product } user={ user }/>
+        <hr/>
         <Reviews product={ product } />
       </div>
       }
