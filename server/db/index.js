@@ -105,10 +105,20 @@ const seed = () => {
           }).then(product => {
             product.setCategory(Math.floor(Math.random() * numCategories) + 1);
             Review.create({
-              userId: 1,
-              productId: product.id,
-              title: faker.lorem.sentence(),
-              description: faker.lorem.paragraph()
+                userId: 1,
+                productId: product.id,
+                title: faker.lorem.sentence(),
+                description: faker.lorem.paragraph(),
+                rating: (Math.floor(Math.random() * 5))
+              })
+            .then( review =>{
+              Review.create({
+                userId: 1,
+                productId: review.productId,
+                title: faker.lorem.sentence(),
+                description: faker.lorem.paragraph(),
+                rating: (Math.floor(Math.random() * 5))
+              })
             });
           });
         }

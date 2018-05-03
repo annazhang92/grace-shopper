@@ -1,46 +1,47 @@
 import axios from 'axios';
-
-
-
 // ------ constants ----
-const GET_REVIEWS = 'GET_REVIEWS;
-const CREATE_REVIEW = 'CREATE_REVIEW;
+const GET_REVIEWS = 'GET_REVIEWS'
+const CREATE_REVIEW = 'CREATE_REVIEW';
 
 // ---- action creators
-export const getReviewsFromServer = () => {
+export const getReviews = () => {
   return (dispatch) => {
     return axios.get('/api/reviews')
       .then(res => res.data)
-      .then(reviews => dispatch(getReviews(reviews)))
-      .catch(err => console.error(err))
-  }
-}
+      .then(reviews => dispatch({
+        type: GET_REVIEWS,
+        reviews
+      }))
+      .catch(err =>
+        console.error(err)
+      );
+  };
+};
 
-export const createReviewOnServer = (review) => {
+export const createReview = (review) => {
   return (dispatch) => {
     return axios.post('/api/reviews', review)
       .then(res => res.data)
-      .then(review => dispatch(createReview(review)))
-      .catch(err => console.error(err))
-  }
-}
+      .then(review => dispatch({
+        type: CREATE_REVIEW,
+        review
+      }))
+      .catch(err =>
+        console.error(err)
+      );
+  };
+};
 
 // ------ products reducer
 
 const reviews = ( state = [], action ) => {
   switch(action.type) {
-
     case GET_REVIEWS:
-      state = action.reviews;
-      break;
-
+      return action.reviews;
     case CREATE_REVIEW:
-      state = [ ...state, action.review ];
-      break;
-
+      return [...state, action.review];
   }
   return state;
 }
-
 
 export default reviews;
