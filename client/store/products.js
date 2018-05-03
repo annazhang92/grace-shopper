@@ -1,9 +1,7 @@
 import axios from 'axios';
 
-
 // ------ constants ----
 const GET_PRODUCTS = 'GET_PRODUCTS';
-
 
 // ---- action creators
 export const getProducts = () => {

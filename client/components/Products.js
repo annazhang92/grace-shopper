@@ -56,12 +56,13 @@ class Products extends Component {
                     <span className="card-header">
                       <img style={{height: '75px', width:'75px', padding:'4px'}} alt="product here" src={ special.imageUrl } />
                     </span>
-                    <div>
-                    <Link to={ `/products/${special.id}` }>
-                      <span style={{fontSize: 16}}>{special.name}</span>
-                    </Link>
+
+                    <div style={{padding:'8px', display:'grid'}}>
+                    <button style={{width: '100px'}} className="btn btn-warning btn-small" onClick={ () => loggedIn? createLineItem({ productId: product.id, userId: user.id, quantity: 1, price: product.price, name: product.name }) : console.log ('please login') }>Add to Cart</button>
+                    <span style={{fontSize: 12}}>{special.name.substr(0,12)}
+                    <span className='price' style={{fontSize: 12}}>: ${special.price}</span></span>
                     </div>
-                    <span className='price' style={{fontSize: 16}}>: ${special.price}</span>
+
                     </div>
                     </div>
                   )
@@ -82,7 +83,7 @@ class Products extends Component {
   }
 };
 
-const mapStateToProps = ({ products, categories }, { id }) => {
+const mapStateToProps = ({ products, categories, loggedIn }, { id }) => {
   if (id) {
     products = products.filter(product => product.categoryId === id);
     categories = categories.find(category => category.id === id);

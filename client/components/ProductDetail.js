@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import store, { createLineItem } from '../store';
 import { connect } from 'react-redux';
 
+import StarRatingComponent from 'react-star-rating-component';
+import Reviews from './Reviews';
+
 
 const ProductDetail = ({ product, createLineItem, user, loggedIn }) => {
   return (
@@ -16,6 +19,7 @@ const ProductDetail = ({ product, createLineItem, user, loggedIn }) => {
         <img src={product.imageUrl}></img>
         <p><strong>Price</strong> {product.price}</p>
         <p><strong>Description:</strong> {product.description}</p>
+        <Reviews product={ product } />
       </div>
       }
     </div>
@@ -31,7 +35,7 @@ const mapStateToProps = ({ products, user }, { id }) => {
     loggedIn
   };
 }
-  
+
 const mapDispatchToProps = (dispatch, { history }) => {
   return {
     createLineItem: (lineItem) => dispatch(createLineItem(lineItem,history)),

@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateUser, updateAddress, createUser, createAddress } from '../store';
-//import { Input, Button } from 'mdbreact';
+import { updateUser, updateAddress, updateNavUser } from '../store';
+
+import AdminUserAccount from './AdminUserAccount'
 
 class UserForm extends Component {
   constructor(props) {
@@ -37,14 +38,15 @@ class UserForm extends Component {
   }
 
   onUpdate(ev) {
-    ev.preventDefault()
-    const { user, updateUser, updateAddress, userAddress } = this.props;
+    ev.preventDefault();
+    const { user, updateUser, updateAddress, userAddress, updateNavUser } = this.props;
     const { id, firstName, lastName, password, email, address1, address2, city, state, zipCode, phoneNumber } = this.state;
     const userId = id;
     const newUserInfo = { id, firstName, lastName, password, email };
     const newAddressInfo = { id, address1, address2, city, state, zipCode, phoneNumber, userId };
     updateUser(newUserInfo);
     updateAddress(newAddressInfo);
+    updateNavUser(newUserInfo);
     this.setState({ updating: false });
   }
 
@@ -85,13 +87,16 @@ class UserForm extends Component {
             })
           }
         </form>
-          {
-            updating ? (
-              <button onClick={ onUpdate } className='btn btn-primary'>Save</button>
-            ) : (
-              <button onClick={() => this.setState({ updating: true })} className='btn btn-primary'>Update Info</button>
-            )
-          }
+        {
+          updating ? (
+            <button onClick={ onUpdate } className='btn btn-primary'>Save</button>
+          ) : (
+            <button onClick={() => this.setState({ updating: true })} className='btn btn-primary'>I want to edit account!</button>
+          )
+        }
+        <br />
+        <br />
+        <AdminUserAccount />
       </div>
     )
   }
@@ -109,6 +114,7 @@ const mapDispatch = (dispatch) => {
   return {
     updateUser: (user) => dispatch(updateUser(user)),
     updateAddress: (address) => dispatch(updateAddress(address)),
+    updateNavUser: (user) => dispatch(updateNavUser(user))
   }
 }
 

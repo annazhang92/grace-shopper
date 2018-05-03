@@ -39,7 +39,7 @@ class Menu extends Component {
             (
               <Nav>
                 <LinkContainer to='/userform'>
-                  <NavItem>{user.fullName}</NavItem>
+                  <NavItem>{user.firstName} {user.lastName}</NavItem>
                 </LinkContainer>
                 <LinkContainer to='/login' onClick={logout}>
                   <NavItem>Logout</NavItem>
