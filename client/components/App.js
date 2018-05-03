@@ -54,6 +54,7 @@ class App extends Component {
   }
 }
 
+
 const mapDispatchToProps = (dispatch) => {
   return {
     getProducts: () => dispatch(getProducts()),

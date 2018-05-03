@@ -52,6 +52,7 @@ class UserForm extends Component {
 
   render() {
     const { onChange, onUpdate } = this;
+    const { adminAccess } = this.props;
     const { firstName, lastName, email, password, isPrimary, address1, address2, city, state, zipCode, phoneNumber, updating } = this.state;
     const inputs = {
       firstName: 'First Name',
@@ -96,17 +97,21 @@ class UserForm extends Component {
         }
         <br />
         <br />
-        <AdminUserAccount />
+        {
+          adminAccess ? <AdminUserAccount /> : ''
+        }
       </div>
     )
   }
 }
 
 const mapState = ({ user, addresses }) => {
+  const adminAccess = false; //TO TEST.  REMOVE ONCE THIS IS PROPERLY PASSED IN AS PROP!!
   const userAddress = addresses.find(address => user.id === address.userId && address.isPrimary === true) 
   return { 
     user,
-    userAddress
+    userAddress,
+    adminAccess
   }
 }
 
