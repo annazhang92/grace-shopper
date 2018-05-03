@@ -7,49 +7,67 @@ class AdminUserAccount extends Component {
     super(props);
     const { user } = props;
     this.state = {
+      id: user.id ? user.id : '',
+      firstName: user.id ? user.firstName : '',
+      lastName: user.id ? user.lastName : '',
+      email: user.id ? user.email : '',
+      password: user.id ? user.password : '',
       isAdmin: user.id ? user.isAdmin : '',
       status: user.id ? user.status : ''
     }
-    this.onChangeAdmin = this.onChangeAdmin.bind(this);
+    this.onChangeAdminStatus = this.onChangeAdminStatus.bind(this);
+    this.onSave = this.onSave.bind(this);
   }
 
-  onChangeAdmin(ev) {
+  onChangeAdminStatus(ev) {
     this.setState({
-      isAdmin: ev.target.checked
+      isAdmin: ev.target.checked,
+      status: ev.target.checked ? 'I': 'A'
     })
+  }
+
+  onSave(ev) {
+    ev.preventDefault();
+    console.log(this.state);
+    this.props.updateUser(this.state);
   }
 
   render() {
     const { user } = this.props;
-    const { onChangeAdmin, onSave } = this;
+    const { isAdmin, status } = this.state;
+    const { onChangeAdminStatus, onSave } = this;
+    const isInactive = status ==='A' ? false : true  ;
     return (
       <div>
-        <form>
+        <form onSubmit={onSave}>
           <label>
             MAKE ADMIN?
             <input
               name='isAdmin'
               type='checkbox'
-              value={this.state.isAdmin}
-              onChange={onChangeAdmin}
+              checked={isAdmin}
+              onChange={onChangeAdminStatus}
             />
           </label>
           <br />
           <label>
-          INACTIVATE?
-          <input
-            name='isAdmin'
-            type='checkbox'
-            value={this.state.isAdmin}
-            onChange={onChangeAdmin}
-          />
-        </label>
+            DEACTIVATE USER? 
+            <input
+              name='status'
+              type='checkbox'
+              checked={isInactive}
+              onChange={onChangeAdminStatus}
+            />
+          </label>
+          <br />
+          <button style={{ marginBottom: '10px' }} className='btn btn-primary'>Save Admin & Status</button>          
         </form>
-
       </div>
     )
   }
 }
+
+
 
 const mapState = ({ user }) => {
   return {

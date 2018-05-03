@@ -9,9 +9,9 @@ class Menu extends Component {
     super(props);
     const { user, logout, thisUserlineItems } = props;
   }
-  componentWillReceiveProps(nextProps) {
+  /*componentWillReceiveProps(nextProps) {
     const { user } = nextProps;
-  };
+  };*/
 
   render() {
     const { user, logout, thisUserlineItems } = this.props;

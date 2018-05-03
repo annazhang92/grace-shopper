@@ -87,7 +87,7 @@ const seed = () => {
           });
         }
       })
-/*      .then(() => {
+      .then(() => {
         for (let i = 0; i < numCategories; i++) {
           Category.create({
             name: faker.unique(faker.commerce.department),
@@ -122,7 +122,7 @@ const seed = () => {
             });
           });
         }
-      })*/
+      })
 
   ]);
 };
