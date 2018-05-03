@@ -29,7 +29,9 @@ const Reviews = ({ reviews, user, loggedIn, product }) => {
               <br/>
             </div>
           )
+
         })
+
         :
         null
       }
