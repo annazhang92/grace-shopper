@@ -7,5 +7,6 @@ app.use('/orders', require('./orders'));
 app.use('/users', require('./users'));
 app.use('/lineItems', require('./lineItems'));
 app.use('/addresses', require('./addresses'));
+app.use('/reviews', require('./reviews'));
 
 module.exports = app;
