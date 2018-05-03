@@ -5,11 +5,29 @@ import { Link } from 'react-router-dom';
 class Users extends Component {
   constructor(props) {
     super(props);
+    const { users } = props;
     this.state = {
-
+      isAdmin: 'false'
     }
+    this.onChangeAdmin = this.onChangeAdmin.bind(this);
+  //  this.onSave = this.onSave.bind(this);
   }
+
+  onChangeAdmin(ev) {
+    console.log('hello')
+    /*  this.setState({
+      isAdmin: ev.target.value
+    })*/
+  }
+
+  /*onSave(ev) {
+    ev.preventDefault();
+    const adminStatus = this.state.isAdmin;
+    //LOOP THROUGH UPDATEUSER FOR ALL!!
+  }*/
+
   render() {
+
     return (
       <div>
         <h2>Users</h2>
@@ -19,7 +37,7 @@ class Users extends Component {
               return (
                 <li key={user.id} className='list-group-item'>
                   {user.fullName}
-  
+
                 </li>
               )
             })
@@ -37,4 +55,10 @@ const mapStateToProps = ({ users }) => {
   }
 }
 
-export default connect(mapStateToProps)(Users);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    updateUser: (user) => dispatch(updateUser(user))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Users);

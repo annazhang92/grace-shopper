@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const SET_USER = 'SET_USER';
+const UPDATE_NAV_USER = 'UPDATE_NAV_USER';
 
 export const getUserFromToken = (token) => {
   return (dispatch) => {
@@ -13,6 +14,18 @@ export const getUserFromToken = (token) => {
         })
       })
   }
+};
+
+export const updateNavUser = (user) => {
+  return (dispatch) => {
+    return axios.put(`/api/users/${user.id}`, user)
+      .then(() => {
+        dispatch({
+          type: UPDATE_NAV_USER,
+          user
+        });
+      });
+  };
 };
 
 export const attemptLogin = (credentials, history) => {
@@ -40,7 +53,10 @@ export const logout = () => {
 const user = (state = {}, action) => {
   switch(action.type) {
     case SET_USER:
-      state = action.user
+      state = action.user;
+      break;
+    case UPDATE_NAV_USER:
+      state = action.user;
       break;
   };
   return state;
