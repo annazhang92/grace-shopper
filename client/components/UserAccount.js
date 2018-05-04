@@ -1,19 +1,20 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateUser, updateAddress, updateNavUser } from '../store';
+import { updateUser, updateAddress, createAddress, updateNavUser } from '../store';
 
 import AdminUserAccount from './AdminUserAccount'
 
 class UserForm extends Component {
   constructor(props) {
     super(props);
-    const { user, userAddress } = props;
+    const { userToRender, userAddress } = props;
     this.state = {
-      id: user.id ? user.id : '',
-      firstName: user.id ? user.firstName : '',
-      lastName: user.id ? user.lastName : '',
-      password: user.id ? user.password : '',
-      email: user.id ? user.email : '',
+      id: userToRender.id ? userToRender.id : '',
+      firstName: userToRender.id ? userToRender.firstName : '',
+      lastName: userToRender.id ? userToRender.lastName : '',
+      password: userToRender.id ? userToRender.password : '',
+      email: userToRender.id ? userToRender.email : '',
+      isAdmin: userToRender.id ? userToRender.isAdmin : '',
 //      isPrimary: userAddress ? userAddress.isPrimary : '',
       address1: userAddress ? userAddress.address1 : '',
       address2: userAddress ? userAddress.address2 : '',
@@ -28,7 +29,7 @@ class UserForm extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    const { user, userAddress } = nextProps;
+    const { userToRender, userAddress, user, currentUserId } = nextProps;
   }
 
   onChange(ev) {
@@ -37,22 +38,24 @@ class UserForm extends Component {
     this.setState(change);
   }
 
+
+
   onUpdate(ev) {
     ev.preventDefault();
-    const { user, updateUser, updateAddress, userAddress, updateNavUser } = this.props;
-    const { id, firstName, lastName, password, email, address1, address2, city, state, zipCode, phoneNumber } = this.state;
+    const { userToRender, updateUser, updateAddress, userAddress, updateNavUser, user } = this.props;
+    const { id, firstName, lastName, password, email, isAdmin, address1, address2, city, state, zipCode, phoneNumber } = this.state;
     const userId = id;
-    const newUserInfo = { id, firstName, lastName, password, email };
+    const newUserInfo = { id, firstName, lastName, password, email, isAdmin };
     const newAddressInfo = { id, address1, address2, city, state, zipCode, phoneNumber, userId };
     updateUser(newUserInfo);
-    updateAddress(newAddressInfo);
-    updateNavUser(newUserInfo);
+    userAddress ? updateAddress(newAddressInfo) : createAddress(newAddressInfo);
+    (user.id === userToRender.id) ? updateNavUser(newUserInfo) : null;
     this.setState({ updating: false });
   }
 
   render() {
     const { onChange, onUpdate } = this;
-    const { adminAccess } = this.props;
+    const { userToRender, user } = this.props;
     const { firstName, lastName, email, password, isPrimary, address1, address2, city, state, zipCode, phoneNumber, updating } = this.state;
     const inputs = {
       firstName: 'First Name',
@@ -66,6 +69,9 @@ class UserForm extends Component {
       state: 'State',
       zipCode: 'Zip Code',
       phoneNumber: 'Phone Number'
+    }
+    if (!userToRender) {
+      return null;
     }
     return (    
       <div>
@@ -98,20 +104,21 @@ class UserForm extends Component {
         <br />
         <br />
         {
-          adminAccess ? <AdminUserAccount /> : ''
+          user.isAdmin ? <AdminUserAccount user={userToRender}/> : ''
         }
       </div>
     )
   }
 }
 
-const mapState = ({ user, addresses }) => {
-  const adminAccess = false; //TO TEST.  REMOVE ONCE THIS IS PROPERLY PASSED IN AS PROP!!
-  const userAddress = addresses.find(address => user.id === address.userId && address.isPrimary === true) 
+const mapState = ({ user, addresses, users }, { currentUserId }) => {
+  const userToRenderId = currentUserId ? currentUserId : user.id; 
+  const userAddress = addresses.find(address => userToRenderId === address.userId)
+  const userToRender = users.find(user => user.id === userToRenderId)
   return { 
-    user,
+    userToRender,
     userAddress,
-    adminAccess
+    user
   }
 }
 
@@ -119,6 +126,7 @@ const mapDispatch = (dispatch) => {
   return {
     updateUser: (user) => dispatch(updateUser(user)),
     updateAddress: (address) => dispatch(updateAddress(address)),
+    createAddress: (address) => dispatch(createAddress(address)),
     updateNavUser: (user) => dispatch(updateNavUser(user))
   }
 }

@@ -67,16 +67,10 @@ class AdminUserAccount extends Component {
   }
 }
 
-const mapState = ({ user }) => {
-  return {
-    user
-  }
-}
-
 const mapDispatch = (dispatch) => {
   return {
     updateUser: (user) => dispatch(updateUser(user))
   }
 }
 
-export default connect(mapState, mapDispatch)(AdminUserAccount);
+export default connect(null, mapDispatch)(AdminUserAccount);

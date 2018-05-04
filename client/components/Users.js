@@ -6,28 +6,18 @@ class Users extends Component {
   constructor(props) {
     super(props);
     const { users } = props;
-    this.state = {
-      isAdmin: 'false'
-    }
-    this.onChangeAdmin = this.onChangeAdmin.bind(this);
-  //  this.onSave = this.onSave.bind(this);
   }
 
-  onChangeAdmin(ev) {
-    console.log('hello')
-    /*  this.setState({
-      isAdmin: ev.target.value
-    })*/
+  componentWillReceiveProps(nextProps) {
+    const { users } = nextProps;
   }
-
-  /*onSave(ev) {
-    ev.preventDefault();
-    const adminStatus = this.state.isAdmin;
-    //LOOP THROUGH UPDATEUSER FOR ALL!!
-  }*/
 
   render() {
 
+    const { users } = this.props;
+    if (!users) {
+      return null;
+    }
     return (
       <div>
         <h2>Users</h2>
@@ -36,8 +26,7 @@ class Users extends Component {
             users.map(user => {
               return (
                 <li key={user.id} className='list-group-item'>
-                  {user.fullName}
-
+                  <Link to = {`/users/${user.id}`}>{user.fullName}</Link>
                 </li>
               )
             })
@@ -55,10 +44,4 @@ const mapStateToProps = ({ users }) => {
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    updateUser: (user) => dispatch(updateUser(user))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(Users);
+export default connect(mapStateToProps)(Users);

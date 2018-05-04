@@ -45,8 +45,9 @@ class App extends Component {
           <Route exact path="/register" component={ RegisterForm } />
           <Route exact path="/cart" component={ Cart } />
           <Route exact path="/orders/:id" render={ ({ match, history }) => <CheckOut id={ match.params.id * 1 } history={ history } /> } />
-          <Route exact path="/complete" component={ OrderComplete } />
+          <Route exact path="/complete" component={()=> <OrderComplete /> } />
           <Route exact path="/users" component={ Users } />
+          <Route exact path="/users/:id" component={ ({match }) => <UserForm currentUserId={ match.params.id * 1 } /> } />
           <Route exact path="/userform" component={ UserForm } />
         </div>
       </Router>
