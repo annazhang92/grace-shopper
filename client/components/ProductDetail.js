@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import store, { createLineItem } from '../store';
 import { connect } from 'react-redux';

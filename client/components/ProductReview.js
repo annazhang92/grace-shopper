@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { Button, Modal, FormGroup, ControlLabel,FormControl } from 'react-bootstrap';
 import { createReview } from '../store';
@@ -60,7 +61,6 @@ class ProductReview extends React.Component {
     //   return;
     // }
 
-    console.log(`SAVING REVIEW`,this.state);
     this.props.createReview(this.state);
     this.setState({
       rating: 0,

@@ -1,3 +1,4 @@
+/* eslint-disable */
 import axios from 'axios';
 // ------ constants ----
 const GET_REVIEWS = 'GET_REVIEWS'
