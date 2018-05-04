@@ -8,8 +8,16 @@ class Users extends Component {
     const { users } = props;
   }
 
+  componentWillReceiveProps(nextProps) {
+    const { users } = nextProps;
+  }
+
   render() {
+
     const { users } = this.props;
+    if (!users) {
+      return null;
+    }
     return (
       <div>
         <h2>Users</h2>
