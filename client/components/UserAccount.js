@@ -7,7 +7,7 @@ import AdminUserAccount from './AdminUserAccount'
 class UserForm extends Component {
   constructor(props) {
     super(props);
-    const { user, userAddress } = props;
+    const { userToRender, userAddress } = props;
     this.state = {
       id: user.id ? user.id : '',
       firstName: user.id ? user.firstName : '',
@@ -52,7 +52,7 @@ class UserForm extends Component {
 
   render() {
     const { onChange, onUpdate } = this;
-    const { adminAccess } = this.props;
+    const { user } = this.props;
     const { firstName, lastName, email, password, isPrimary, address1, address2, city, state, zipCode, phoneNumber, updating } = this.state;
     const inputs = {
       firstName: 'First Name',
@@ -98,20 +98,19 @@ class UserForm extends Component {
         <br />
         <br />
         {
-          adminAccess ? <AdminUserAccount /> : ''
+          user.isAdmin ? <AdminUserAccount /> : ''
         }
       </div>
     )
   }
 }
 
-const mapState = ({ user, addresses }) => {
-  const adminAccess = false; //TO TEST.  REMOVE ONCE THIS IS PROPERLY PASSED IN AS PROP!!
-  const userAddress = addresses.find(address => user.id === address.userId && address.isPrimary === true) 
+const mapState = ({ user, addresses }, { currentUser }) => {
+  const userToRender = currentUser ? currentUser : user; 
+  const userAddress = addresses.find(address => userToRender.id === address.userId) 
   return { 
-    user,
-    userAddress,
-    adminAccess
+    userToRender,
+    userAddress
   }
 }
 
