@@ -28,6 +28,7 @@ Category.hasMany(Product);
 // Need to test the following:
 LineItem.belongsTo(Product);
 LineItem.belongsTo(User);
+LineItem.belongsTo(Order);
 
 Order.belongsTo(User);
 Order.hasOne(Address, { as: 'shippingAddress' })
