@@ -38,8 +38,6 @@ class UserForm extends Component {
     this.setState(change);
   }
 
-
-
   onUpdate(ev) {
     ev.preventDefault();
     const { userToRender, updateUser, updateAddress, userAddress, updateNavUser, user } = this.props;
@@ -101,8 +99,6 @@ class UserForm extends Component {
             <button onClick={() => this.setState({ updating: true })} className='btn btn-primary'>I want to edit account!</button>
           )
         }
-        <br />
-        <br />
         {
           user.isAdmin ? <AdminUserAccount user={userToRender}/> : ''
         }

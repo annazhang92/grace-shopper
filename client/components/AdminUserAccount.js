@@ -15,27 +15,32 @@ class AdminUserAccount extends Component {
       isAdmin: user.id ? user.isAdmin : '',
       status: user.id ? user.status : ''
     }
-    this.onChangeAdminStatus = this.onChangeAdminStatus.bind(this);
+    this.onChangeAdmin = this.onChangeAdmin.bind(this);
+    this.onChangeStatus = this.onChangeStatus.bind(this);
     this.onSave = this.onSave.bind(this);
   }
 
-  onChangeAdminStatus(ev) {
+  onChangeAdmin(ev) {
     this.setState({
       isAdmin: ev.target.checked,
+    })
+  }
+
+  onChangeStatus(ev) {
+    this.setState({
       status: ev.target.checked ? 'I': 'A'
     })
   }
 
   onSave(ev) {
     ev.preventDefault();
-    console.log(this.state);
     this.props.updateUser(this.state);
   }
 
   render() {
     const { user } = this.props;
     const { isAdmin, status } = this.state;
-    const { onChangeAdminStatus, onSave } = this;
+    const { onChangeAdmin, onChangeStatus, onSave } = this;
     const isInactive = status ==='A' ? false : true  ;
     return (
       <div>
@@ -43,20 +48,22 @@ class AdminUserAccount extends Component {
           <label>
             MAKE ADMIN?
             <input
+              id="chk1"
               name='isAdmin'
               type='checkbox'
               checked={isAdmin}
-              onChange={onChangeAdminStatus}
+              onChange={onChangeAdmin}
             />
           </label>
           <br />
           <label>
             DEACTIVATE USER? 
             <input
+              id="chk2"
               name='status'
               type='checkbox'
               checked={isInactive}
-              onChange={onChangeAdminStatus}
+              onChange={onChangeStatus}
             />
           </label>
           <br />
