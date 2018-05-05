@@ -23,13 +23,13 @@ export const createReview = (review) => {
   return (dispatch) => {
     return axios.post('/api/reviews', review)
       .then(res => res.data)
-      .then(review => dispatch({
-        type: CREATE_REVIEW,
-        review
-      }))
-      .catch(err =>
-        console.error(err)
-      );
+      .then(review =>
+        dispatch({
+          type: CREATE_REVIEW,
+          review
+        })
+        .catch(err => {console.log('-->',err)})
+      )
   };
 };
 
