@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateUser, updateAddress, createAddress, updateNavUser } from '../store';
@@ -22,10 +23,20 @@ class UserForm extends Component {
       state: userAddress ? userAddress.state : '',
       zipCode: userAddress ? userAddress.zipCode : '',
       phoneNumber: userAddress ? userAddress.phoneNumber : '',
-      updating: false 
+      updating: false,
+      errors: {
+
+      }
     }
     this.onChange = this.onChange.bind(this);
     this.onUpdate = this.onUpdate.bind(this);
+    this.validators = {
+      name: ( value ) => {
+        if(!value){
+          return 'First Name name is required';
+        }
+      }
+    };
   }
 
   componentWillReceiveProps(nextProps) {
@@ -40,6 +51,24 @@ class UserForm extends Component {
 
   onUpdate(ev) {
     ev.preventDefault();
+    //defensive errors on form
+    const errors = Object.keys(this.validators).reduce( ( memo, key ) => {
+      const validator = this.validators[key];
+      const value = this.state[key];
+      const error = validator( value );
+      if( error ){
+        memo[key] = error;
+      }
+      return memo;
+    }, {});
+
+    console.log('ERROR', errors)
+    this.setState({ errors: errors });
+
+    if(Object.keys(errors).length > 0){
+      return;
+    }
+    // don't continue if errors persist
     const { userToRender, updateUser, updateAddress, userAddress, updateNavUser, user } = this.props;
     const { id, firstName, lastName, password, email, isAdmin, address1, address2, city, state, zipCode, phoneNumber } = this.state;
     const userId = id;
@@ -54,7 +83,7 @@ class UserForm extends Component {
   render() {
     const { onChange, onUpdate } = this;
     const { userToRender, user } = this.props;
-    const { firstName, lastName, email, password, isPrimary, address1, address2, city, state, zipCode, phoneNumber, updating } = this.state;
+    const { firstName, lastName, email, password, isPrimary, address1, address2, city, state, zipCode, phoneNumber, updating, errors } = this.state;
     const inputs = {
       firstName: 'First Name',
       lastName: 'Last Name',
@@ -71,7 +100,7 @@ class UserForm extends Component {
     if (!userToRender) {
       return null;
     }
-    return (    
+    return (
       <div>
         <h2>User Account</h2>
         <form>
@@ -87,6 +116,14 @@ class UserForm extends Component {
                 onChange={onChange}
                 value={this.state[input]}
                 />
+                {
+                  (errors.input) ?
+                  <div>
+                    <span className='alert-box error'>{errors.input} </span>
+                  </div>
+                  :
+                    <span>HJGJHGJ</span>
+                }
                 </div>
               )
             })
@@ -108,10 +145,10 @@ class UserForm extends Component {
 }
 
 const mapState = ({ user, addresses, users }, { currentUserId }) => {
-  const userToRenderId = currentUserId ? currentUserId : user.id; 
+  const userToRenderId = currentUserId ? currentUserId : user.id;
   const userAddress = addresses.find(address => userToRenderId === address.userId)
   const userToRender = users.find(user => user.id === userToRenderId)
-  return { 
+  return {
     userToRender,
     userAddress,
     user

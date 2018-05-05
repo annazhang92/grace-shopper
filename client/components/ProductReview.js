@@ -16,7 +16,8 @@ class ProductReview extends React.Component {
       errors: {},
       show: false,
       userId: user ? user.id : null,
-      productId: product ? product.id : null
+      productId: product ? product.id : null,
+      error: ''
     };
 
     this.handleShow = this.handleShow.bind(this);
@@ -61,13 +62,16 @@ class ProductReview extends React.Component {
     //   return;
     // }
 
-    this.props.createReview(this.state);
-    this.setState({
-      rating: 0,
-      title: '',
-      description: ''
-    })
-    this.handleClose();
+    this.props.createReview(this.state)
+      .catch( ex => {
+        console.log('ERRRROOR', ex.message)
+      })
+    // this.setState({
+    //   rating: 0,
+    //   title: '',
+    //   description: ''
+    // })
+    // this.handleClose();
   };
 
   getValidationState() {
