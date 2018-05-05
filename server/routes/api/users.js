@@ -22,5 +22,6 @@ app.put('/:id', (req, res, next) => {
       return user.save();
     })
     .then(user => res.send(user))
-    .catch(next);
+    .catch(next)
 });
+
