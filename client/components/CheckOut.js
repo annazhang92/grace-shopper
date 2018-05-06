@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import store, { updateOrder, setLineItem, setOrder } from '../store';
+import store, { updateOrder, setLineItem, setOrder, updateProduct } from '../store';
 
 
 class CheckOut extends Component {
-  constructor({ order, id, updateOrder, thisUserlineItems }) {
+  constructor({ order, id, updateOrder, thisUserlineItems, thisUserProducts, updateProduct }) {
     super();
     this.state = {
       fullName: '',
@@ -33,6 +33,10 @@ class CheckOut extends Component {
     this.props.updateOrder(this.props.order.id, { fullName: this.state.fullName, address: this.state.address, creditCardNumber: this.state.creditCardNumber });
     this.props.thisUserlineItems.map((thisUserlineItem)=>this.props.setLineItem(thisUserlineItem.id, { active: false, orderId: this.props.order.id }));
     this.props.setOrder(this.props.order.id, { active: false });
+    this.props.thisUserProducts.map((thisUserProduct)=>{
+      const lineItemOfThisProduct = this.props.thisUserlineItems.find(thisUserlineItem => thisUserlineItem.productId === thisUserProduct.id) 
+      this.props.updateProduct(thisUserProduct.id, {inventory: thisUserProduct.inventory-lineItemOfThisProduct.quantity})
+    }) 
   }
 
   render() {
@@ -60,15 +64,18 @@ class CheckOut extends Component {
 }
 
 
-const mapStateToProps = ({ orders, lineItems }, { id }) => {
+const mapStateToProps = ({ orders, lineItems, products }, { id }) => {
   const thisUserlineItemsAll = lineItems.filter(lineItem => lineItem.active === true)
   const thisUserlineItems = thisUserlineItemsAll.filter(lineItem => lineItem.userId === id);
+  const idArr = thisUserlineItems.map(thisUserlineItems => thisUserlineItems.productId);
+  const thisUserProducts = products.filter(product => idArr.includes(product.id));
   const thisUserOrders = orders.filter(order => order.active === true);
   const order = thisUserOrders.find(thisUserOrder => thisUserOrder.userId === id);
   return {
     order,
     id,
-    thisUserlineItems
+    thisUserlineItems,
+    thisUserProducts
   };
 }
 
@@ -77,6 +84,7 @@ const mapDispatchToProps = (dispatch, { history }) => {
     updateOrder: (id, order) => dispatch(updateOrder(id, order, history)),
     setLineItem: (id, lineItem) => dispatch(setLineItem(id, lineItem, history)),
     setOrder: (id, order) => dispatch(setOrder(id, order, history)),
+    updateProduct: (id, product) => dispatch(updateProduct(id, product, history)),
   };
 };
 

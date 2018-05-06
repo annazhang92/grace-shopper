@@ -71,11 +71,13 @@ class ProductCard extends Component {
               <div key={ product.id }>
                 <div className="card card-1">
                   <span className="card-header">
-                    <img alt="product here" src={ product.imageUrl } />
+                    {product.inventory ? <img alt="product here" src={ product.imageUrl } /> : <img alt="product here" className="no-inventory" src={ product.imageUrl } />}
+                    
                   </span>
                   <Link to={ `/products/${product.id}` }>
                     <h3>{product.name}</h3>
                   </Link>
+                  {!product.inventory ? <h4>This product is out of stock!</h4> : <h4>Only {product.inventory} left</h4>}
                   <span className="price">
                     Price: ${product.price}
                   </span>
@@ -87,13 +89,13 @@ class ProductCard extends Component {
                       value={4.5}
                     />
                     <span>({Math.floor(Math.random() * 200) + 1})</span>
-                </div>
+                  </div>
                   <br></br>
                   {lineItem && loggedIn?
                     <div>
-                      <button onClick={ () => updateLineItem(lineItem.id, { quantity: lineItem.quantity - 1 }) }>-</button>
+                      <button onClick={ () => lineItem.quantity>1 ? updateLineItem(lineItem.id, { quantity: lineItem.quantity - 1 }) : null }>-</button>
                       <span className="price">Quantity: {lineItem.quantity}</span>
-                      <button onClick={ () => updateLineItem(lineItem.id, { quantity: lineItem.quantity + 1 }) }>+</button>
+                      <button onClick={ () => product.inventory>lineItem.quantity ? updateLineItem(lineItem.id, { quantity: lineItem.quantity + 1 }) : null }>+</button>
                       <br></br>
                       <button onClick={ () => deleteLineItem(lineItem.id) }>Delete</button>
                     </div>
@@ -101,9 +103,9 @@ class ProductCard extends Component {
                   }
                   {lineItem && !loggedIn?
                     <div>
-                      <button onClick={ () => this.updateInStorage({ productId: product.id, quantity: lineItem.quantity - 1, price: product.price, name: product.name, active: true }, lineItem.productId) }>-</button>
+                      <button onClick={ () => lineItem.quantity>1 ? this.updateInStorage({ productId: product.id, quantity: lineItem.quantity - 1, price: product.price, name: product.name, active: true }, lineItem.productId):null }>-</button>
                       <span className="price">Quantity: {lineItem.quantity}</span>
-                      <button onClick={ () => this.updateInStorage({ productId: product.id, quantity: lineItem.quantity + 1, price: product.price, name: product.name, active: true }, lineItem.productId) }>+</button>
+                      <button onClick={ () => product.inventory>lineItem.quantity ? this.updateInStorage({ productId: product.id, quantity: lineItem.quantity + 1, price: product.price, name: product.name, active: true }, lineItem.productId):null }>+</button>
                       <br></br>
                       <button onClick={ () => this.deleteInStorage(lineItem.productId) }>Delete</button>
                     </div>

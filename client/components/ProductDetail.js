@@ -66,7 +66,10 @@ class ProductDetail extends Component {
       <div>
         <h2>{product.name}</h2>
         <div>
-          {!productExist?<button className="btn btn-warning" onClick={this.handleCreateLineItem}>Add to Cart</button>: <button className="btn btn-success">In the Card</button>}
+          {product.inventory<=0 ? <button className="btn btn-danger">Out of Stock</button> : null}
+          {productExist && product.inventory>0 ? <button className="btn btn-success">In the Cart</button> : null}
+          {!productExist && product.inventory>0 ?<button className="btn btn-primary" onClick={this.handleCreateLineItem}>Add to Cart</button>: null}
+
           
         </div>
         <img src={product.imageUrl}></img>

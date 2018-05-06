@@ -3,6 +3,9 @@ body {
   text-align: center;
 }
 
+.no-inventory {
+  opacity: 0.2;
+}
 .wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
