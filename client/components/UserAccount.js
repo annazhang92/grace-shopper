@@ -100,6 +100,10 @@ class UserForm extends Component {
           )
         }
         {
+          <button onClick={ onShowPastOrders } className='btn btn-primary'>Save</button>
+        }
+
+        {
           user.isAdmin ? <AdminUserAccount user={userToRender}/> : ''
         }
       </div>
