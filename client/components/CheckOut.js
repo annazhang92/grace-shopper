@@ -31,7 +31,7 @@ class CheckOut extends Component {
 
   onClick() {
     this.props.updateOrder(this.props.order.id, { fullName: this.state.fullName, address: this.state.address, creditCardNumber: this.state.creditCardNumber });
-    this.props.thisUserlineItems.map((thisUserlineItem)=>this.props.setLineItem(thisUserlineItem.id, { active: false }));
+    this.props.thisUserlineItems.map((thisUserlineItem)=>this.props.setLineItem(thisUserlineItem.id, { active: false, orderId: this.props.order.id }));
     this.props.setOrder(this.props.order.id, { active: false });
   }
 
