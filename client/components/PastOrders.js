@@ -1,19 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { getOrders } from '../store';
 
 class PastOrders extends Component {
   constructor(props) {
     super(props);
-    const { ordersByUser } = props;    
+//    const { user, orders } = props;    
+  }
+
+  componentDidMount() {
+    this.props.getOrders();
   }
 
   componentWillReceiveProps(nextProps) {
-    const { ordersByUser } = nextProps;
+    const { user, orders } = nextProps;
   }
 
   render() {
-    const { ordersByUser } = this.props;
+    const { user, orders } = this.props;
+    const ordersByUser = orders.filter(order => order.userId === user.id);
     return (
       <div>
         <h2> Past Orders By User </h2>
@@ -22,7 +28,8 @@ class PastOrders extends Component {
             return (
               <div>
               <li key={order.id} className='list-group-item'>
-                <h4>Order: {order.id}</h4>                
+                <h4>Order: {order.id}</h4> 
+                {order.lineItems ? order.lineItems : null};               
                 {
                   order.lineItems.map(lineItem => {
                     const subtotal = lineItem.price * lineItem.quantity
@@ -49,14 +56,19 @@ class PastOrders extends Component {
       </div>
     )
   }
-
 }
 
-const mapStateToProps = ({ user, orders }) => {
-  const ordersByUser = orders.filter(order => order.userId === user.id);
+/*const mapStateToProps = ({ user, orders }) => {
   return {
-    ordersByUser
+    user,
+    orders
+  }
+}*/
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    getOrders: () => dispatch(getOrders())
   }
 }
 
-export default connect(mapStateToProps)(PastOrders);
+export default connect(null, mapDispatchToProps)(PastOrders);

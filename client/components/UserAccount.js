@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateUser, updateAddress, createAddress, updateNavUser } from '../store';
 
-import AdminUserAccount from './AdminUserAccount'
+import AdminUserAccount from './AdminUserAccount';
+import PastOrders from './PastOrders';
 
 class UserForm extends Component {
   constructor(props) {
@@ -22,10 +23,12 @@ class UserForm extends Component {
       state: userAddress ? userAddress.state : '',
       zipCode: userAddress ? userAddress.zipCode : '',
       phoneNumber: userAddress ? userAddress.phoneNumber : '',
+      showComponent: false,
       updating: false 
     }
     this.onChange = this.onChange.bind(this);
     this.onUpdate = this.onUpdate.bind(this);
+    this.onShowPastOrders = this.onShowPastOrders.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -51,10 +54,16 @@ class UserForm extends Component {
     this.setState({ updating: false });
   }
 
+  onShowPastOrders() {
+    this.setState({
+      showComponent: true
+    })
+  }
+
   render() {
-    const { onChange, onUpdate } = this;
+    const { onChange, onUpdate, onShowPastOrders } = this;
     const { userToRender, user } = this.props;
-    const { firstName, lastName, email, password, isPrimary, address1, address2, city, state, zipCode, phoneNumber, updating } = this.state;
+    const { firstName, lastName, email, password, isPrimary, address1, address2, city, state, zipCode, phoneNumber, showComponent, updating } = this.state;
     const inputs = {
       firstName: 'First Name',
       lastName: 'Last Name',
@@ -99,9 +108,13 @@ class UserForm extends Component {
             <button onClick={() => this.setState({ updating: true })} className='btn btn-primary'>I want to edit account!</button>
           )
         }
-        {
-          <button onClick={ onShowPastOrders } className='btn btn-primary'>Save</button>
-        }
+        <br />
+        <div>
+          <button onClick={ onShowPastOrders } className='btn btn-primary'>Order History</button>
+          {
+            showComponent ? <PastOrders /> : null
+          }
+        </div>
 
         {
           user.isAdmin ? <AdminUserAccount user={userToRender}/> : ''
