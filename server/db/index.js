@@ -48,7 +48,7 @@ Cart.belongsTo(User);
 Cart.hasOne(Address, { as: 'shippingAddress' })
 Cart.hasOne(CreditCard, { as: 'paymentMethod' });
 
-//Review - rating support
+// Review - rating support
 Review.belongsTo(User);
 Review.belongsTo(Product);
 
@@ -83,7 +83,7 @@ const seed = () => {
             state: faker.address.state(),
             zipCode: 12345,
             phoneNumber: faker.phone.phoneNumber()
-          }).then(address=> {
+          }).then(address => {
             address.setUser(1);
           });
         }
@@ -106,20 +106,19 @@ const seed = () => {
           }).then(product => {
             product.setCategory(Math.floor(Math.random() * numCategories) + 1);
             Review.create({
-                userId: 1,
-                productId: product.id,
-                title: faker.lorem.sentence(),
-                description: faker.lorem.paragraph(),
-                rating: (Math.floor(Math.random() * 5))
-              })
-            .then( review =>{
+              userId: 1,
+              productId: product.id,
+              title: faker.lorem.sentence(),
+              description: faker.lorem.paragraph(),
+              rating: (Math.floor(Math.random() * 5))
+            }).then(review => {
               Review.create({
                 userId: 1,
                 productId: review.productId,
                 title: faker.lorem.sentence(),
                 description: faker.lorem.paragraph(),
                 rating: (Math.floor(Math.random() * 5))
-              })
+              });
             });
           });
         }

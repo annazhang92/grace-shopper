@@ -6,6 +6,7 @@ const GET_ORDERS = 'GET_ORDERS';
 const CREATE_ORDER = 'CREATE_ORDER';
 const UPDATE_ORDER = 'UPDATE_ORDER';
 const SET_ORDER = 'SET_ORDER';
+const GET_ORDERS_AFTER_UPDATE = 'GET_ORDERS_AFTER_UPDATE';
 
 // ---- action creators
 export const getOrders = () => {
@@ -15,6 +16,22 @@ export const getOrders = () => {
     .then(orders =>
         dispatch({
           type: GET_ORDERS,
+          orders
+        })
+      )
+    .catch(err =>
+      console.log(err)
+    )
+  };
+};
+
+export const getOrdersAfterUpdate = () => {
+  return (dispatch) => {
+    return axios.get('/api/orders')
+    .then(res => res.data)
+    .then(orders =>
+        dispatch({
+          type: GET_ORDERS_AFTER_UPDATE,
           orders
         })
       )
@@ -71,6 +88,8 @@ export const setOrder = (id, order, history ) => {
 const orders = (state = [], action) => {
   switch (action.type) {
     case GET_ORDERS:
+      return action.orders;
+    case GET_ORDERS_AFTER_UPDATE:
       return action.orders;
     case CREATE_ORDER:
       return [...state, action.order];

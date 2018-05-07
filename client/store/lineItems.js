@@ -7,6 +7,8 @@ const CREATE_LINEITEM = 'CREATE_LINEITEM';
 const UPDATE_LINEITEM = 'UPDATE_LINEITEM';
 const DELETE_LINEITEM = 'DELETE_LINEITEM';
 const SET_LINEITEM = 'SET_LINEITEM';
+const DELETE_LINEITEM_STORAGE = 'DELETE_LINEITEM_STORAGE';
+const CREATE_LINEITEM_STORAGE = 'CREATE_LINEITEM_STORAGE';
 
 
 // ---- action creators
@@ -91,10 +93,14 @@ const lineItems = (state = [], action) => {
       return action.lineItems;
     case CREATE_LINEITEM:
       return [...state, action.lineItem];
+    case CREATE_LINEITEM_STORAGE:
+      return [...state, action.lineItemNew];
     case UPDATE_LINEITEM:
       return state.map(lineItem => lineItem.id === action.lineItem.id ? action.lineItem : lineItem); 
     case DELETE_LINEITEM:
       return state.filter(lineItem => lineItem.id !== action.lineItem.id); 
+    case DELETE_LINEITEM_STORAGE:
+      return state.filter(lineItem => lineItem.productId !== action.lineItem.id); 
     case SET_LINEITEM:
       return state.map(lineItem => lineItem.id === action.lineItem.id ? action.lineItem : lineItem); 
   }

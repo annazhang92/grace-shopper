@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { attemptLogin } from '../store';
+import { attemptLogin} from '../store';
 
 
 class LoginForm extends Component {
@@ -14,6 +14,7 @@ class LoginForm extends Component {
 
     this.onSave = this.onSave.bind(this);
     this.onChange = this.onChange.bind(this);
+    // this.handleLogin=this.handleLogin.bind(this);
   }
 
   onSave(ev) {
@@ -29,6 +30,13 @@ class LoginForm extends Component {
     change[ev.target.name] = ev.target.value;
     this.setState(change);
   }
+
+  // handleLogin() {
+  //   if(localStorage.getItem('lineItems')) {
+  //     const lineItems = JSON.parse(localStorage.getItem('lineItems'))
+  //     lineItems.map(lineItem=>this.props.createLineItem(lineItem))
+  //   }
+  // }
 
   render() {
     const { onSave, onChange } = this;
@@ -50,7 +58,9 @@ class LoginForm extends Component {
 
 const mapDispatchToProps = (dispatch, { history }) => {
   return {
-    attemptLogin: (credentials)=> dispatch(attemptLogin(credentials, history))
+    attemptLogin: (credentials)=> dispatch(attemptLogin(credentials, history)),
+    // createLineItem: (lineItem) => dispatch(createLineItem(lineItem,history)),
+
   };
 };
 

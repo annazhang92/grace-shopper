@@ -18,6 +18,10 @@ const Product = conn.define('product', {
   price: {
     type: Sequelize.DECIMAL,
     isNumeric: true
+  },
+  inventory: {
+    type: Sequelize.INTEGER,
+    defaultValue: 5
   }
 });
 
