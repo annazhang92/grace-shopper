@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-//import { getOrdersAfterUpdate } from '../store';
 
 class PastOrders extends Component {
   constructor(props) {
@@ -9,30 +8,22 @@ class PastOrders extends Component {
 //    const { user, orders } = props;    
   }
 
-/*  componentDidMount() {
-    this.props.getOrdersAfterUpdate();
-  }*/
-
-/*  componentWillReceiveProps(nextProps) {
-    const { user, orders } = nextProps;
-  }*/
-
   render() {
-    const { user, orders } = this.props;
-    console.log(orders);
-    const ordersByUser = orders.filter(order => order.userId === user.id);
-    console.log(ordersByUser)
+    const { user, ordersByUser, lineItemsByUser } = this.props;
+    let lineItemsByOrder;
     return (
       <div>
         <h2> Past Orders By User </h2>
         {
           ordersByUser.map(order => {
+            const lineItemsByOrder = lineItemsByUser.filter(lineItem => lineItem.orderId === order.id);
             return (
               <div>
               <li key={order.id} className='list-group-item'>
-                <h4>Order: {order.id}</h4>              
-                {
-                  order.lineItems.map(lineItem => {
+                <h4>Order: {order.id}</h4>                                          
+                {                    
+                  lineItemsByOrder.map(lineItem => {
+                    console.log(lineItemsByUser)                    
                     const subtotal = lineItem.price * lineItem.quantity
                     return (
                       <div>
@@ -59,17 +50,15 @@ class PastOrders extends Component {
   }
 }
 
-const mapStateToProps = ({ user, orders }) => {
+const mapStateToProps = ({ user, orders, lineItems }) => {
+  const ordersByUser = orders.filter(order => order.userId === user.id);
+  const lineItemsByUser = lineItems.filter(lineItem => lineItem.userId === user.id);
   return {
     user,
-    orders
+    orders,
+    lineItemsByUser,
+    ordersByUser
   }
 }
-
-/*const mapDispatchToProps = (dispatch) => {
-  return {
-    getOrdersAfterUpdate: () => dispatch(getOrdersAfterUpdate())
-  }
-}*/
 
 export default connect(mapStateToProps)(PastOrders);
