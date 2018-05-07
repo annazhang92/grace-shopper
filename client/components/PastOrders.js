@@ -11,9 +11,12 @@ class PastOrders extends Component {
   render() {
     const { user, ordersByUser, lineItemsByUser } = this.props;
     let lineItemsByOrder;
+    if (ordersByUser.length === 0) {
+      return 'Sorry, you have no past orders.'
+    }
     return (
       <div>
-        <h2> Past Orders By User </h2>
+        <h4> Past Orders By User </h4>
         {
           ordersByUser.map(order => {
             const lineItemsByOrder = lineItemsByUser.filter(lineItem => lineItem.orderId === order.id);

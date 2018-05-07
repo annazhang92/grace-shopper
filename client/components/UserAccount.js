@@ -55,9 +55,8 @@ class UserForm extends Component {
   }
 
   onShowPastOrders() {
-    this.setState({
-      showComponent: true
-    })
+    const { showComponent } = this.state;
+    showComponent ? this.setState({ showComponent: false }) : this.setState({ showComponent: true })
   }
 
   render() {
@@ -109,13 +108,14 @@ class UserForm extends Component {
           )
         }
         <br />
+        <br />
         <div>
           <button onClick={ onShowPastOrders } className='btn btn-primary'>Order History</button>
           {
             showComponent ? <PastOrders /> : null
           }
         </div>
-
+        <br />
         {
           user.isAdmin ? <AdminUserAccount user={userToRender}/> : ''
         }
