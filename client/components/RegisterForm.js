@@ -8,30 +8,54 @@ class RegisterForm extends Component {
     super(props);
     this.state = {
       firstName: '',
+      firstNameError: '',
       lastName: '',
+      lastNameError: '',
       email: '',
-      password: ''
+      emailError: '',
+      password: '',
+      passwordError: ''
     };
 
     this.onSave = this.onSave.bind(this);
     this.onChange = this.onChange.bind(this);
   }
 
+validate = () =>{
+  let isError = false;
+  const errors = {};
+  if(this.state.password.length < 5){
+    isError = true;
+    errors.password = "Password needs to be at least 5 characters long"
+  }
+
+  if(isError){
+    this.setState({
+      ...this.state,
+      ...errors
+    })
+  }
+  return isError;
+}
+
   onSave(ev) {
     ev.preventDefault();
-    const userInfo = {
-      firstName: this.state.firstName,
-      lastName: this.state.lastName,
-      email: this.state.email,
-      password: this.state.password
-    };
-    this.props.createUser(userInfo);
-    this.setState({
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: ''
-    });
+    const err = this.validate();
+    if(!err){
+      const userInfo = {
+        firstName: this.state.firstName,
+        lastName: this.state.lastName,
+        email: this.state.email,
+        password: this.state.password
+      };
+      this.props.createUser(userInfo);
+      this.setState({
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: ''
+      });
+    }
   }
 
   onChange(ev) {
@@ -47,10 +71,10 @@ class RegisterForm extends Component {
       <div>
         <h2>Enter Your Information</h2>
         <form onSubmit={ onSave }>
-          <div><p>First Name</p><input name="firstName" value={ firstName } onChange={ onChange } /></div>
-          <div><p>Last Name</p><input name="lastName" value={ lastName } onChange={ onChange } /></div>
-          <div><p>Email</p><input name="email" value={ email } onChange={ onChange } /></div>
-          <div><p>Password</p><input name="password" value={ password } onChange={ onChange } /></div>
+          <div><p>First Name</p><input name="firstName" value={ firstName } onChange={ onChange } errorText={this.state.firstNameError} /></div>
+          <div><p>Last Name</p><input name="lastName" value={ lastName } onChange={ onChange } errorText={this.state.lastNameError}/></div>
+          <div><p>Email</p><input name="email" value={ email } onChange={ onChange } errorText={this.state.emailError} /></div>
+          <div><p>Password</p><input name="password" value={ password } onChange={ onChange } errorText={this.state.passwordError}/></div>
           <button> Register </button>
         </form>
       </div>
