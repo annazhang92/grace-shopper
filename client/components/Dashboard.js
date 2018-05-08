@@ -688,6 +688,8 @@ class HeatMap extends Component {
     // const { data } = this.props;
     this.state = {
       data: testData ? testData : [],
+      min:0,
+      max:0,
       pieData: [
         { label: '<5', value: 4 },
         { label: '5-13', value: 13 },
@@ -701,26 +703,15 @@ class HeatMap extends Component {
   };
 
   onHexClick(i){
-    console.log('click AGAIN',i);
-    console.log('pie', this.state.data);
-    this.state.pieData[0].label = `label ${i}`;
-    // console.log('New Pie Data', this.state.pieData);
-    // var test = [
-    //   { label: `label ${i}`, value: 2704659 },
-    //   { label: '5-13', value: 4499890 },
-    //   { label: '14-17', value: 2159981 },
-    //   { label: '18-24', value: 3853788 },
-    //   { label: '25-44', value: 14106543 },
-    //   { label: '45-64', value: 8819342 },
-    //   { label: '≥65', value: 612463 },
-    // ];
-    // this.setState({ pieData: test });
-    // console.log('Color scale', colorScale);
+    console.log('onHexClick',i);
+    //TODO: update filtered Pie Data
   };
 
   render () {
   const { pieData } = this.state;
-  const { doSomething } = this;
+  const { onHexClick } = this;
+  const { orders } = this.props;
+  console.log('orders',orders);
   const margin = {
     top: 60,
     right: 20,
@@ -758,18 +749,17 @@ class HeatMap extends Component {
   };
 
   const hexbinPath = hexbin().radius(hexRadius);
-  console.log('BUILD HEX');
-  console.log(`hexData ${hexData}`,hexData);
-  console.log(`MapColumns`,MapColumns);
-  console.log(`hexRadius`,hexRadius);
-  console.log(`points`,points);
-  console.log(`hexagon()`,hexbinPath.hexagon() );
-  console.log(`hexagon()`,hexbinPath.hexagon() );
-  console.log('*---*');
+
   const hours = ["12a", "1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a", "12p", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p"];
   return (
-    <div>
-      <svg width={width+margin.left+margin.right} height={height + margin.top + margin.bottom+100}>
+    <div >
+      <h2>Marketplace order analysis</h2>
+      <div>
+        <button>Product Viewing</button>
+        <button>Product Orders</button>
+      </div>
+      <div>
+      <svg width={width+margin.left+margin.right} height={350}>
         <g transform={"translate(10," + 50 + ")"}>
         {hours.map((d,i)=><text key={i} x={70 + hexRadius * i * 1.75} y={-15}>{d}</text>)}
         </g>
@@ -797,7 +787,8 @@ class HeatMap extends Component {
           <text x={margin.left+580} y={height-margin.bottom -10} style={{fontSize:14}}>60 (max)</text>
         </g>
       </svg>
-      <PieChart data={this.state.pieData}/>
+      </div>
+      <PieChart data  ={this.state.pieData}/>
     </div>
   );
   }
