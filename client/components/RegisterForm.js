@@ -100,7 +100,7 @@ class RegisterForm extends Component {
         <form onSubmit={ onSave }>
           <TextField
             name="firstName"
-            hintText="First Name"
+            floatingLabelText="First Name"
             value={ firstName }
             onChange={ onChange }
             floatingLabelFixed={true}
@@ -109,7 +109,7 @@ class RegisterForm extends Component {
           <br />
           <TextField
             name="lastName"
-            hintText="Last Name"
+            floatingLabelText="Last Name"
             value={ lastName }
             onChange={ onChange }
             floatingLabelFixed={true}
@@ -118,7 +118,7 @@ class RegisterForm extends Component {
           <br />
           <TextField
             name="email"
-            hintText="Email Address"
+            floatingLabelText="Email Address"
             value={ email }
             onChange={ onChange }
             floatingLabelFixed={true}
@@ -127,7 +127,7 @@ class RegisterForm extends Component {
           <br /> 
           <TextField
             name="password"
-            hintText="Password"
+            floatingLabelText="Password"
             value={ password }
             onChange={ onChange }
             floatingLabelFixed={true}
