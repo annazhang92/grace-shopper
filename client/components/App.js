@@ -18,11 +18,8 @@ import OrderComplete from './OrderComplete';
 import UserForm from './UserAccount';
 import Users from './Users';
 import PastOrders from './PastOrders';
-<<<<<<< HEAD
 import ProductForm from './ProductForm';
-=======
 import HeatMap from './Dashboard';
->>>>>>> 1c65be50a778d3cc907691bfaa0ee5d9de5db132
 
 class App extends Component {
   componentDidMount() {

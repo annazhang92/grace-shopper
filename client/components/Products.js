@@ -29,7 +29,7 @@ class Products extends Component {
   }
 
   render(){
-    const { products, categories} = this.props;
+    const { products, categories, user} = this.props;
     const { onAddProduct } = this;
     const { search, min, max } = this.state;
     const filteredProducts = products.filter( product => {
@@ -45,7 +45,7 @@ class Products extends Component {
           <div>
             <PageHeader>{ categories.name } Products offered: { filteredProducts.length }
             <br />
-            <button onClick={ onAddProduct } className='btn btn-primary'>ADD PRODUCT</button>
+            {user.isAdmin ? <button onClick={ onAddProduct } className='btn btn-primary'>ADD PRODUCT</button> : null}
             </PageHeader>
             <div>
               <span>Product Name</span><input name='search' value={search} placeholder="Search..." onChange={this.updateSearch.bind(this)} />
@@ -91,14 +91,15 @@ class Products extends Component {
   }
 };
 
-const mapStateToProps = ({ products, categories, loggedIn }, { id }) => {
+const mapStateToProps = ({ products, categories, loggedIn, user }, { id }) => {
   if (id) {
     products = products.filter(product => product.categoryId === id);
     categories = categories.find(category => category.id === id);
   }
   return {
     products,
-    categories
+    categories,
+    user
   };
 };
 
