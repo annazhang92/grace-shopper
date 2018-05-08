@@ -7,10 +7,13 @@ import StarRatingComponent from 'react-star-rating-component';
 const Reviews = ({ reviews, user, loggedIn, product }) => {
   console.log('REVIEWS***', product);
   const productReviews = reviews.filter(review => review.productId === product.id);
+  const monthNames = ["January", "February", "March", "April", "May","June","July", "August", "September", "October", "November", "December" ];
   return (
     <div className="container">
       { productReviews ?
         productReviews.map(review => {
+          const date = new Date(review.createdAt);
+          const reviewDate =  monthNames[date.getMonth()] + ', '+date.getDate() + ', ' + date.getFullYear();
           return(
             <div>
               <div key={ review.id } style={{display:'flex', justifyContent:'row'}}>
@@ -20,8 +23,8 @@ const Reviews = ({ reviews, user, loggedIn, product }) => {
                   starCount={5}
                   value={review.rating}
                 />
-                <b> { review.title } </b>
-                <span>{ review.createdAt.toString()}</span>
+                <b> <span> s{ review.title } </span></b>
+                <span> {reviewDate} </span>
               </div>
               <div style={{textAlign:'left'}}>
                 {review.description}
