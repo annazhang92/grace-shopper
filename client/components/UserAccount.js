@@ -10,12 +10,12 @@ class UserForm extends Component {
     super(props);
     const { userToRender, userAddress } = props;
     this.state = {
-      id: userToRender.id ? userToRender.id : '',
-      firstName: userToRender.id ? userToRender.firstName : '',
-      lastName: userToRender.id ? userToRender.lastName : '',
-      password: userToRender.id ? userToRender.password : '',
-      email: userToRender.id ? userToRender.email : '',
-      isAdmin: userToRender.id ? userToRender.isAdmin : '',
+      id: userToRender ? userToRender.id : '',
+      firstName: userToRender ? userToRender.firstName : '',
+      lastName: userToRender ? userToRender.lastName : '',
+      password: userToRender ? userToRender.password : '',
+      email: userToRender ? userToRender.email : '',
+      isAdmin: userToRender ? userToRender.isAdmin : '',
 //      isPrimary: userAddress ? userAddress.isPrimary : '',
       address1: userAddress ? userAddress.address1 : '',
       address2: userAddress ? userAddress.address2 : '',

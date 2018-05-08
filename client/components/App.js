@@ -18,7 +18,11 @@ import OrderComplete from './OrderComplete';
 import UserForm from './UserAccount';
 import Users from './Users';
 import PastOrders from './PastOrders';
+<<<<<<< HEAD
+import ProductForm from './ProductForm';
+=======
 import HeatMap from './Dashboard';
+>>>>>>> 1c65be50a778d3cc907691bfaa0ee5d9de5db132
 
 class App extends Component {
   componentDidMount() {
@@ -52,6 +56,8 @@ class App extends Component {
           <Route exact path="/users/:id" component={ ({match }) => <UserForm currentUserId={ match.params.id * 1 } /> } />
           <Route exact path="/pastorders" component={ PastOrders } />
           <Route exact path="/userform" component={ UserForm } />
+          <Route exact path="/productform/:id" component={({ match }) => <ProductForm productId={ match.params.id * 1 } /> } />
+          <Route exact path="/productform" component={ ProductForm } /> 
           <Route exact path="/dashboard" component={ HeatMap } />
         </div>
       </Router>

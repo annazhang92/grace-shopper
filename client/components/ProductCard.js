@@ -5,6 +5,8 @@ import { connect } from 'react-redux';
 
 import StarRatingComponent from 'react-star-rating-component';
 
+import ProductForm from './ProductForm';
+
 
 // const ProductCard = ({ products, lineItems, updateLineItem, deleteLineItem, loggedIn }) => {
 class ProductCard extends Component {
@@ -59,7 +61,7 @@ class ProductCard extends Component {
   }
 
   render() {
-    const { products, lineItems, updateLineItem, deleteLineItem, loggedIn } = this.props;
+    const { products, lineItems, updateLineItem, deleteLineItem, loggedIn, user } = this.props;
     
     return (
       <div className="wrapper">
@@ -90,6 +92,7 @@ class ProductCard extends Component {
                     />
                     <span>({Math.floor(Math.random() * 200) + 1})</span>
                   </div>
+                  {user.isAdmin ? <Link to={`/productform/${product.id}`}>EDIT PRODUCT</Link> : null}
                   <br></br>
                   {lineItem && loggedIn?
                     <div>

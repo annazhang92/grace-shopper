@@ -25,8 +25,7 @@ class PastOrders extends Component {
               <li key={order.id} className='list-group-item'>
                 <h4>Order: {order.id}</h4>                                          
                 {                    
-                  lineItemsByOrder.map(lineItem => {
-                    console.log(lineItemsByUser)                    
+                  lineItemsByOrder.map(lineItem => {                   
                     const subtotal = lineItem.price * lineItem.quantity
                     return (
                       <div>
