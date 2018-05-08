@@ -53,6 +53,7 @@ class App extends Component {
           <Route exact path="/pastorders" component={ PastOrders } />
           <Route exact path="/userform" component={ UserForm } />
           <Route exact path="/productform/:id" component={({ match }) => <ProductForm productId={ match.params.id * 1 } /> } />
+          <Route exact path="/productform" component={ ProductForm } /> 
         </div>
       </Router>
     );

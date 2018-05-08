@@ -32,7 +32,6 @@ class ProductForm extends Component {
     const { product, createProduct, updateProduct } = this.props;
     const { id, name, description, imageUrl, price, inventory, categoryId } = this.state;
     const newProductInfo = { id, name, description, imageUrl, price, inventory, categoryId };
-    console.log(newProductInfo);
     product ? updateProduct(newProductInfo) : createProduct(newProductInfo);
     this.setState({ isUpdating: false });
   }
@@ -41,6 +40,7 @@ class ProductForm extends Component {
     const { onChangeProduct, onUpdate } = this;
     const { product } = this.props;
     const { name, description, imageUrl, price, categoryId, isUpdating } = this.state;
+    const buttonText = product ? 'I want to make changes!': 'I want to create a new product!';
     const inputs = {
       name: 'Name',
       description: 'Description',
@@ -74,7 +74,7 @@ class ProductForm extends Component {
           isUpdating ? (
             <button onClick={ onUpdate } className='btn btn-primary'>Save</button>
           ) : (
-            <button onClick={() => this.setState({ isUpdating: true })} className='btn btn-primary'>I want to make changes!</button>
+            <button onClick={() => this.setState({ isUpdating: true })} className='btn btn-primary'>{buttonText}</button>
           )
         }
       </div>
@@ -84,7 +84,7 @@ class ProductForm extends Component {
 }
 
 const mapState = ({ products }, { productId }) => {
-  const product = products.find(product => product.id === productId);
+  const product = productId ? products.find(product => product.id === productId) : '';
   return {
     product
   }
