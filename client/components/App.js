@@ -19,6 +19,7 @@ import UserForm from './UserAccount';
 import Users from './Users';
 import PastOrders from './PastOrders';
 import ProductForm from './ProductForm';
+import CategoryForm from './CategoryForm';
 import HeatMap from './Dashboard';
 
 class App extends Component {
@@ -54,7 +55,9 @@ class App extends Component {
           <Route exact path="/pastorders" component={ PastOrders } />
           <Route exact path="/userform" component={ UserForm } />
           <Route exact path="/productform/:id" component={({ match }) => <ProductForm productId={ match.params.id * 1 } /> } />
-          <Route exact path="/productform" component={ ProductForm } /> 
+          <Route exact path="/productform" component={ ProductForm } />
+          <Route exact path="/categoryform/:id" component={({ match }) => <CategoryForm categoryId={ match.params.id * 1 } /> } />
+          <Route exact path="/categoryform" component={ CategoryForm } />  
           <Route exact path="/dashboard" component={ HeatMap } />
         </div>
       </Router>
