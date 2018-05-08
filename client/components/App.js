@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Route } from 'react-router-dom';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import injectTapEventPlugin from 'react-tap-event-plugin';
+//Needed for onTouchTap
+injectTapEventPlugin();
 
 // store-related
 import { connect } from 'react-redux';
