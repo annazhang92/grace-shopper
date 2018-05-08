@@ -83,13 +83,18 @@ class ProductForm extends Component {
 
 }
 
-const mapDispatch = (dispatch, ownProps) => {
-  const { product } = ownProps;
+const mapState = ({ products }, { productId }) => {
+  const product = products.find(product => product.id === productId);
   return {
-    product,
+    product
+  }
+}
+
+const mapDispatch = (dispatch) => {
+  return {
     updateProduct: (product) => dispatch(updateProduct(product)),
     createProduct: (product) => dispatch(createProduct(product))
   }
 }
 
-export default connect(null, mapDispatch)(ProductForm);
+export default connect(mapState, mapDispatch)(ProductForm);

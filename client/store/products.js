@@ -22,11 +22,10 @@ export const getProducts = () => {
   };
 };
 
-export const updateProduct = (id, product, history ) => {
+export const updateProduct = (product) => {
   return (dispatch) => {
-    return axios.put(`/api/products/${id}`, product)
-    .then(res => res.data)
-    .then(product =>
+    return axios.put(`/api/products/${product.id}`, product)
+    .then(() =>
       dispatch({
         type: UPDATE_PRODUCT,
         product

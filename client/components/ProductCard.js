@@ -92,7 +92,7 @@ class ProductCard extends Component {
                     />
                     <span>({Math.floor(Math.random() * 200) + 1})</span>
                   </div>
-                  {user.isAdmin ? <button onClick={() => <ProductForm product={product}/>}>Edit</button> : null}
+                  {user.isAdmin ? <Link to={`/productform/${product.id}`}>EDIT PRODUCT</Link> : null}
                   <br></br>
                   {lineItem && loggedIn?
                     <div>
