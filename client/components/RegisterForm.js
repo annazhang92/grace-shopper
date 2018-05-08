@@ -24,22 +24,45 @@ class RegisterForm extends Component {
     this.onChange = this.onChange.bind(this);
   }
 
-validate = () => {
-  let isError = false;
-  const errors = {};
-  if(this.state.password.length < 5){
-    isError = true;
-    errors.password = "Password needs to be at least 8 characters long"
-  }
+  validate (){
+    // let isError = false;
+    // const errors = {};
 
-  if(isError){
-    this.setState({
-      ...this.state,
-      ...errors
-    });
-  }
-  return isError;
-}
+    if(this.state.firstName.length <= 1){
+      // isError = true;
+      // errors.firstNameError = "Your first name should be at least 2 characters long."
+      this.setState({firstNameError: "Your first name should be at least 2 characters long."});
+    }
+
+    if(this.state.lastName.length <= 1){
+      // isError = true;
+      // errors.lastNameError = "Your last name should be at least 2 characters long."
+      this.setState({lastNameError: "Your first name should be at least 2 characters long."});
+
+    }
+
+    if(this.state.email.indexOf('@') === -1 && this.state.email.indexOf('.') === -1){
+      // isError = true;
+      // errors.emailError = "Invalid email address."
+      this.setState({emailError: "Invalid email address."});
+    }
+
+
+    if(this.state.password.length < 5){
+      // isError = true;
+      // errors.password = "Password needs to be at least 8 characters long."
+      this.setState({passwordError: "Password needs to be at least 8 characters long."});
+
+    }
+
+    // // if(isError){
+    // //   this.setState({
+    // //   // ...this.state,
+    // //   //    ...errors
+    // //   });
+    // }
+    // return isError;
+  }  
 
   onSave(ev) {
     ev.preventDefault();
@@ -68,6 +91,7 @@ validate = () => {
   }
 
   render() {
+    console.log(this.state);
     const { onSave, onChange } = this;
     const { firstName, lastName, email, password } = this.state;
     return (
@@ -77,7 +101,6 @@ validate = () => {
           <TextField
             name="firstName"
             hintText="First Name"
-            floatingLabelText="First Name"
             value={ firstName }
             onChange={ onChange }
             floatingLabelFixed={true}
@@ -87,7 +110,6 @@ validate = () => {
           <TextField
             name="lastName"
             hintText="Last Name"
-            floatingLabelText="Last Name"
             value={ lastName }
             onChange={ onChange }
             floatingLabelFixed={true}
@@ -97,28 +119,15 @@ validate = () => {
           <TextField
             name="email"
             hintText="Email Address"
-            floatingLabelText="Email Address"
             value={ email }
             onChange={ onChange }
             floatingLabelFixed={true}
             errorText={this.state.emailError}
           />
-          <br />
-          <TextField
-            name="email"
-            hintText="Email Address"
-            floatingLabelText="Email Address"
-            value={ email }
-            onChange={ onChange }
-            floatingLabelFixed={true}
-            type="email"
-            errorText={this.state.emailError}
-          />
-          <br />   
+          <br /> 
           <TextField
             name="password"
             hintText="Password"
-            floatingLabelText="Password"
             value={ password }
             onChange={ onChange }
             floatingLabelFixed={true}
@@ -126,10 +135,8 @@ validate = () => {
             errorText={this.state.passwordError}
           />
           <br />      
-            {/* <div><p>First Name</p><input name="firstName" value={ firstName } onChange={ onChange } errorText={this.state.firstNameError} /></div>
-            <div><p>Last Name</p><input name="lastName" value={ lastName } onChange={ onChange } errorText={this.state.lastNameError}/></div>
-            <div><p>Email</p><input name="email" value={ email } onChange={ onChange } errorText={this.state.emailError} /></div>
-            <div><p>Password</p><input name="password" value={ password } onChange={ onChange } errorText={this.state.passwordError}/></div> */}
+          <br />
+          <br />
             <RaisedButton label="Register" onClick={ev => this.onSave(ev)} primary />
         </form>
       </div>
