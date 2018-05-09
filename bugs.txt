@@ -1,1 +1,0 @@
-- Logged in user on top right doesn't change even though info changes on user form.

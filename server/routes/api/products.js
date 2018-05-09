@@ -13,7 +13,7 @@ app.post('/', (req, res, next) => {
   Product.create(req.body)
     .then(product => res.send(product))
     .catch(next)
-})
+});
 
 app.put('/:id', (req, res, next) => {
   Product.findById(req.params.id)
