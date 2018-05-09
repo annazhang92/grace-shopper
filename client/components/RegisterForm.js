@@ -25,49 +25,31 @@ class RegisterForm extends Component {
   }
 
   validate (){
-    // let isError = false;
-    // const errors = {};
-
     if(this.state.firstName.length <= 1){
-      // isError = true;
-      // errors.firstNameError = "Your first name should be at least 2 characters long."
+      this.setState({firstName: ""});
       this.setState({firstNameError: "Your first name should be at least 2 characters long."});
     }
 
     if(this.state.lastName.length <= 1){
-      // isError = true;
-      // errors.lastNameError = "Your last name should be at least 2 characters long."
+      this.setState({lastName: ""});
       this.setState({lastNameError: "Your first name should be at least 2 characters long."});
 
     }
 
     if(this.state.email.indexOf('@') === -1 && this.state.email.indexOf('.') === -1){
-      // isError = true;
-      // errors.emailError = "Invalid email address."
+      this.setState({email: ""});
       this.setState({emailError: "Invalid email address."});
     }
 
-
     if(this.state.password.length < 5){
-      // isError = true;
-      // errors.password = "Password needs to be at least 8 characters long."
+      this.setState({password: ""});
       this.setState({passwordError: "Password needs to be at least 8 characters long."});
-
     }
-
-    // // if(isError){
-    // //   this.setState({
-    // //   // ...this.state,
-    // //   //    ...errors
-    // //   });
-    // }
-    // return isError;
-  }  
+  } 
 
   onSave(ev) {
     ev.preventDefault();
-    const err = this.validate();
-    if(!err){
+    if(!this.validate()){
       const userInfo = {
         firstName: this.state.firstName,
         lastName: this.state.lastName,
@@ -75,13 +57,14 @@ class RegisterForm extends Component {
         password: this.state.password
       };
       this.props.createUser(userInfo);
-      this.setState({
-        firstName: '',
-        lastName: '',
-        email: '',
-        password: ''
-      });
+      // this.setState({
+      //   firstName: '',
+      //   lastName: '',
+      //   email: '',
+      //   password: ''
+      // });
     }
+
   }
 
   onChange(ev) {

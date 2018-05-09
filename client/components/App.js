@@ -46,7 +46,7 @@ class App extends Component {
             <Route exact path="/products" component={ Products } />
             <Route exact path="/products/:id" render={ ({ match, history }) => <ProductDetail id={ match.params.id * 1 } history={ history } /> } />
             <Route exact path="/products/categories/:id" render={ ({ match, history }) => <Products id={ match.params.id * 1 } history={ history } /> } />
-            <Route exact path="/login" render={({ history }) => <LoginForm history={ history } /> } />
+            <MuiThemeProvider><Route exact path="/login" render={({ history }) => <LoginForm history={ history } /> } /></MuiThemeProvider>
             <MuiThemeProvider><Route exact path="/register" component={ RegisterForm } /></MuiThemeProvider>
             <Route exact path="/cart" component={ Cart } />
             <Route exact path="/orders/:id" render={ ({ match, history }) => <CheckOut id={ match.params.id * 1 } history={ history } /> } />
