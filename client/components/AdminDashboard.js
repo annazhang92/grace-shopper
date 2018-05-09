@@ -1,45 +1,48 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+// import { Link } from 'react-router-dom';
+import { PageHeader, Button, ButtonToolbar } from 'react-bootstrap';
 import { updateOrder } from '../store';
 
 class AdminDashboard extends Component {
   constructor(props) {
     super(props);
+    const { orders } = this.props;
     this.state = {
-      active: this.props.order ? this.props.order.active : ''
+      orders: orders ? orders : []
     };
 
     this.changeOrderStatus = this.changeOrderStatus.bind(this);
   }
 
   changeOrderStatus(ev, selectedOrder) {
-    const updatedOrder = {
-      id: selectedOrder.id,
-      status: ev.target.value
-    };
-    this.props.updateOrder(updatedOrder);
+    // PUT route on order isn't working
+    selectedOrder.active = ev.target.value;
+    // const updatedOrder = {
+    //   id: selectedOrder.id,
+    //   active: ev.target.value
+    // };
+    this.props.updateOrder(selectedOrder);
+    console.log(selectedOrder);
   }
-  // To-do: build this out in a separate component?
   render() {
     const { orders } = this.props;
     const { changeOrderStatus } = this;
-    if (!orders) {
-      return null;
+    if (orders.length < 1) {
+      return <PageHeader>You have no orders!</PageHeader>;
     }
     return (
       <div>
-        <h2>All Orders</h2>
+        <PageHeader>All Orders</PageHeader>
         <ul className="list-group">
           {
             orders.map(order => {
               return (
-                <div>
-                  <li key={ order.id } className="list-group-item">
-                    <Link to={ `/orders/${order.id}` }>{order.description}</Link>
-                  </li>
-                  <br />
-                  <button bsStyle="primary" onClick={ ev => changeOrderStatus(ev, order) } value={ !order.active }>Toggle Order Status</button>
+                <div className="wrapper">
+                  <ButtonToolbar key={ order.id }>
+                    <Button bsStyle="link" to={ `/orders/${order.id}` }>{order.description}</Button>
+                    <Button bsStyle="primary" onClick={ ev => changeOrderStatus(ev, order) } value={ !(order.active) }>Toggle Order Status</Button>
+                  </ButtonToolbar>
                 </div>
               );
             })
