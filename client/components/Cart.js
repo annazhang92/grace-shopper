@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import ProductCard from './ProductCard';
 import store, { createOrder } from '../store';
 import { Link } from 'react-router-dom';
+import RaisedButton from 'material-ui/RaisedButton';
 
 const Cart = ({ products, thisUserProducts, thisUserlineItems, loggedIn, createOrder, user }) => {
   const totalPrice = thisUserlineItems.reduce(function (acc, thisUserlineItem) {
@@ -18,8 +19,9 @@ const Cart = ({ products, thisUserProducts, thisUserlineItems, loggedIn, createO
     <div>
       <PageHeader>Cart Items</PageHeader>
       {thisUserlineItems && thisUserProducts ? <ProductCard products={ thisUserProducts } lineItems={thisUserlineItems}/> : <h2>Your cart is empty!</h2>}
-      <h2>TotalPrice: {totalPrice} dollar</h2>
-      <Link to={ `/orders/${user.id}` }><button onClick= { () => loggedIn? createOrder ({ description: orderDescription, price: totalPrice, userId: user.id, fullName: 'placeholder', address: 'placeholder', creditCardNumber: 12345678 }) : console.log ('please login') }>CheckOut</button></Link>
+      <h2>Total Price: {totalPrice} dollar</h2>
+      <br />
+      <Link to={ `/orders/${user.id}` }><RaisedButton label="Checkout" onClick= { () => loggedIn? createOrder ({ description: orderDescription, price: totalPrice, userId: user.id, fullName: 'placeholder', address: 'placeholder', creditCardNumber: 12345678 }) : console.log ('please login') } primary /></Link>
     </div>
   );
 };

@@ -45,14 +45,35 @@ class LoginForm extends Component {
     const { email, password } = this.state;
     return (
       <div>
-        <h2>Enter Your Information</h2>
+        <h2>Login</h2>
         <form onSubmit={ onSave }>
-          <div><p>Email</p><input name="email" value={ email } onChange={ onChange } /></div>
-          <div><p>Password</p><input name="password" value={ password } onChange={ onChange } /></div>
-          <button>Login</button>
+          <br />
+            <TextField
+              name="email"
+              floatingLabelText="Email Address"
+              value={ email }
+              onChange={ onChange }
+              floatingLabelFixed={true}
+              type="email"
+              // errorText={this.state.emailError}
+            />
+            <br /> 
+            <TextField
+              name="password"
+              floatingLabelText="Password"
+              value={ password }
+              onChange={ onChange }
+              floatingLabelFixed={true}
+              type="password"
+              // errorText={this.state.passwordError}
+            />
+            <br />      
+            <br />
+            <br />
+            <RaisedButton label="Login" onClick={ev => this.onSave(ev)} primary />
         </form>
 
-        <p>Do not have an account?<Link to={`/register`}> Create One </Link></p>
+        <p>New to Grace Shopper? <br /> <Link to={`/register`}> Create an account! </Link></p>
       </div>
     );
   }

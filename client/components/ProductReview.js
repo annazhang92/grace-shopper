@@ -45,7 +45,7 @@ class ProductReview extends React.Component {
   };
 
   onSubmit(ev){
-    console.log('onSubmot')
+    console.log('onSubmit')
     ev.preventDefault();
     // const errors = Object.keys(this.validators).reduce( ( memo, key ) => {
     //   const validator = this.validators[key];

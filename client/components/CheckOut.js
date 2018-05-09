@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import store, { updateOrder, setLineItem, setOrder } from '../store';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 
 
 class CheckOut extends Component {
@@ -48,10 +50,36 @@ class CheckOut extends Component {
         </div>}
         <h3>We need more information to complete the order:</h3>
         <form onSubmit={ onSave }>
-          <div><p>FullName</p><input name="fullName" value={ fullName } onChange={ onChange } /></div>
-          <div><p>Address</p><input name="address" value={ address } onChange={ onChange } /></div>
-          <div><p>CreditCardNumber</p><input name="creditCardNumber" value={ creditCardNumber } onChange={ onChange } /></div>
-          <Link to="/complete"><button onClick={ this.onClick }>Complete Order</button></Link>
+        <TextField
+            name="fullName"
+            floatingLabelText="Full Name"
+            value={ fullName }
+            onChange={ onChange }
+            floatingLabelFixed={true}
+            // errorText={this.state.fullNameError}
+          />
+          <br />
+          <TextField
+            name="address"
+            floatingLabelText="Address"
+            value={ address }
+            onChange={ onChange }
+            floatingLabelFixed={true}
+            // errorText={this.state.addressError}
+          />
+          <br />
+          <TextField
+            name="creditCardNumber"
+            floatingLabelText="Credit Card Number"
+            value={ creditCardNumber }
+            onChange={ onChange }
+            floatingLabelFixed={true}
+            // errorText={this.state.creditCardNumberError}
+          />
+          <br />
+          <br />
+          <br />
+          <Link to="/complete"><RaisedButton label="Complete Order" onClick={ this.onClick } primary/></Link>
         </form>
 
       </div>
