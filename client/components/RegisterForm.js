@@ -25,27 +25,36 @@ class RegisterForm extends Component {
   }
 
   validate (){
+    let isError = false;
     if(this.state.firstName.length <= 1){
+      isError = true;
       this.setState({firstName: ""});
       this.setState({firstNameError: "Your first name should be at least 2 characters long."});
     }
 
     if(this.state.lastName.length <= 1){
+      isError = true;
       this.setState({lastName: ""});
       this.setState({lastNameError: "Your first name should be at least 2 characters long."});
 
     }
 
     if(this.state.email.indexOf('@') === -1 && this.state.email.indexOf('.') === -1){
+      isError = true;
       this.setState({email: ""});
       this.setState({emailError: "Invalid email address."});
     }
 
     if(this.state.password.length < 5){
+      isError = true;
       this.setState({password: ""});
       this.setState({passwordError: "Password needs to be at least 8 characters long."});
     }
-  } 
+    
+    if(isError){
+    }
+    return isError;
+  }
 
   onSave(ev) {
     ev.preventDefault();
@@ -74,12 +83,12 @@ class RegisterForm extends Component {
   }
 
   render() {
-    console.log(this.state);
     const { onSave, onChange } = this;
     const { firstName, lastName, email, password } = this.state;
     return (
       <div>
-        <h2>Enter Your Information</h2>
+        <h2>Create account</h2>
+        <br />
         <form onSubmit={ onSave }>
           <TextField
             name="firstName"
@@ -105,6 +114,7 @@ class RegisterForm extends Component {
             value={ email }
             onChange={ onChange }
             floatingLabelFixed={true}
+            type="email"
             errorText={this.state.emailError}
           />
           <br /> 
@@ -120,7 +130,7 @@ class RegisterForm extends Component {
           <br />      
           <br />
           <br />
-            <RaisedButton label="Register" onClick={ev => this.onSave(ev)} primary />
+          <RaisedButton label="Register" onClick={ev => this.onSave(ev)} primary />
         </form>
       </div>
     );
