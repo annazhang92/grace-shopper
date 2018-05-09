@@ -19,6 +19,7 @@ import UserForm from './UserAccount';
 import Users from './Users';
 import PastOrders from './PastOrders';
 import ProductForm from './ProductForm';
+import CategoryForm from './CategoryForm';
 import HeatMap from './Dashboard';
 import AdminDashboard from './AdminDashboard';
 
@@ -55,7 +56,15 @@ class App extends Component {
           <Route exact path="/pastorders" component={ PastOrders } />
           <Route exact path="/userform" component={ UserForm } />
           <Route exact path="/productform/:id" component={({ match }) => <ProductForm productId={ match.params.id * 1 } /> } />
+<<<<<<< HEAD
           <Route exact path="/productform" component={ ProductForm } />
+||||||| merged common ancestors
+          <Route exact path="/productform" component={ ProductForm } /> 
+=======
+          <Route exact path="/productform" component={ ProductForm } />
+          <Route exact path="/categoryform/:id" component={({ match }) => <CategoryForm categoryId={ match.params.id * 1 } /> } />
+          <Route exact path="/categoryform" component={ CategoryForm } />  
+>>>>>>> 003acda8776c5b3cd3d903b98b9d08682c7a6a21
           <Route exact path="/dashboard" component={ HeatMap } />
           <Route exact path="/admindashboard" component={ AdminDashboard } />
         </div>
