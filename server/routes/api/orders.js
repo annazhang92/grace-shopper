@@ -5,9 +5,7 @@ module.exports = app;
 
 app.get('/', (req, res, next) => {
   Order.findAll({
-    include: [
-      { model: LineItem, as: 'lineItems' }
-    ]
+    include: [ LineItem ]
   })
     .then(orders => res.send(orders))
     .catch(next);

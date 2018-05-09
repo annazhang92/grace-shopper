@@ -19,6 +19,11 @@ import CheckOut from './CheckOut';
 import OrderComplete from './OrderComplete';
 import UserForm from './UserAccount';
 import Users from './Users';
+import PastOrders from './PastOrders';
+import ProductForm from './ProductForm';
+import CategoryForm from './CategoryForm';
+import HeatMap from './Dashboard';
+import AdminDashboard from './AdminDashboard';
 
 //Needed for onTouchTap
 injectTapEventPlugin();
@@ -38,24 +43,31 @@ class App extends Component {
 
   render() {
     return (
-        <Router>
-          <div>
-            <Menu />
-            <Route path="/" exact component={ Home } />
-            <Route exact path="/products/categories" component={ Categories } />
-            <Route exact path="/products" component={ Products } />
-            <Route exact path="/products/:id" render={ ({ match, history }) => <ProductDetail id={ match.params.id * 1 } history={ history } /> } />
-            <Route exact path="/products/categories/:id" render={ ({ match, history }) => <Products id={ match.params.id * 1 } history={ history } /> } />
-            <MuiThemeProvider><Route exact path="/login" render={({ history }) => <LoginForm history={ history } /> } /></MuiThemeProvider>
-            <MuiThemeProvider><Route exact path="/register" component={ RegisterForm } /></MuiThemeProvider>
-            <MuiThemeProvider><Route exact path="/cart" component={ Cart } /></MuiThemeProvider>
-            <MuiThemeProvider><Route exact path="/orders/:id" render={ ({ match, history }) => <CheckOut id={ match.params.id * 1 } history={ history } /> } /></MuiThemeProvider>
-            <Route exact path="/complete" component={()=> <OrderComplete /> } />
-            <Route exact path="/users" component={ Users } />
-            <Route exact path="/users/:id" component={ ({match }) => <UserForm currentUserId={ match.params.id * 1 } /> } />
-            <Route exact path="/userform" component={ UserForm } />
-          </div>
-        </Router>
+      <Router>
+        <div>
+          <Menu />
+          <Route path="/" exact component={ Home } />
+          <Route exact path="/products/categories" component={ Categories } />
+          <Route exact path="/products" component={ Products } />
+          <Route exact path="/products/:id" render={ ({ match, history }) => <ProductDetail id={ match.params.id * 1 } history={ history } /> } />
+          <Route exact path="/products/categories/:id" render={ ({ match, history }) => <Products id={ match.params.id * 1 } history={ history } /> } />
+          <MuiThemeProvider><Route exact path="/login" render={({ history }) => <LoginForm history={ history } /> } /></MuiThemeProvider>
+          <MuiThemeProvider><Route exact path="/register" component={ RegisterForm } /></MuiThemeProvider>
+          <MuiThemeProvider><Route exact path="/cart" component={ Cart } /></MuiThemeProvider>
+          <MuiThemeProvider><Route exact path="/orders/:id" render={ ({ match, history }) => <CheckOut id={ match.params.id * 1 } history={ history } /> } /></MuiThemeProvider>
+          <Route exact path="/complete" component={()=> <OrderComplete /> } />
+          <Route exact path="/users" component={ Users } />
+          <Route exact path="/users/:id" component={ ({match }) => <UserForm currentUserId={ match.params.id * 1 } /> } />
+          <Route exact path="/pastorders" component={ PastOrders } />
+          <Route exact path="/userform" component={ UserForm } />
+          <Route exact path="/productform/:id" component={({ match }) => <ProductForm productId={ match.params.id * 1 } /> } />
+          <Route exact path="/productform" component={ ProductForm } /> 
+          <Route exact path="/categoryform/:id" component={({ match }) => <CategoryForm categoryId={ match.params.id * 1 } /> } />
+          <Route exact path="/categoryform" component={ CategoryForm } />  
+          <Route exact path="/dashboard" component={ HeatMap } />
+          <Route exact path="/admindashboard" component={ AdminDashboard } />
+        </div>
+      </Router>
     );
   }
 }

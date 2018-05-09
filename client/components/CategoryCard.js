@@ -1,8 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
+import CategoryForm from './CategoryForm';
 
-const CategoryCard = ({ categories }) => {
+const CategoryCard = ({ categories, user }) => {
   return (
     <div className="wrapper">
       {
@@ -17,7 +19,8 @@ const CategoryCard = ({ categories }) => {
                 <Link to={ `/products/categories/${category.id}` }>
                   <h3>{category.name}</h3>
                 </Link>
-              </div>
+                {user.isAdmin ? <Link to={`/categoryform/${category.id}`}>EDIT CATEGORY</Link> : null}
+              </div>              
             </div>
           );
         })
@@ -28,4 +31,10 @@ const CategoryCard = ({ categories }) => {
   );
 };
 
-export default CategoryCard;
+const mapState = ({ user }) => {
+  return {
+    user
+  }
+}
+
+export default connect(mapState)(CategoryCard);

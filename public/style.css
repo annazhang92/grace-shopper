@@ -3,6 +3,9 @@ body {
   text-align: center;
 }
 
+.no-inventory {
+  opacity: 0.2;
+}
 .wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -174,4 +177,72 @@ img {
 }
 .btn-save:hover {
   box-shadow: 0 0 40px 40px #36454f inset;
+}
+
+
+/* --------------- HEX stuff --- */
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+.hex-app {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+.hexPath path{
+  stroke:white;
+  stroke-width:1px;
+  transition: opacity .5s;
+}
+.hexPath text{
+  transition: opacity 0.5s;
+}
+.hexPath:hover path{
+  opacity: 0.1;
+}
+.hexPath text{
+  opacity: 0;
+  cursor:default;
+}
+.hexPath:hover text{
+  opacity: 1;
+}
+text{
+  font-size: 12px;
+}
+
+
+/* --- simple table --- */
+
+#ver-minimalist
+{
+	font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-
+Serif;
+	font-size: 12px;
+	margin: 45px;
+	width: 480px;
+	text-align: left;
+	border-collapse: collapse;
+}
+#ver-minimalist th
+{
+	padding: 8px 2px;
+	font-weight: normal;
+	font-size: 14px;
+	border-bottom: 2px solid #6678b1;
+	border-right: 30px solid #fff;
+	border-left: 30px solid #fff;
+	color: #039;
+}
+#ver-minimalist td
+{
+	padding: 12px 2px 0px 2px;
+	border-right: 30px solid #fff;
+	border-left: 30px solid #fff;
+	color: #669;
 }

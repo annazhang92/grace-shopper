@@ -15,6 +15,7 @@ class Products extends Component {
       min: '',
       max: 0
     };
+    this.onAddProduct = this.onAddProduct.bind(this);
   };
 
   updateSearch(ev){
@@ -23,8 +24,13 @@ class Products extends Component {
     this.setState(change);
   }
 
+  onAddProduct() {
+    window.location = '/#/productform';
+  }
+
   render(){
-    const { products, categories} = this.props;
+    const { products, categories, user} = this.props;
+    const { onAddProduct } = this;
     const { search, min, max } = this.state;
     const filteredProducts = products.filter( product => {
       return product.name.toLowerCase().indexOf(search.toLowerCase()) !== -1 && (parseFloat(product.price) > min) && ( max > 0 ? parseFloat(product.price) < max : true);
@@ -38,6 +44,8 @@ class Products extends Component {
           (products && categories) ?
           <div>
             <PageHeader>{ categories.name } Products offered: { filteredProducts.length }
+            <br />
+            {user.isAdmin ? <button onClick={ onAddProduct } className='btn btn-primary'>ADD PRODUCT</button> : null}
             </PageHeader>
             <div>
               <span>Product Name</span><input name='search' value={search} placeholder="Search..." onChange={this.updateSearch.bind(this)} />
@@ -83,14 +91,15 @@ class Products extends Component {
   }
 };
 
-const mapStateToProps = ({ products, categories, loggedIn }, { id }) => {
+const mapStateToProps = ({ products, categories, loggedIn, user }, { id }) => {
   if (id) {
     products = products.filter(product => product.categoryId === id);
     categories = categories.find(category => category.id === id);
   }
   return {
     products,
-    categories
+    categories,
+    user
   };
 };
 
