@@ -19,7 +19,7 @@ app.put('/:id', (req, res, next) => {
   Category.findById(req.params.id)
     .then(category => {
       Object.assign(category, req.body)
-      return product.save();
+      return category.save();
     })
     .then(category => res.send(category))
     .catch(next);
