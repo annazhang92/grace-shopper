@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { attemptLogin } from '../store';
+import { attemptLogin} from '../store';
 import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 
@@ -16,6 +16,7 @@ class LoginForm extends Component {
 
     this.onSave = this.onSave.bind(this);
     this.onChange = this.onChange.bind(this);
+    // this.handleLogin=this.handleLogin.bind(this);
   }
 
   onSave(ev) {
@@ -32,38 +33,26 @@ class LoginForm extends Component {
     this.setState(change);
   }
 
+  // handleLogin() {
+  //   if(localStorage.getItem('lineItems')) {
+  //     const lineItems = JSON.parse(localStorage.getItem('lineItems'))
+  //     lineItems.map(lineItem=>this.props.createLineItem(lineItem))
+  //   }
+  // }
+
   render() {
     const { onSave, onChange } = this;
     const { email, password } = this.state;
     return (
       <div>
-        <h2>Sign in</h2>
-        <br />
+        <h2>Enter Your Information</h2>
         <form onSubmit={ onSave }>
-          <TextField
-              name="email"
-              floatingLabelText="Email"
-              value={ email }
-              onChange={ onChange }
-              type="email"
-              floatingLabelFixed={true}
-          />
-          <br />
-          <TextField
-              name="password"
-              floatingLabelText="Password"
-              value={ password }
-              onChange={ onChange }
-              type="password"
-              floatingLabelFixed={true}
-          />
-          <br />
-          <br />
-          <br />
-          <RaisedButton label="Sign in" primary/>
+          <div><p>Email</p><input name="email" value={ email } onChange={ onChange } /></div>
+          <div><p>Password</p><input name="password" value={ password } onChange={ onChange } /></div>
+          <button>Login</button>
         </form>
 
-        <p>New to Grace Shopper? <br /> <Link to={`/register`}> Create your account </Link></p>
+        <p>Do not have an account?<Link to={`/register`}> Create One </Link></p>
       </div>
     );
   }
@@ -71,7 +60,9 @@ class LoginForm extends Component {
 
 const mapDispatchToProps = (dispatch, { history }) => {
   return {
-    attemptLogin: (credentials)=> dispatch(attemptLogin(credentials, history))
+    attemptLogin: (credentials)=> dispatch(attemptLogin(credentials, history)),
+    // createLineItem: (lineItem) => dispatch(createLineItem(lineItem,history)),
+
   };
 };
 

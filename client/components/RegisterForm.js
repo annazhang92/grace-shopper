@@ -28,26 +28,22 @@ class RegisterForm extends Component {
     let isError = false;
     if(this.state.firstName.length <= 1){
       isError = true;
-      this.setState({firstName: ""});
       this.setState({firstNameError: "Your first name should be at least 2 characters long."});
     }
 
     if(this.state.lastName.length <= 1){
       isError = true;
-      this.setState({lastName: ""});
       this.setState({lastNameError: "Your first name should be at least 2 characters long."});
 
     }
 
     if(this.state.email.indexOf('@') === -1 && this.state.email.indexOf('.') === -1){
       isError = true;
-      this.setState({email: ""});
       this.setState({emailError: "Invalid email address."});
     }
 
     if(this.state.password.length < 5){
       isError = true;
-      this.setState({password: ""});
       this.setState({passwordError: "Password needs to be at least 8 characters long."});
     }
     
@@ -66,12 +62,16 @@ class RegisterForm extends Component {
         password: this.state.password
       };
       this.props.createUser(userInfo);
-      // this.setState({
-      //   firstName: '',
-      //   lastName: '',
-      //   email: '',
-      //   password: ''
-      // });
+      this.setState({
+        firstName: '',
+        firstNameError: '',
+        lastName: '',
+        lastNameError: '',
+        email: '',
+        emailError: '',
+        password: '',
+        passwordError: ''
+      });
     }
 
   }
