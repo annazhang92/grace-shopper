@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { HashRouter as Router, Route } from 'react-router-dom';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import injectTapEventPlugin from 'react-tap-event-plugin';
 
 // store-related
 import { connect } from 'react-redux';
@@ -22,6 +24,9 @@ import ProductForm from './ProductForm';
 import CategoryForm from './CategoryForm';
 import HeatMap from './Dashboard';
 import AdminDashboard from './AdminDashboard';
+
+//Needed for onTouchTap
+injectTapEventPlugin();
 
 class App extends Component {
   componentDidMount() {
@@ -46,10 +51,10 @@ class App extends Component {
           <Route exact path="/products" component={ Products } />
           <Route exact path="/products/:id" render={ ({ match, history }) => <ProductDetail id={ match.params.id * 1 } history={ history } /> } />
           <Route exact path="/products/categories/:id" render={ ({ match, history }) => <Products id={ match.params.id * 1 } history={ history } /> } />
-          <Route exact path="/login" render={({ history }) => <LoginForm history={ history } /> } />
-          <Route exact path="/register" component={ RegisterForm } />
-          <Route exact path="/cart" component={ Cart } />
-          <Route exact path="/orders/:id" render={ ({ match, history }) => <CheckOut id={ match.params.id * 1 } history={ history } /> } />
+          <MuiThemeProvider><Route exact path="/login" render={({ history }) => <LoginForm history={ history } /> } /></MuiThemeProvider>
+          <MuiThemeProvider><Route exact path="/register" component={ RegisterForm } /></MuiThemeProvider>
+          <MuiThemeProvider><Route exact path="/cart" component={ Cart } /></MuiThemeProvider>
+          <MuiThemeProvider><Route exact path="/orders/:id" render={ ({ match, history }) => <CheckOut id={ match.params.id * 1 } history={ history } /> } /></MuiThemeProvider>
           <Route exact path="/complete" component={()=> <OrderComplete /> } />
           <Route exact path="/users" component={ Users } />
           <Route exact path="/users/:id" component={ ({match }) => <UserForm currentUserId={ match.params.id * 1 } /> } />

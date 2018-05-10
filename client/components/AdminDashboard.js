@@ -16,7 +16,7 @@ class AdminDashboard extends Component {
   }
 
   changeOrderStatus(ev, selectedOrder) {
-    // PUT route on order isn't working
+    // this is still buggy
     selectedOrder.active = ev.target.value;
     // const updatedOrder = {
     //   id: selectedOrder.id,

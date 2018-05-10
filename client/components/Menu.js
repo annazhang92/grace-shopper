@@ -20,7 +20,7 @@ class Menu extends Component {
       <Navbar inverse collapseOnSelect>
         <Navbar.Header>
           <LinkContainer to="/">
-            <Navbar.Brand>Home</Navbar.Brand>
+            <Navbar.Brand>Grace Shopper</Navbar.Brand>
           </LinkContainer>
           <Navbar.Toggle />
         </Navbar.Header>

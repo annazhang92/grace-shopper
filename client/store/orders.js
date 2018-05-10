@@ -1,6 +1,5 @@
 import axios from 'axios';
 
-
 // ------ constants ----
 const GET_ORDERS = 'GET_ORDERS';
 const CREATE_ORDER = 'CREATE_ORDER';
@@ -9,22 +8,22 @@ const SET_ORDER = 'SET_ORDER';
 
 // ---- action creators
 export const getOrders = () => {
-  return (dispatch) => {
+  return dispatch => {
     return axios.get('/api/orders')
-    .then(res => res.data)
-    .then(orders =>
+      .then(res => res.data)
+      .then(orders => {
         dispatch({
           type: GET_ORDERS,
           orders
-        })
-      )
-    .catch(err =>
-      console.log(err)
-    )
+        });
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 };
 
-export const createOrder = ( order ) => {
+export const createOrder = order => {
   return (dispatch) => {
     return axios.post('/api/orders', order)
     .then(res => res.data)
@@ -38,24 +37,23 @@ export const createOrder = ( order ) => {
   };
 };
 
-export const updateOrder = (id, order, history ) => {
-  return (dispatch) => {
-    return axios.put(`/api/orders/${id}`, order)
-    .then(res => res.data)
-    .then(order =>
-      dispatch({
-        type: UPDATE_ORDER,
-        order
+export const updateOrder = order => {
+  return dispatch => {
+    return axios.put(`/api/orders/${order.id}`, order)
+      .then(() => {
+        dispatch({
+          type: UPDATE_ORDER,
+          order
+        });
       })
-    )
-    .catch(err => console.log(err))
+      .catch(err => console.log(err));
   };
 };
 
 
 export const setOrder = (id, order, history ) => {
   return (dispatch) => {
-    return axios.put(`/api/orders/status/${id}`, order)
+    return axios.put(`/api/orders/status/${order.id}`, order)
     .then(res => res.data)
     .then(order =>
       dispatch({
@@ -67,7 +65,7 @@ export const setOrder = (id, order, history ) => {
   };
 };
 
-// ------ products reducer
+// ------ orders reducer
 const orders = (state = [], action) => {
   switch (action.type) {
     case GET_ORDERS:
@@ -75,9 +73,9 @@ const orders = (state = [], action) => {
     case CREATE_ORDER:
       return [...state, action.order];
     case UPDATE_ORDER:
-      return state.map(order => order.id === action.order.id ? action.order : order ); 
+      return state.map(order => order.id === action.order.id ? action.order : order );
     case SET_ORDER:
-      return state.map(order => order.id === action.order.id ? action.order : order ); 
+      return state.map(order => order.id === action.order.id ? action.order : order );
   }
   return state;
 };

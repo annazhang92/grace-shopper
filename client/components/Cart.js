@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import ProductCard from './ProductCard';
 import store, { createOrder, createLineItem, getLineItems } from '../store';
 import { Link } from 'react-router-dom';
+import RaisedButton from 'material-ui/RaisedButton';
 
 
 class Cart extends Component {
@@ -66,11 +67,12 @@ class Cart extends Component {
 
     return (
       <div>
-        <PageHeader>Cart Items</PageHeader>
+        <PageHeader>Shopping Cart</PageHeader>
         {/* {thisUserlineItems && <p>{thisUserlineItems[0].name}</p>} */}
         {thisUserlineItems && thisUserProducts ? <ProductCard products={ thisUserProducts } lineItems={thisUserlineItems}/> : <h2>Your cart is empty!</h2>}
-        <h2>TotalPrice: {totalPrice} dollar</h2>
-        {loggedIn ? <Link to={ `/orders/${user.id}` }><button onClick= { () => createOrder ({ description: orderDescription, price: totalPrice, userId: user.id, fullName: 'placeholder', address: 'placeholder', creditCardNumber: 12345678 }) }>CheckOut</button></Link> : <Link to={ '/login' }><button onClick= { () => this.handleCheckoutVisitor ({ description: orderDescription, price: totalPrice, userId: user.id, fullName: 'placeholder', address: 'placeholder', creditCardNumber: 12345678 }) }>CheckOut</button></Link>
+        <h2>Total Price: ${totalPrice}</h2>
+        <br />
+        {loggedIn ? <Link to={ `/orders/${user.id}` }><RaisedButton label="Checkout" onClick= { () => createOrder ({ description: orderDescription, price: totalPrice, userId: user.id, fullName: 'placeholder', address: 'placeholder', creditCardNumber: 12345678 }) } primary /></Link> : <Link to={ '/login' }><RaisedButton label="Checkout" onClick= { () => this.handleCheckoutVisitor ({ description: orderDescription, price: totalPrice, userId: user.id, fullName: 'placeholder', address: 'placeholder', creditCardNumber: 12345678 }) } primary /></Link>
         }
       </div>
     );
