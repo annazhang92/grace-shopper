@@ -8,6 +8,7 @@ const CreditCard = require('./CreditCard');
 const LineItem = require('./LineItem');
 const Order = require('./Order');
 const Review = require('./Review');
+const ProductCategory = require('./ProductCategory');
 
 const randomImage = require('./scraped/images.js');
 
@@ -22,8 +23,13 @@ const numProducts = 500;
 const numAddresses = 1;
 
 // Model relationships
-Product.belongsTo(Category);
-Category.hasMany(Product);
+//Product.belongsTo(Category);
+//Category.hasMany(Product);
+//Product.belongsToMany(Category, {through: 'ProductCategory'});
+//Category.belongsToMany(Product, {through: 'ProductCategory'});
+ProductCategory.belongsTo(Product);
+ProductCategory.belongsTo(Category);
+Product.hasMany(ProductCategory);
 
 // Need to test the following:
 LineItem.belongsTo(Product);
@@ -103,8 +109,28 @@ const seed = () => {
             description: faker.lorem.sentence(),
             imageUrl: randomImage(),
             price: faker.commerce.price()
-          }).then(product => {
+          /*}).then(product => {
             product.setCategory(Math.floor(Math.random() * numCategories) + 1);
+            Review.create({
+              userId: 1,
+              productId: product.id,
+              title: faker.lorem.sentence(),
+              description: faker.lorem.paragraph(),
+              rating: (Math.floor(Math.random() * 5))
+            }).then(review => {
+              Review.create({
+                userId: 1,
+                productId: review.productId,
+                title: faker.lorem.sentence(),
+                description: faker.lorem.paragraph(),
+                rating: (Math.floor(Math.random() * 5))
+              });
+            });*/
+          }).then(product => {
+            const randomCategoryOne = Math.floor(Math.random() * numCategories) + 1;
+            const randomCategoryTwo = (randomCategoryOne + 1 <= numCategories) ? (randomCategoryOne + 1) : (randomCategoryOne - 1); 
+            ProductCategory.create({ productId: product.id, categoryId: randomCategoryOne });
+            ProductCategory.create({ productId: product.id, categoryId: randomCategoryTwo });
             Review.create({
               userId: 1,
               productId: product.id,
@@ -123,7 +149,6 @@ const seed = () => {
           });
         }
       })
-
   ]);
 };
 
@@ -134,6 +159,7 @@ module.exports = {
   models: {
     User,
     Category,
+    ProductCategory,
     Product,
     Cart,
     Address,
