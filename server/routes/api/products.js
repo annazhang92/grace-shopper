@@ -7,11 +7,17 @@ app.get('/', (req, res, next) => {
   Product.findAll({
     include: [{
       model: ProductCategory,
-      include: [ Category ]
+      include: [
+        Category
+      ]
     }]
+   // include: [{
+    //  model: ProductCategory,
+ //     include: [ Category ]
+    //}]
   })
-  /*Product.findAll()
-    .then(products => res.send(products))*/
+  //Product.findAll()
+    .then(products => res.send(products))
     .catch(next);
 });
 

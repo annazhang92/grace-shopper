@@ -109,7 +109,7 @@ const seed = () => {
             description: faker.lorem.sentence(),
             imageUrl: randomImage(),
             price: faker.commerce.price()
-          }).then(product => {
+          /*}).then(product => {
             product.setCategory(Math.floor(Math.random() * numCategories) + 1);
             Review.create({
               userId: 1,
@@ -125,8 +125,8 @@ const seed = () => {
                 description: faker.lorem.paragraph(),
                 rating: (Math.floor(Math.random() * 5))
               });
-            });
-          /*}).then(product => {
+            });*/
+          }).then(product => {
             const randomCategoryOne = Math.floor(Math.random() * numCategories) + 1;
             const randomCategoryTwo = (randomCategoryOne + 1 <= numCategories) ? (randomCategoryOne + 1) : (randomCategoryOne - 1); 
             ProductCategory.create({ productId: product.id, categoryId: randomCategoryOne });
@@ -146,7 +146,7 @@ const seed = () => {
                 rating: (Math.floor(Math.random() * 5))
               });
             });
-          });*/
+          });
         }
       })
   ]);
@@ -159,6 +159,7 @@ module.exports = {
   models: {
     User,
     Category,
+    ProductCategory,
     Product,
     Cart,
     Address,
