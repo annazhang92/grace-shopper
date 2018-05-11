@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateUser, updateAddress, createAddress, updateNavUser } from '../store';
-
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 import AdminUserAccount from './AdminUserAccount';
 import PastOrders from './PastOrders';
 
@@ -88,31 +89,33 @@ class UserForm extends Component {
           {
             Object.keys(inputs).map(input => {
               return (
-                <div className="" key={input}>
-                <label className="font-weight-bold">{inputs[input]}</label>
-                <input
+                <div key={input}>
+                <br />
+                <TextField
                 name={input}
+                floatingLabelText={inputs[input]}
                 readOnly={updating ? false : true}
-                className={`form-control${updating ? `` : `-plaintext` }`}
                 onChange={onChange}
                 value={this.state[input]}
+                floatingLabelFixed={true}
                 />
                 </div>
               )
             })
           }
+          <br />
         </form>
         {
           updating ? (
-            <button onClick={ onUpdate } className='btn btn-primary'>Save</button>
+            <RaisedButton label="Save" onClick={ onUpdate } primary/>
           ) : (
-            <button onClick={() => this.setState({ updating: true })} className='btn btn-primary'>I want to edit account!</button>
+            <RaisedButton label="Edit" onClick={() => this.setState({ updating: true })} />
           )
         }
         <br />
         <br />
         <div>
-          <button onClick={ onShowPastOrders } className='btn btn-primary'>Order History</button>
+          <RaisedButton label="Order History" onClick={ onShowPastOrders } primary/>
           {
             showComponent ? <PastOrders /> : null
           }

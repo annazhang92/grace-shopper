@@ -48,12 +48,11 @@ class CategoryForm extends Component {
           {
             Object.keys(inputs).map(input => {
               return (
-                <div className="" key={input}>
-                  <label className="font-weight-bold">{inputs[input]}</label>
+                <div key={input}>
+                  <label >{inputs[input]}</label>
                   <input
                     name={input}
                     readOnly={isUpdating ? false : true}
-                    className={`form-control${isUpdating ? `` : `plaintext` }`}
                     onChange={onChangeCategory}
                     value={this.state[input]}
                   />
@@ -64,9 +63,9 @@ class CategoryForm extends Component {
         </form>
         {
           isUpdating ? (
-            <button onClick={ onUpdate } className='btn btn-primary'>Save</button>
+            <button onClick={ onUpdate } >Save</button>
           ) : (
-            <button onClick={() => this.setState({ isUpdating: true })} className='btn btn-primary'>{buttonText}</button>
+            <button onClick={() => this.setState({ isUpdating: true })} >{buttonText}</button>
           )
         }
       </div>
