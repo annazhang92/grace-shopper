@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateUser } from '../store'; 
+import { updateUser } from '../store';
+import RaisedButton from 'material-ui/RaisedButton';
 
 class AdminUserAccount extends Component {
   constructor(props) {
@@ -46,7 +47,7 @@ class AdminUserAccount extends Component {
       <div>
         <form onSubmit={onSave}>
           <label>
-            MAKE ADMIN?
+            Make an administrator:
             <input
               id="chk1"
               name='isAdmin'
@@ -57,7 +58,7 @@ class AdminUserAccount extends Component {
           </label>
           <br />
           <label>
-            DEACTIVATE USER? 
+            Deactivate user: 
             <input
               id="chk2"
               name='status'
@@ -67,7 +68,8 @@ class AdminUserAccount extends Component {
             />
           </label>
           <br />
-          <button style={{ marginBottom: '10px' }} className='btn btn-primary'>Save Admin & Status</button>          
+          <br />
+          <RaisedButton label="Save Admin & Status" primary/>          
         </form>
       </div>
     )
