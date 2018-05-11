@@ -5,16 +5,12 @@ module.exports = app;
 
 app.get('/', (req, res, next) => {
   Product.findAll({
-    include: [{
+    /*include: [{
       model: ProductCategory,
       include: [
         Category
       ]
-    }]
-   // include: [{
-    //  model: ProductCategory,
- //     include: [ Category ]
-    //}]
+    }]*/
   })
   //Product.findAll()
     .then(products => res.send(products))
