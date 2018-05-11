@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import { updateProduct, createProduct } from '../store';
 
@@ -57,23 +59,26 @@ class ProductForm extends Component {
             Object.keys(inputs).map(input => {
               return (
                 <div key={input}>
-                <label >{inputs[input]}</label>
-                <input
+                <br />
+                <TextField
                   name={input}
+                  floatingLabelText={inputs[input]}
                   readOnly={isUpdating ? false : true}
                   onChange={onChangeProduct}
                   value={this.state[input]}
+                  floatingLabelFixed={true}
                 />
                 </div>
               )
             })
           }
         </form>
+        <br />
         {
           isUpdating ? (
-            <button onClick={ onUpdate }>Save</button>
+            <RaisedButton label="Save" onClick={ onUpdate }/>
           ) : (
-            <button onClick={() => this.setState({ isUpdating: true })} >{buttonText}</button>
+            <RaisedButton label={buttonText} onClick={() => this.setState({ isUpdating: true })} primary/>
           )
         }
       </div>
