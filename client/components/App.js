@@ -61,7 +61,7 @@ class App extends Component {
           <Route exact path="/pastorders" component={ PastOrders } />
           <MuiThemeProvider><Route exact path="/userform" component={ UserForm } /></MuiThemeProvider>
           <Route exact path="/productform/:id" component={({ match }) => <ProductForm productId={ match.params.id * 1 } /> } />
-          <Route exact path="/productform" component={ ProductForm } />
+          <MuiThemeProvider><Route exact path="/productform" component={ ProductForm } /></MuiThemeProvider>
           <Route exact path="/categoryform/:id" component={({ match }) => <CategoryForm categoryId={ match.params.id * 1 } /> } />
           <Route exact path="/categoryform" component={ CategoryForm } />  
           <Route exact path="/dashboard" component={ HeatMap } />
