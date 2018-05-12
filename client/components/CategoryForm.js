@@ -25,7 +25,7 @@ class CategoryForm extends Component {
     let isError = false;
     if(this.state.name.length <= 1){
       isError = true;
-      this.setState({firstNameError: "Your first name should be at least 2 characters long."});
+      this.setState({nameError: "Your category's name should be at least 2 characters long."});
     }
 
     if(this.state.imageUrl.indexOf('.com') === -1){
@@ -73,9 +73,10 @@ class CategoryForm extends Component {
               name="name"
               floatingLabelText="Name"
               value={ name }
-              readOnly={updating ? false : true}
-              onChange={ onChange }
+              readOnly={isUpdating ? false : true}
+              onChange={ onChangeCategory }
               floatingLabelFixed={true}
+              type="text"
               errorText={this.state.nameError}
             />
             <br />
@@ -83,8 +84,8 @@ class CategoryForm extends Component {
               name="imageUrl"
               floatingLabelText="Image URL"
               value={ imageUrl }
-              readOnly={updating ? false : true}
-              onChange={ onChange }
+              readOnly={isUpdating ? false : true}
+              onChange={ onChangeCategory }
               floatingLabelFixed={true}
               type="url"
               errorText={this.state.imageUrlError}
