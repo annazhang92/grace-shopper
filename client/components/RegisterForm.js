@@ -42,7 +42,7 @@ class RegisterForm extends Component {
       this.setState({emailError: "Invalid email address."});
     }
 
-    if(this.state.password.length < 5){
+    if(this.state.password.length < 7){
       isError = true;
       this.setState({passwordError: "Password needs to be at least 8 characters long."});
     }

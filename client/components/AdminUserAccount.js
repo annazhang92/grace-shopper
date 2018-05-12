@@ -46,6 +46,8 @@ class AdminUserAccount extends Component {
     return (
       <div>
         <form onSubmit={onSave}>
+          <br />
+          <br />
           <label>
             Make an administrator:
             <input
@@ -58,7 +60,7 @@ class AdminUserAccount extends Component {
           </label>
           <br />
           <label>
-            Deactivate user: 
+            Deactivate user:
             <input
               id="chk2"
               name='status'
