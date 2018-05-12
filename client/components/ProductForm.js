@@ -49,7 +49,7 @@ class ProductForm extends Component {
       imageUrl: 'Image URL',
       price: 'Price',
       inventory: 'Inventory',
-      categoryId: 'Category Id'
+      categoryId: 'Category ID'
     }
     return (
       <div>
@@ -76,9 +76,9 @@ class ProductForm extends Component {
         <br />
         {
           isUpdating ? (
-            <RaisedButton label="Save" onClick={ onUpdate }/>
+            <RaisedButton label="Save" onClick={ onUpdate } primary/>
           ) : (
-            <RaisedButton label={buttonText} onClick={() => this.setState({ isUpdating: true })} primary/>
+            <RaisedButton label={buttonText} onClick={() => this.setState({ isUpdating: true })}/>
           )
         }
       </div>

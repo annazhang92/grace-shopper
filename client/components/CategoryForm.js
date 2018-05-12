@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 
 import { updateCategory, createCategory } from '../store';
 
@@ -36,36 +38,39 @@ class CategoryForm extends Component {
     const { onChangeCategory, onUpdate } = this;
     const { category } = this.props;
     const { name, imageUrl, isUpdating } = this.state;
-    const buttonText = category ? 'I want to make changes!' : 'I want to create a new category!';
+    const buttonText = category ? 'I want to make changes!' : 'Create a new category';
     const inputs = {
       name: 'Name',
       imageUrl: 'Image URL'
     }
     return (
       <div>
-        {category ? <h2>Update Category</h2> : <h2>Create Category</h2>}
+        {category ? <h2>Update Category</h2> : <h2>Create Another Category</h2>}
         <form>
           {
             Object.keys(inputs).map(input => {
               return (
                 <div key={input}>
-                  <label >{inputs[input]}</label>
-                  <input
+                  <br />
+                  <TextField
                     name={input}
+                    floatingLabelText={inputs[input]}
                     readOnly={isUpdating ? false : true}
                     onChange={onChangeCategory}
                     value={this.state[input]}
+                    floatingLabelFixed={true}
                   />
                 </div>
               )
             })
           }
         </form>
+        <br />
         {
           isUpdating ? (
-            <button onClick={ onUpdate } >Save</button>
+            <RaisedButton label="Save" onClick={ onUpdate } primary/>
           ) : (
-            <button onClick={() => this.setState({ isUpdating: true })} >{buttonText}</button>
+            <RaisedButton label={buttonText} onClick={() => this.setState({ isUpdating: true })} />
           )
         }
       </div>
