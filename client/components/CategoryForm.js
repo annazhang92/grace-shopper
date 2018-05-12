@@ -12,11 +12,31 @@ class CategoryForm extends Component {
     this.state = {
       id: category ? category.id : '',
       name: category ? category.name : '',
+      nameError: '',
       imageUrl: category ? category.imageUrl : '',
+      imageUrlError: '',
       isUpdating: false
     }
     this.onChangeCategory = this.onChangeCategory.bind(this);
     this.onUpdate = this.onUpdate.bind(this);
+  }
+
+  validate (){
+    let isError = false;
+    if(this.state.name.length <= 1){
+      isError = true;
+      this.setState({firstNameError: "Your first name should be at least 2 characters long."});
+    }
+
+    if(this.state.imageUrl.indexOf('.com') === -1){
+      isError = true;
+      this.setState({imageUrlError: "Please enter a valid URL"});
+
+    }
+    
+    if(isError){
+    }
+    return isError;
   }
 
   onChangeCategory(ev) {
@@ -27,11 +47,13 @@ class CategoryForm extends Component {
 
   onUpdate(ev) {
     ev.preventDefault();
-    const { category, updateCategory, createCategory } = this.props;
-    const { id, name, imageUrl } = this.state;
-    const newCategoryInfo = { id, name, imageUrl };
-    category ? updateCategory(newCategoryInfo) : createCategory(newCategoryInfo);
-    this.setState({ isUpdating: false });
+    if(!this.validate()){
+      const { category, updateCategory, createCategory } = this.props;
+      const { id, name, imageUrl } = this.state;
+      const newCategoryInfo = { id, name, imageUrl };
+      category ? updateCategory(newCategoryInfo) : createCategory(newCategoryInfo);
+      this.setState({ isUpdating: false });
+    }
   }
 
   render() {
@@ -47,7 +69,28 @@ class CategoryForm extends Component {
       <div>
         {category ? <h2>Update Category</h2> : <h2>Create Another Category</h2>}
         <form>
-          {
+          <TextField
+              name="name"
+              floatingLabelText="Name"
+              value={ name }
+              readOnly={updating ? false : true}
+              onChange={ onChange }
+              floatingLabelFixed={true}
+              errorText={this.state.nameError}
+            />
+            <br />
+            <TextField
+              name="imageUrl"
+              floatingLabelText="Image URL"
+              value={ imageUrl }
+              readOnly={updating ? false : true}
+              onChange={ onChange }
+              floatingLabelFixed={true}
+              type="url"
+              errorText={this.state.imageUrlError}
+            />
+            <br />
+          {/* {
             Object.keys(inputs).map(input => {
               return (
                 <div key={input}>
@@ -63,7 +106,7 @@ class CategoryForm extends Component {
                 </div>
               )
             })
-          }
+          } */}
         </form>
         <br />
         {

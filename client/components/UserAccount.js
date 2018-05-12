@@ -52,7 +52,7 @@ class UserForm extends Component {
 
     if(this.state.lastName.length <= 1){
       isError = true;
-      this.setState({lastNameError: "Your first name should be at least 2 characters long."});
+      this.setState({lastNameError: "Your last name should be at least 2 characters long."});
 
     }
 
