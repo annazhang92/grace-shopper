@@ -1374,13 +1374,14 @@ class HeatMap extends Component {
         { label: '18-24', value: 20 },
         { label: '25-44', value: 30 },
         { label: '45-64', value: 60 }
-      ]
+      ],
+      selected: -1
     },
     this.onHexClick = this.onHexClick.bind(this);
   };
 
-  onHexClick(i){
-    console.log('onHexClick',i);
+  onHexClick(value,index,data){
+    console.log('onHexClick',value, index, data);
     this.setState({
       pieData: [
         { label: '5-13', value: 6 },
@@ -1388,8 +1389,8 @@ class HeatMap extends Component {
         { label: '25-44', value: 27 },
         { label: '45-64', value: 0 }
       ]
-
     });
+    this.setState({ selected: index });
     //TODO: update filtered Pie Data
   };
 
@@ -1422,9 +1423,13 @@ class HeatMap extends Component {
   MapRows = hexData.length,
   hexRadius = d3.min([width/((MapColumns + 0.6) * Math.sqrt(3)),height/((MapRows + 1/3) * 1.5)]),
   colours=["#5490c1", "#00a6ca","#00ccbc","#90eb9d","#ffff8c","#f9d057","#f29e2e","#e76818","#d7191c"],
+  colour=['#B4B2B2'],
   colorScale = d3.scaleLinear()
                 .domain(d3.range(0, 1, 1.0 / (colours.length - 1)))
                 .range(colours),
+  colorOrdinal = d3.scaleOrdinal()
+                .domain(d3.range(0, 1, 1.0 / (colour.length - 1)))
+                .range(colour),
   dataToColorMap = d3.scaleLinear().domain([0,60]).range([0,1]);
 
   var points = [];
@@ -1440,13 +1445,13 @@ class HeatMap extends Component {
   const { products } = this.props;
 
   console.log('Products', products);
-
+  const { selected } = this.state;
   return (
     <div >
       <h2>Marketplace order analysis</h2>
       <div>
-        <button onClick={() => this.setState({ data: testData})}>Product Viewing</button>
-        <button onClick={() => this.setState({ data: testData2})}>Product Orders</button>
+        <button onClick={() => this.setState({ data: testData, selected: -1})}>Product Viewing</button>
+        <button onClick={() => this.setState({ data: testData2, selected: -1})}>Product Orders</button>
       </div>
       <div>
       <svg width={width+margin.left+margin.right} height={350}>
@@ -1459,11 +1464,11 @@ class HeatMap extends Component {
         <g transform={"translate(90," + margin.top + ")"}>
         {hexbinPath(points).map((d,i)=>
          <g className="hexPath" key={i} onClick={() => {
-            onHexClick(d[0][2]);
+            onHexClick(d[0][2],i,d);
           }}>
 
-          <path shapeRendering="geometricPrecision" transform={"translate(" + d.x + "," + d.y + ")"} d={hexbinPath.hexagon()} style={{fill:colorScale(dataToColorMap(d[0][2]))}}/>
-          <text transform={"translate(" + (d.x-7) + "," + (d.y+5) + ")"} >{d[0][2]}</text>
+          <path shapeRendering="geometricPrecision" transform={"translate(" + d.x + "," + d.y + ")"} d={hexbinPath.hexagon()} style={{fill: selected === -1 || selected === i ? colorScale(dataToColorMap(d[0][2])) : colorOrdinal(dataToColorMap(d[0][2])) }}/>
+          <text style={{opacity: selected === i ? 1 : 0}} transform={"translate(" + (d.x-7) + "," + (d.y+5) + ")"} >{d[0][2]}</text>
         </g>
         )}
         </g>
@@ -1478,10 +1483,15 @@ class HeatMap extends Component {
         </g>
       </svg>
       </div>
-      <div style={{display:'flex',justifyContent:'center'}}>
+      <div style={{display:'flex',justifyContent:'row'}}>
       <PieChart data={this.state.pieData}/>
-      <SimpleBarChart data={[ 6, 9, 10]} reverse={false} label={'Top Female Products'}/>
-      <SimpleBarChart data={[ 6, 9, 10]} reverse={true} label={'Top Male Products'}/>
+      <div style={{display:'flex',flexDirection:'column',justifyContent:'center'}}>
+      <h3>Popular Products By Gender</h3>
+      <div style={{display:'flex',justifyContent:'row'}}>
+        <SimpleBarChart data={[ 6, 9, 10]} reverse={false} label={'Female Products'}/>
+        <SimpleBarChart data={[ 6, 9, 10]} reverse={true} label={'Male Products'}/>
+      </div>
+      </div>
       </div>
     </div>
   );
