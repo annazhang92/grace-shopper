@@ -1381,7 +1381,6 @@ class HeatMap extends Component {
   };
 
   onHexClick(value,index,data){
-    console.log('onHexClick',value, index, data);
     this.setState({
       pieData: [
         { label: '5-13', value: 6 },
@@ -1423,13 +1422,9 @@ class HeatMap extends Component {
   MapRows = hexData.length,
   hexRadius = d3.min([width/((MapColumns + 0.6) * Math.sqrt(3)),height/((MapRows + 1/3) * 1.5)]),
   colours=["#5490c1", "#00a6ca","#00ccbc","#90eb9d","#ffff8c","#f9d057","#f29e2e","#e76818","#d7191c"],
-  colour=['#B4B2B2'],
   colorScale = d3.scaleLinear()
                 .domain(d3.range(0, 1, 1.0 / (colours.length - 1)))
                 .range(colours),
-  colorOrdinal = d3.scaleOrdinal()
-                .domain(d3.range(0, 1, 1.0 / (colour.length - 1)))
-                .range(colour),
   dataToColorMap = d3.scaleLinear().domain([0,60]).range([0,1]);
 
   var points = [];
@@ -1467,7 +1462,7 @@ class HeatMap extends Component {
             onHexClick(d[0][2],i,d);
           }}>
 
-          <path shapeRendering="geometricPrecision" transform={"translate(" + d.x + "," + d.y + ")"} d={hexbinPath.hexagon()} style={{fill: selected === -1 || selected === i ? colorScale(dataToColorMap(d[0][2])) : colorOrdinal(dataToColorMap(d[0][2])) }}/>
+          <path shapeRendering="geometricPrecision" transform={"translate(" + d.x + "," + d.y + ")"} d={hexbinPath.hexagon()} style={{ opacity: selected === -1 || selected === i ? 1 : .50, fill: colorScale(dataToColorMap(d[0][2]))}}/>
           <text style={{opacity: selected === i ? 1 : 0}} transform={"translate(" + (d.x-7) + "," + (d.y+5) + ")"} >{d[0][2]}</text>
         </g>
         )}
