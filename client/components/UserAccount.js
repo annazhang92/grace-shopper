@@ -5,7 +5,8 @@ import TextField from 'material-ui/TextField';
 import RaisedButton from 'material-ui/RaisedButton';
 import AdminUserAccount from './AdminUserAccount';
 import PastOrders from './PastOrders';
-
+import SelectField from 'material-ui/SelectField';
+import MenuItem from 'material-ui/MenuItem';
 
 
 class UserForm extends Component {
@@ -36,12 +37,17 @@ class UserForm extends Component {
       phoneNumber: userAddress ? userAddress.phoneNumber : '',
       phoneNumberError: '',
       showComponent: false,
-      updating: false 
+      updating: false,
+      value: 0
     }
     this.onChange = this.onChange.bind(this);
     this.onUpdate = this.onUpdate.bind(this);
     this.onShowPastOrders = this.onShowPastOrders.bind(this);
+    this.handleChange = (event, index, value) => this.setState({value}).bind(this);
+
   }
+
+
 
   validate (){
     let isError = false;
@@ -52,7 +58,7 @@ class UserForm extends Component {
 
     if(this.state.lastName.length <= 1){
       isError = true;
-      this.setState({lastNameError: "Your first name should be at least 2 characters long."});
+      this.setState({lastNameError: "Your last name should be at least 2 characters long."});
 
     }
 
@@ -226,15 +232,69 @@ class UserForm extends Component {
               errorText={this.state.cityError}
             />
             <br />
-            <TextField
+            <SelectField
               name="state"
               floatingLabelText="State"
-              value={ state }
+              // floatingLabelStyle={textAlign: 'left'}
+              value={ this.state.value }
               readOnly={updating ? false : true}
               onChange={ onChange }
-              floatingLabelFixed={true}
               errorText={this.state.stateError}
-            />
+              floatingLabelFixed={true}
+            >
+              <MenuItem value={0} primaryText="" />
+              <MenuItem value={1} primaryText="Alabama" />
+              <MenuItem value={2} primaryText="Alaska" />
+              <MenuItem value={3} primaryText="Arizona" />
+              <MenuItem value={4} primaryText="Arkansas" />
+              <MenuItem value={5} primaryText="California" />
+              <MenuItem value={6} primaryText="Colorado" />
+              <MenuItem value={7} primaryText="Connecticut" />
+              <MenuItem value={8} primaryText="Delaware" />
+              <MenuItem value={9} primaryText="Florida" />
+              <MenuItem value={10} primaryText="Georgia" />
+              <MenuItem value={11} primaryText="Hawaii" />
+              <MenuItem value={12} primaryText="Idaho" />
+              <MenuItem value={13} primaryText="Illinois" />
+              <MenuItem value={14} primaryText="Indiana" />
+              <MenuItem value={15} primaryText="Iowa" />
+              <MenuItem value={16} primaryText="Kansas" />
+              <MenuItem value={17} primaryText="Kentucky" />
+              <MenuItem value={18} primaryText="Louisiana" />
+              <MenuItem value={19} primaryText="Maine" />
+              <MenuItem value={20} primaryText="Maryland" />
+              <MenuItem value={21} primaryText="Massachusetts" />
+              <MenuItem value={22} primaryText="Michigan" />
+              <MenuItem value={23} primaryText="Minnesota" />
+              <MenuItem value={24} primaryText="Mississippi" />
+              <MenuItem value={25} primaryText="Missouri" />
+              <MenuItem value={26} primaryText="Montana" />
+              <MenuItem value={27} primaryText="Nebraska" />
+              <MenuItem value={28} primaryText="Nevada" />
+              <MenuItem value={29} primaryText="New Hampshire" />
+              <MenuItem value={30} primaryText="New Jersey" />
+              <MenuItem value={31} primaryText="New Mexico" />
+              <MenuItem value={32} primaryText="New York" />
+              <MenuItem value={33} primaryText="North Carolina" />
+              <MenuItem value={34} primaryText="North Dakota" />
+              <MenuItem value={35} primaryText="Ohio" />
+              <MenuItem value={36} primaryText="Oklahoma" />
+              <MenuItem value={37} primaryText="Oregon" />
+              <MenuItem value={38} primaryText="Pennsylvania" />
+              <MenuItem value={39} primaryText="Rhode Island" />
+              <MenuItem value={40} primaryText="South Carolina" />
+              <MenuItem value={41} primaryText="South Dakota" />
+              <MenuItem value={42} primaryText="Tennessee" />
+              <MenuItem value={43} primaryText="Texas" />
+              <MenuItem value={44} primaryText="Utah" />
+              <MenuItem value={45} primaryText="Vermont" />
+              <MenuItem value={46} primaryText="Virginia" />
+              <MenuItem value={47} primaryText="Washington" />
+              <MenuItem value={48} primaryText="West Virginia" />
+              <MenuItem value={49} primaryText="Wisconsin" />
+              <MenuItem value={50} primaryText="Wyoming" />              
+            </SelectField>
+            <br />
             <br />
             <TextField
               name="zipCode"
