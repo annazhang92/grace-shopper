@@ -24,6 +24,7 @@ import ProductForm from './ProductForm';
 import CategoryForm from './CategoryForm';
 import HeatMap from './Dashboard';
 import AdminDashboard from './AdminDashboard';
+import TopBottom from './TopBottom';
 
 //Needed for onTouchTap
 injectTapEventPlugin();
@@ -42,6 +43,16 @@ class App extends Component {
   }
 
   render() {
+    const revenueByProduct = [
+      {id: 1, name: 'chocolate', revenue: 1000},
+      {id: 2, name: 'cookie', revenue: 500},
+      {id: 3, name: 'ice cream', revenue: 200},
+      {id: 4, name: 'cake', revenue: 300},
+      {id: 5, name: 'brownie', revenue: 400},
+      {id: 6, name: 'pie', revenue: 700},
+      {id: 7, name: 'candy', revenue: 800},
+      {id: 8, name: 'smores', revenue: 900},
+    ]
     return (
       <Router>
         <div>
@@ -66,7 +77,8 @@ class App extends Component {
           <MuiThemeProvider><Route exact path="/categoryform" component={ CategoryForm } /></MuiThemeProvider>
           <Route exact path="/dashboard" component={ HeatMap } />
           <Route exact path="/admindashboard" component={ AdminDashboard } />
-        </div>
+          <Route exact path="/topbottom" component={() => <TopBottom revenueByProduct ={revenueByProduct} /> } />
+          </div>
       </Router>
     );
   }
