@@ -37,6 +37,7 @@ const PieChart = ({ data }) => (
             <path
               d={dataArc(d)}
               fill={colorScale(dataToColorMap(d.data.value))}
+
             />
 
             <text

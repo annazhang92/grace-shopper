@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { scaleLinear } from 'd3-scale';
-import { max } from 'd3-array';
+// import { max } from 'd3-array';
 import * as d3 from 'd3';
 
 class SimpleBarChart extends Component {
@@ -105,7 +105,7 @@ class SimpleBarChart extends Component {
             .style('top', d3.event.pageY - 70 + 'px')
             .style('display', 'inline-block')
             .style('opacity', 1)
-            .html(d.name);
+            .html(d.name + '<br/>' + '$500');
         })
         .on('mouseout', () => { tooltip.style('display', 'none'); })
     :
@@ -114,7 +114,6 @@ class SimpleBarChart extends Component {
       .attr('width', d => { return x(0) - x(d.count); })
       .attr('height', height - 1)
       .on('mousemove', d => {
-        var string = '<img src= ' + d.imageUrl + ' />';
         tooltip
           .style('left', d3.event.pageX - 50 + 'px')
           .style('top', d3.event.pageY - 70 + 'px')
@@ -123,7 +122,6 @@ class SimpleBarChart extends Component {
           .html(d.name );
       })
       .on('mouseout', () => { tooltip.style('display', 'none'); })
-
 
     bar.append('text')
       .attr('x', reverse ? d => { return x(d.count) - 3; } : d => { return x(d.count) + 20; })
