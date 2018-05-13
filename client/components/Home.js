@@ -1,9 +1,12 @@
 import React from 'react';
 import { PageHeader } from 'react-bootstrap';
+import SimpleBarChart from './SimpleBarChart';
 
 const Home = () => {
   return (
-    <PageHeader>Welcome to the Grace Shopper App!</PageHeader>
+    <div>
+      <PageHeader>Welcome to the Grace Shopper App!</PageHeader>
+    </div>
   );
 };
 
