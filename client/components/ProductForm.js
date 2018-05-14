@@ -59,7 +59,7 @@ class ProductForm extends Component {
 
     if(this.state.categoryId.length < 7){
       isError = true;
-      this.setState({cateogryIdError: "Please enter a valid category ID."});
+      this.setState({categoryIdError: "Please enter a valid category ID."});
     }
 
     
@@ -88,7 +88,7 @@ class ProductForm extends Component {
   render() {
     const { onChangeProduct, onUpdate } = this;
     const { product } = this.props;
-    const { name, description, imageUrl, price, categoryId, isUpdating } = this.state;
+    const { name, description, imageUrl, price, categoryId, inventory, isUpdating } = this.state;
     const buttonText = product ? 'I want to make changes!': 'I want to create a new product!';
     // const inputs = {
     //   name: 'Name',
@@ -101,6 +101,7 @@ class ProductForm extends Component {
     return (
       <div>
         {product ? <h2>Update Product</h2> : <h2>Create Product</h2>}
+        <br />
         <form>
           <TextField
               name="name"
@@ -191,7 +192,6 @@ class ProductForm extends Component {
       </div>
     )
   }
-
 }
 
 const mapState = ({ products }, { productId }) => {
