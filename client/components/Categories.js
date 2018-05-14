@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import LazyLoad from 'react-lazy-load';
 import { PageHeader } from 'react-bootstrap';
 import CategoryCard from './CategoryCard';
+import RaisedButton from 'material-ui/RaisedButton';
 
 //const Categories = ({ categories }) => {
 class Categories extends Component {
@@ -21,16 +22,21 @@ class Categories extends Component {
     if (categories) {
       return (      
         <div>
-        {user.isAdmin ? <button onClick={ onAddCategory } className='btn btn-primary'>ADD CATEGORY</button> : null}         
+          <br />
+          {user.isAdmin ? <RaisedButton label="Add Category" onClick={ onAddCategory } primary/> : null}
+          <br />       
           <LazyLoad>
             <CategoryCard categories={ categories } />
           </LazyLoad>
+          
         </div>
       );
     };
     return (
       <div>
-        {user.isAdmin ? <button onClick={ onAddCategory } className='btn btn-primary'>ADD CATEGORY</button> : null};
+        <br />
+        {user.isAdmin ? <RaisedButton label="Add Category" onClick={ onAddCategory } primary/> : null};
+        <br />
         <PageHeader>There are no categories currently available</PageHeader>;
       </div>
     )

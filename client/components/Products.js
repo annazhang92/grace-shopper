@@ -3,7 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 // this fixes image render from pinging the website too much at once
 import LazyLoad from 'react-lazy-load';
-import { PageHeader } from 'react-bootstrap';
+import { PageHeader } from 'react-bootstrap'
+import RaisedButton from 'material-ui/RaisedButton';;
 
 import ProductCard from './ProductCard';
 
@@ -43,9 +44,10 @@ class Products extends Component {
         {
           (products && categories) ?
           <div>
-            <PageHeader>{ categories.name } Products offered: { filteredProducts.length }
+            <PageHeader>{ categories.name } Products Offered: { filteredProducts.length }
             <br />
-            {user.isAdmin ? <button onClick={ onAddProduct } className='btn btn-primary'>ADD PRODUCT</button> : null}
+            <br />
+            {user.isAdmin ? <RaisedButton label="Add Product" onClick={ onAddProduct } primary/> : null}
             </PageHeader>
             <div>
               <span>Product Name</span><input name='search' value={search} placeholder="Search..." onChange={this.updateSearch.bind(this)} />
@@ -53,6 +55,7 @@ class Products extends Component {
               <span> - </span>
               <input type='numeric' step='0.01' name='max' placeholder="$ Max" onChange={this.updateSearch.bind(this)} />
             </div>
+            <br />
             <div>
               <div className='ticker-wrap'>
               <div className='ticker'>

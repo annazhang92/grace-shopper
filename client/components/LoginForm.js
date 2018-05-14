@@ -11,7 +11,9 @@ class LoginForm extends Component {
     super(props);
     this.state = {
       email: '',
-      password: ''
+      emailError: '',
+      password: '',
+      passwordError: ''
     };
 
     this.onSave = this.onSave.bind(this);
@@ -19,12 +21,32 @@ class LoginForm extends Component {
     // this.handleLogin=this.handleLogin.bind(this);
   }
 
+  validate (){
+    let isError = false;
+    if(this.state.email.indexOf('@') === -1 && this.state.email.indexOf('.') === -1){
+      isError = true;
+      this.setState({emailError: "Please enter a email address."});
+    }
+
+    if(this.state.password.length < 7){
+      isError = true;
+      this.setState({passwordError: "Please enter a valid password."});
+
+    }
+    
+    if(isError){
+    }
+    return isError;
+  }
+
   onSave(ev) {
     ev.preventDefault();
-    const { email, password } = this.state;
-    const { attemptLogin } = this.props;
-    attemptLogin({ email, password });
-    this.setState({ email: '', password: '' })
+      if(!this.validate()){
+      const { email, password } = this.state;
+      const { attemptLogin } = this.props;
+      attemptLogin({ email, password });
+      this.setState({ email: '', password: '' })
+    }
   }
 
   onChange(ev) {
@@ -55,7 +77,7 @@ class LoginForm extends Component {
               onChange={ onChange }
               floatingLabelFixed={true}
               type="email"
-              // errorText={this.state.emailError}
+              errorText={this.state.emailError}
             />
             <br /> 
             <TextField
@@ -65,7 +87,7 @@ class LoginForm extends Component {
               onChange={ onChange }
               floatingLabelFixed={true}
               type="password"
-              // errorText={this.state.passwordError}
+              errorText={this.state.passwordError}
             />
             <br />      
             <br />
