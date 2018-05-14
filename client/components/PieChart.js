@@ -37,6 +37,7 @@ const PieChart = ({ data }) => (
             <path
               d={dataArc(d)}
               fill={colorScale(dataToColorMap(d.data.value))}
+
             />
 
             <text
@@ -61,22 +62,26 @@ const PieChart = ({ data }) => (
         <td>NY</td>
         <td>Game</td>
         <td>$2,000 </td>
-      </tr>
-      <tr>
+        <td><button>Launch Campaign</button></td>
+        </tr>
+        <tr>
         <td>NJ</td>
         <td>Sports</td>
         <td>$700</td>
-      </tr>
-      <tr>
+        <td><button>Launch Campaign</button></td>
+        </tr>
+        <tr>
         <td>MA</td>
         <td>Computers</td>
         <td>$6,000 </td>
-      </tr>
-      <tr>
+        <td><button>Launch Campaign</button></td>
+        </tr>
+        <tr>
         <td>CO</td>
         <td>Toys</td>
         <td>$800</td>
-      </tr>
+        <td><button>Launch Campaign</button></td>
+        </tr>
       </table>
     </body>
   </div>

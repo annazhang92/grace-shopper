@@ -45,7 +45,7 @@ class ProductReview extends React.Component {
   };
 
   onSubmit(ev){
-    console.log('onSubmit')
+    console.log('onSubmot')
     ev.preventDefault();
     // const errors = Object.keys(this.validators).reduce( ( memo, key ) => {
     //   const validator = this.validators[key];
@@ -108,6 +108,7 @@ class ProductReview extends React.Component {
     // const tooltip = <Tooltip id="modal-tooltip">wow.</Tooltip>;
     const { handleChange, onSubmit } = this;
     const { rating } = this.state;
+    
     return (
       <div>
         <Button bsStyle='primary' bsSize="medium" onClick={this.handleShow}>

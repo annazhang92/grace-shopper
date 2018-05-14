@@ -19,17 +19,17 @@ supports unique values!
 */
 const faker = require('faker');
 const numCategories = 10;
-const numProducts = 500;
+const numProducts = 20;
 const numAddresses = 1;
+const numLineItems = 300;
 
 // Model relationships
-//Product.belongsTo(Category);
-//Category.hasMany(Product);
-//Product.belongsToMany(Category, {through: 'ProductCategory'});
-//Category.belongsToMany(Product, {through: 'ProductCategory'});
-ProductCategory.belongsTo(Product);
+Product.belongsTo(Category);
+Category.hasMany(Product);
+
+/*ProductCategory.belongsTo(Product);
 ProductCategory.belongsTo(Category);
-Product.hasMany(ProductCategory);
+Product.hasMany(ProductCategory);*/
 
 // Need to test the following:
 LineItem.belongsTo(Product);
@@ -102,6 +102,7 @@ const seed = () => {
           });
         }
       })
+
       .then(() => {
         for (let i = 0; i < numProducts; i++) {
           Product.create({
@@ -109,7 +110,7 @@ const seed = () => {
             description: faker.lorem.sentence(),
             imageUrl: randomImage(),
             price: faker.commerce.price()
-          /*}).then(product => {
+          }).then(product => {
             product.setCategory(Math.floor(Math.random() * numCategories) + 1);
             Review.create({
               userId: 1,
@@ -125,8 +126,8 @@ const seed = () => {
                 description: faker.lorem.paragraph(),
                 rating: (Math.floor(Math.random() * 5))
               });
-            });*/
-          }).then(product => {
+            });
+          /*}).then(product => {
             const randomCategoryOne = Math.floor(Math.random() * numCategories) + 1;
             const randomCategoryTwo = (randomCategoryOne + 1 <= numCategories) ? (randomCategoryOne + 1) : (randomCategoryOne - 1); 
             ProductCategory.create({ productId: product.id, categoryId: randomCategoryOne });
@@ -145,8 +146,20 @@ const seed = () => {
                 description: faker.lorem.paragraph(),
                 rating: (Math.floor(Math.random() * 5))
               });
-            });
+            });*/
           });
+        }
+      })
+      //GENERATE LINE ITEM DATA SOLELY FOR TOP 5/BOTTOM 5 SELLERS!
+      .then(() => {
+        for(let i=0; i<numLineItems; i++) {
+          LineItem.create({
+            quantity: (Math.floor(Math.random() * 5) + 1),
+            name: ''
+          }).then((lineItem) => {
+            lineItem.productId = (Math.floor(Math.random() * numProducts) + 1);
+            return lineItem.save();
+          })
         }
       })
   ]);
@@ -159,7 +172,7 @@ module.exports = {
   models: {
     User,
     Category,
-    ProductCategory,
+//    ProductCategory,
     Product,
     Cart,
     Address,

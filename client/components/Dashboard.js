@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { hexbin } from 'd3-hexbin';
 import * as d3 from 'd3';
 import PieChart from './PieChart';
+import SimpleBarChart from './SimpleBarChart';
 
 
 const testData = [
@@ -678,6 +679,682 @@ const testData = [
       "key":"Saturday",
       "value":0
     }
+];
+
+const testData2 = [
+  {
+    "key":"Sunday",
+    "value":0
+  },
+  {
+    "key":"Monday",
+    "value":0
+  },
+  {
+    "key":"Tuesday",
+    "value":0
+  },
+  {
+    "key":"Wednesday",
+    "value":0
+  },
+  {
+    "key":"Thrusday",
+    "value":0
+  },
+  {
+    "key":"Friday",
+    "value":0
+  },
+  {
+    "key":"Saturday",
+    "value":30
+  },
+  {
+    "key":"Sunday",
+    "value":0
+  },
+  {
+    "key":"Monday",
+    "value":0
+  },
+  {
+    "key":"Tuesday",
+    "value":0
+  },
+  {
+    "key":"Wednesday",
+    "value":20
+  },
+  {
+    "key":"Thrusday",
+    "value":0
+  },
+  {
+    "key":"Friday",
+    "value":0
+  },
+  {
+    "key":"Saturday",
+    "value":15
+  },
+  {
+    "key":"Sunday",
+    "value":0
+  },
+  {
+    "key":"Monday",
+    "value":0
+  },
+  {
+    "key":"Tuesday",
+    "value":0
+  },
+  {
+    "key":"Wednesday",
+    "value":0
+  },
+  {
+    "key":"Thrusday",
+    "value":0
+  },
+  {
+    "key":"Friday",
+    "value":0
+  },
+  {
+    "key":"Saturday",
+    "value":0
+  },
+  {
+    "key":"Sunday",
+    "value":55
+  },
+  {
+    "key":"Monday",
+    "value":0
+  },
+  {
+    "key":"Tuesday",
+    "value":32
+  },
+  {
+    "key":"Wednesday",
+    "value":0
+  },
+  {
+    "key":"Thrusday",
+    "value":0
+  },
+  {
+    "key":"Friday",
+    "value":23
+  },
+  {
+    "key":"Saturday",
+    "value":0
+  },
+  {
+    "key":"Sunday",
+    "value":10
+  },
+  {
+    "key":"Monday",
+    "value":10
+  },
+  {
+    "key":"Tuesday",
+    "value":10
+  },
+  {
+    "key":"Wednesday",
+    "value":10
+  },
+  {
+    "key":"Thrusday",
+    "value":10
+  },
+  {
+    "key":"Friday",
+    "value":10
+  },
+  {
+    "key":"Saturday",
+    "value":10
+  },
+  {
+    "key":"Sunday",
+    "value":10
+  },
+  {
+    "key":"Monday",
+    "value":10
+  },
+  {
+    "key":"Tuesday",
+    "value":0
+  },
+  {
+    "key":"Wednesday",
+    "value":10
+  },
+  {
+    "key":"Thrusday",
+    "value":0
+  },
+  {
+    "key":"Friday",
+    "value":10
+  },
+  {
+    "key":"Saturday",
+    "value":10
+  },
+  {
+    "key":"Sunday",
+    "value":20
+  },
+  {
+    "key":"Monday",
+    "value":20
+  },
+  {
+    "key":"Tuesday",
+    "value":20
+  },
+  {
+    "key":"Wednesday",
+    "value":20
+  },
+  {
+    "key":"Thrusday",
+    "value":20
+  },
+  {
+    "key":"Friday",
+    "value":30
+  },
+  {
+    "key":"Saturday",
+    "value":20
+  },
+  {
+    "key":"Sunday",
+    "value":20
+  },
+  {
+    "key":"Monday",
+    "value":20
+  },
+  {
+    "key":"Tuesday",
+    "value":20
+  },
+  {
+    "key":"Wednesday",
+    "value":20
+  },
+  {
+    "key":"Thrusday",
+    "value":20
+  },
+  {
+    "key":"Friday",
+    "value":20
+  },
+  {
+    "key":"Saturday",
+    "value":20
+  },
+  {
+    "key":"Sunday",
+    "value":30
+  },
+  {
+    "key":"Monday",
+    "value":30
+  },
+  {
+    "key":"Tuesday",
+    "value":30
+  },
+  {
+    "key":"Wednesday",
+    "value":40
+  },
+  {
+    "key":"Thrusday",
+    "value":40
+  },
+  {
+    "key":"Friday",
+    "value":30
+  },
+  {
+    "key":"Saturday",
+    "value":30
+  },
+  {
+    "key":"Sunday",
+    "value":40
+  },
+  {
+    "key":"Monday",
+    "value":10
+  },
+  {
+    "key":"Tuesday",
+    "value":10
+  },
+  {
+    "key":"Wednesday",
+    "value":40
+  },
+  {
+    "key":"Thrusday",
+    "value":40
+  },
+  {
+    "key":"Friday",
+    "value":10
+  },
+  {
+    "key":"Saturday",
+    "value":40
+  },
+  {
+    "key":"Sunday",
+    "value":40
+  },
+  {
+    "key":"Monday",
+    "value":20
+  },
+  {
+    "key":"Tuesday",
+    "value":40
+  },
+  {
+    "key":"Wednesday",
+    "value":20
+  },
+  {
+    "key":"Thrusday",
+    "value":40
+  },
+  {
+    "key":"Friday",
+    "value":40
+  },
+  {
+    "key":"Saturday",
+    "value":40
+  },
+  {
+    "key":"Sunday",
+    "value":20
+  },
+  {
+    "key":"Monday",
+    "value":10
+  },
+  {
+    "key":"Tuesday",
+    "value":40
+  },
+  {
+    "key":"Wednesday",
+    "value":7
+  },
+  {
+    "key":"Thrusday",
+    "value":7
+  },
+  {
+    "key":"Friday",
+    "value":50
+  },
+  {
+    "key":"Saturday",
+    "value":28
+  },
+
+    {
+      "key":"Sunday",
+      "value":50
+    },
+    {
+      "key":"Monday",
+      "value":20
+    },
+    {
+      "key":"Tuesday",
+      "value":20
+    },
+    {
+      "key":"Wednesday",
+      "value":10
+    },
+    {
+      "key":"Thrusday",
+      "value":20
+    },
+    {
+      "key":"Friday",
+      "value":0
+    },
+    {
+      "key":"Saturday",
+      "value":0
+    },
+    {
+      "key":"Sunday",
+      "value":10
+    },
+    {
+      "key":"Monday",
+      "value":0
+    },
+    {
+      "key":"Tuesday",
+      "value":0
+    },
+    {
+      "key":"Wednesday",
+      "value":30
+    },
+    {
+      "key":"Thrusday",
+      "value":15
+    },
+    {
+      "key":"Friday",
+      "value":20
+    },
+    {
+      "key":"Saturday",
+      "value":10
+    },
+    {
+      "key":"Sunday",
+      "value":30
+    },
+    {
+      "key":"Monday",
+      "value":50
+    },
+    {
+      "key":"Tuesday",
+      "value":30
+    },
+    {
+      "key":"Wednesday",
+      "value":20
+    },
+    {
+      "key":"Thrusday",
+      "value":40
+    },
+    {
+      "key":"Friday",
+      "value":10
+    },
+    {
+      "key":"Saturday",
+      "value":10
+    },
+    {
+      "key":"Sunday",
+      "value":10
+    },
+    {
+      "key":"Monday",
+      "value":30
+    },
+    {
+      "key":"Tuesday",
+      "value":20
+    },
+    {
+      "key":"Wednesday",
+      "value":10
+    },
+    {
+      "key":"Thrusday",
+      "value":20
+    },
+    {
+      "key":"Friday",
+      "value":35
+    },
+    {
+      "key":"Saturday",
+      "value":43
+    },
+    {
+      "key":"Sunday",
+      "value":10
+    },
+    {
+      "key":"Monday",
+      "value":10
+    },
+    {
+      "key":"Tuesday",
+      "value":14
+    },
+    {
+      "key":"Wednesday",
+      "value":30
+    },
+    {
+      "key":"Thrusday",
+      "value":20
+    },
+    {
+      "key":"Friday",
+      "value":60
+    },
+    {
+      "key":"Saturday",
+      "value":10
+    },
+    {
+      "key":"Sunday",
+      "value":10
+    },
+    {
+      "key":"Monday",
+      "value":60
+    },
+    {
+      "key":"Tuesday",
+      "value":60
+    },
+    {
+      "key":"Wednesday",
+      "value":30
+    },
+    {
+      "key":"Thrusday",
+      "value":30
+    },
+    {
+      "key":"Friday",
+      "value":60
+    },
+    {
+      "key":"Saturday",
+      "value":10
+    },
+    {
+      "key":"Sunday",
+      "value":10
+    },
+    {
+      "key":"Monday",
+      "value":20
+    },
+    {
+      "key":"Tuesday",
+      "value":20
+    },
+    {
+      "key":"Wednesday",
+      "value":20
+    },
+    {
+      "key":"Thrusday",
+      "value":20
+    },
+    {
+      "key":"Friday",
+      "value":20
+    },
+    {
+      "key":"Saturday",
+      "value":10
+    },
+    {
+      "key":"Sunday",
+      "value":10
+    },
+    {
+      "key":"Monday",
+      "value":10
+    },
+    {
+      "key":"Tuesday",
+      "value":10
+    },
+    {
+      "key":"Wednesday",
+      "value":10
+    },
+    {
+      "key":"Thrusday",
+      "value":10
+    },
+    {
+      "key":"Friday",
+      "value":10
+    },
+    {
+      "key":"Saturday",
+      "value":10
+    },
+    {
+      "key":"Sunday",
+      "value":0
+    },
+    {
+      "key":"Monday",
+      "value":0
+    },
+    {
+      "key":"Tuesday",
+      "value":0
+    },
+    {
+      "key":"Wednesday",
+      "value":0
+    },
+    {
+      "key":"Thrusday",
+      "value":0
+    },
+    {
+      "key":"Friday",
+      "value":0
+    },
+    {
+      "key":"Saturday",
+      "value":0
+    },
+    {
+      "key":"Sunday",
+      "value":0
+    },
+    {
+      "key":"Monday",
+      "value":0
+    },
+    {
+      "key":"Tuesday",
+      "value":0
+    },
+    {
+      "key":"Wednesday",
+      "value":0
+    },
+    {
+      "key":"Thrusday",
+      "value":0
+    },
+    {
+      "key":"Friday",
+      "value":0
+    },
+    {
+      "key":"Saturday",
+      "value":0
+    },
+    {
+      "key":"Sunday",
+      "value":0
+    },
+    {
+      "key":"Monday",
+      "value":0
+    },
+    {
+      "key":"Tuesday",
+      "value":0
+    },
+    {
+      "key":"Wednesday",
+      "value":0
+    },
+    {
+      "key":"Thrusday",
+      "value":0
+    },
+    {
+      "key":"Friday",
+      "value":0
+    },
+    {
+      "key":"Saturday",
+      "value":0
+    },
+    {
+      "key":"Sunday",
+      "value":0
+    },
+    {
+      "key":"Monday",
+      "value":0
+    },
+    {
+      "key":"Tuesday",
+      "value":0
+    },
+    {
+      "key":"Wednesday",
+      "value":0
+    },
+    {
+      "key":"Thrusday",
+      "value":0
+    },
+    {
+      "key":"Friday",
+      "value":0
+    },
+    {
+      "key":"Saturday",
+      "value":0
+    }
 ]
 
 
@@ -697,13 +1374,22 @@ class HeatMap extends Component {
         { label: '18-24', value: 20 },
         { label: '25-44', value: 30 },
         { label: '45-64', value: 60 }
-      ]
+      ],
+      selected: -1
     },
     this.onHexClick = this.onHexClick.bind(this);
   };
 
-  onHexClick(i){
-    console.log('onHexClick',i);
+  onHexClick(value,index,data){
+    this.setState({
+      pieData: [
+        { label: '5-13', value: 6 },
+        { label: '18-24', value: 24 },
+        { label: '25-44', value: 27 },
+        { label: '45-64', value: 0 }
+      ]
+    });
+    this.setState({ selected: index });
     //TODO: update filtered Pie Data
   };
 
@@ -751,12 +1437,16 @@ class HeatMap extends Component {
   const hexbinPath = hexbin().radius(hexRadius);
 
   const hours = ["12a", "1a", "2a", "3a", "4a", "5a", "6a", "7a", "8a", "9a", "10a", "11a", "12p", "1p", "2p", "3p", "4p", "5p", "6p", "7p", "8p", "9p", "10p", "11p"];
+  const { products } = this.props;
+
+  console.log('Products', products);
+  const { selected } = this.state;
   return (
     <div >
       <h2>Marketplace order analysis</h2>
       <div>
-        <button>Product Viewing</button>
-        <button>Product Orders</button>
+        <button onClick={() => this.setState({ data: testData, selected: -1})}>Product Viewing</button>
+        <button onClick={() => this.setState({ data: testData2, selected: -1})}>Product Orders</button>
       </div>
       <div>
       <svg width={width+margin.left+margin.right} height={350}>
@@ -769,11 +1459,11 @@ class HeatMap extends Component {
         <g transform={"translate(90," + margin.top + ")"}>
         {hexbinPath(points).map((d,i)=>
          <g className="hexPath" key={i} onClick={() => {
-            onHexClick(d[0][2]);
+            onHexClick(d[0][2],i,d);
           }}>
 
-          <path shapeRendering="geometricPrecision" transform={"translate(" + d.x + "," + d.y + ")"} d={hexbinPath.hexagon()} style={{fill:colorScale(dataToColorMap(d[0][2]))}}/>
-          <text transform={"translate(" + (d.x-7) + "," + (d.y+5) + ")"} >{d[0][2]}</text>
+          <path shapeRendering="geometricPrecision" transform={"translate(" + d.x + "," + d.y + ")"} d={hexbinPath.hexagon()} style={{ opacity: selected === -1 || selected === i ? 1 : .50, fill: colorScale(dataToColorMap(d[0][2]))}}/>
+          <text style={{opacity: selected === i ? 1 : 0}} transform={"translate(" + (d.x-7) + "," + (d.y+5) + ")"} >{d[0][2]}</text>
         </g>
         )}
         </g>
@@ -788,7 +1478,16 @@ class HeatMap extends Component {
         </g>
       </svg>
       </div>
-      <PieChart data  ={this.state.pieData}/>
+      <div style={{display:'flex',justifyContent:'row'}}>
+      <PieChart data={this.state.pieData}/>
+      <div style={{display:'flex',flexDirection:'column',justifyContent:'center'}}>
+      <h3>Popular Products By Gender</h3>
+      <div style={{display:'flex',justifyContent:'row'}}>
+        <SimpleBarChart data={[ 6, 9, 10]} reverse={false} label={'Female Products'}/>
+        <SimpleBarChart data={[ 6, 9, 10]} reverse={true} label={'Male Products'}/>
+      </div>
+      </div>
+      </div>
     </div>
   );
   }
