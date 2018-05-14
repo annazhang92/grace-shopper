@@ -19,8 +19,9 @@ supports unique values!
 */
 const faker = require('faker');
 const numCategories = 10;
-const numProducts = 500;
+const numProducts = 20;
 const numAddresses = 1;
+const numLineItems = 300;
 
 // Model relationships
 Product.belongsTo(Category);
@@ -101,6 +102,7 @@ const seed = () => {
           });
         }
       })
+
       .then(() => {
         for (let i = 0; i < numProducts; i++) {
           Product.create({
@@ -146,6 +148,18 @@ const seed = () => {
               });
             });*/
           });
+        }
+      })
+      //GENERATE LINE ITEM DATA SOLELY FOR TOP 5/BOTTOM 5 SELLERS!
+      .then(() => {
+        for(let i=0; i<numLineItems; i++) {
+          LineItem.create({
+            quantity: (Math.floor(Math.random() * 5) + 1),
+            name: ''
+          }).then((lineItem) => {
+            lineItem.productId = (Math.floor(Math.random() * numProducts) + 1);
+            return lineItem.save();
+          })
         }
       })
   ]);

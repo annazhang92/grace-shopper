@@ -11,7 +11,7 @@ const LineItem = conn.define('lineItem', {
   },
   price: {
     type: Sequelize.DECIMAL,
-    isNumeric: true
+    defaultValue: 100
   },
   name: {
     type: Sequelize.STRING
