@@ -31,7 +31,7 @@ class ProductForm extends Component {
 
   validate (){
     let isError = false;
-    if(this.state.firstNameError.length <= 1){
+    if(this.state.name.length <= 1){
       isError = true;
       this.setState({nameError: "Your product's name must be at least 2 characters long."});
     }
@@ -42,9 +42,9 @@ class ProductForm extends Component {
 
     }
 
-    if(this.state.imageUrl.indexOf('@') === -1 && this.state.email.indexOf('.') === -1){
+    if(this.state.imageUrl.indexOf('.com') === -1){
       isError = true;
-      this.setState({imageUrlError: "Please include a valid image URL."});
+      this.setState({imageUrlError: "Please enter a valid URL."});
     }
 
     if(this.state.price.length < 7){
@@ -54,12 +54,12 @@ class ProductForm extends Component {
 
     if(this.state.inventory.length < 7){
       isError = true;
-      this.setState({inventoryError: "Please enter a valid price."});
+      this.setState({inventoryError: "Please enter a valid inventory count."});
     }
 
     if(this.state.categoryId.length < 7){
       isError = true;
-      this.setState({cateogryIdError: "Please enter a valid price."});
+      this.setState({cateogryIdError: "Please enter a valid category ID."});
     }
 
     
@@ -90,19 +90,79 @@ class ProductForm extends Component {
     const { product } = this.props;
     const { name, description, imageUrl, price, categoryId, isUpdating } = this.state;
     const buttonText = product ? 'I want to make changes!': 'I want to create a new product!';
-    const inputs = {
-      name: 'Name',
-      description: 'Description',
-      imageUrl: 'Image URL',
-      price: 'Price',
-      inventory: 'Inventory',
-      categoryId: 'Category ID'
-    }
+    // const inputs = {
+    //   name: 'Name',
+    //   description: 'Description',
+    //   imageUrl: 'Image URL',
+    //   price: 'Price',
+    //   inventory: 'Inventory',
+    //   categoryId: 'Category ID'
+    // }
     return (
       <div>
         {product ? <h2>Update Product</h2> : <h2>Create Product</h2>}
         <form>
-          {
+          <TextField
+              name="name"
+              floatingLabelText="Name"
+              value={ name }
+              readOnly={isUpdating ? false : true}
+              onChange={ onChangeProduct }
+              floatingLabelFixed={true}
+              errorText={this.state.nameError}
+            />
+            <br />
+            <TextField
+              name="description"
+              floatingLabelText="Description"
+              value={ description }
+              readOnly={isUpdating ? false : true}
+              onChange={ onChangeProduct }
+              floatingLabelFixed={true}
+              errorText={this.state.descriptionError}
+            />
+            <br />
+            <TextField
+              name="imageUrl"
+              floatingLabelText="Image URL"
+              value={ imageUrl }
+              readOnly={isUpdating ? false : true}
+              onChange={ onChangeProduct }
+              floatingLabelFixed={true}
+              errorText={this.state.imageUrlError}
+            />
+            <br />
+            <TextField
+              name="price"
+              floatingLabelText="Price"
+              value={ price }
+              readOnly={isUpdating ? false : true}
+              onChange={ onChangeProduct }
+              floatingLabelFixed={true}
+              errorText={this.state.priceError}
+            />
+            <br />
+            <TextField
+              name="inventory"
+              floatingLabelText="Inventory"
+              value={ inventory }
+              readOnly={isUpdating ? false : true}
+              onChange={ onChangeProduct }
+              floatingLabelFixed={true}
+              errorText={this.state.inventoryError}
+            />
+            <br />
+            <TextField
+              name="categoryId"
+              floatingLabelText="Category ID"
+              value={ categoryId }
+              readOnly={isUpdating ? false : true}
+              onChange={ onChangeProduct }
+              floatingLabelFixed={true}
+              errorText={this.state.categoryIdError}
+            />
+            <br />
+          {/* {
             Object.keys(inputs).map(input => {
               return (
                 <div key={input}>
@@ -118,7 +178,7 @@ class ProductForm extends Component {
                 </div>
               )
             })
-          }
+          } */}
         </form>
         <br />
         {
