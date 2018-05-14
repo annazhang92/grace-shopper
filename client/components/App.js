@@ -46,7 +46,7 @@ class App extends Component {
       <Router>
         <div>
           <Menu />
-          <Route path="/" exact component={ Home } />
+          <MuiThemeProvider><Route path="/" exact component={ Home } /></MuiThemeProvider>
           <Route exact path="/products/categories" component={ Categories } />
           <Route exact path="/products" component={ Products } />
           <Route exact path="/products/:id" render={ ({ match, history }) => <ProductDetail id={ match.params.id * 1 } history={ history } /> } />
