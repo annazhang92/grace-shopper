@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { updateUser, updateAddress, createAddress, updateNavUser } from '../store';
-import TextField from 'material-ui/TextField';
-import RaisedButton from 'material-ui/RaisedButton';
 import AdminUserAccount from './AdminUserAccount';
 import PastOrders from './PastOrders';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 import SelectField from 'material-ui/SelectField';
 import MenuItem from 'material-ui/MenuItem';
+
+
 
 
 class UserForm extends Component {
@@ -20,6 +22,7 @@ class UserForm extends Component {
       lastName: userToRender ? userToRender.lastName : '',
       lastNameError: '',
       password: userToRender ? userToRender.password : '',
+      passwordNameError: '',
       email: userToRender ? userToRender.email : '',
       emailError: '',
       isAdmin: userToRender ? userToRender.isAdmin : '',
@@ -38,13 +41,12 @@ class UserForm extends Component {
       phoneNumberError: '',
       showComponent: false,
       updating: false,
-      value: 0
+      value: 0,
+      textmask: '(1  )    -    '
     }
     this.onChange = this.onChange.bind(this);
     this.onUpdate = this.onUpdate.bind(this);
     this.onShowPastOrders = this.onShowPastOrders.bind(this);
-    this.handleChange = (event, index, value) => this.setState({value}).bind(this);
-
   }
 
 
