@@ -43,7 +43,7 @@ class App extends Component {
   }
 
   render() {
-    const revenueByProduct = [
+    /*const revenueByProduct = [
       {id: 1, name: 'chocolate', revenue: 1000},
       {id: 2, name: 'cookie', revenue: 500},
       {id: 3, name: 'ice cream', revenue: 200},
@@ -52,7 +52,7 @@ class App extends Component {
       {id: 6, name: 'pie', revenue: 700},
       {id: 7, name: 'candy', revenue: 800},
       {id: 8, name: 'smores', revenue: 900},
-    ]
+    ]*/
     return (
       <Router>
         <div>
@@ -77,7 +77,7 @@ class App extends Component {
           <MuiThemeProvider><Route exact path="/categoryform" component={ CategoryForm } /></MuiThemeProvider>
           <Route exact path="/dashboard" component={ HeatMap } />
           <Route exact path="/admindashboard" component={ AdminDashboard } />
-          <Route exact path="/topbottom" component={() => <TopBottom revenueByProduct ={revenueByProduct} /> } />
+          <Route exact path="/topbottom" component={ TopBottom } />
           </div>
       </Router>
     );

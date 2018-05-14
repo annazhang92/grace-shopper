@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 class TopBottom extends Component {
   constructor(props) {
     super(props);
-    const { revenueByProduct } = props;
+    const { finalLineItems } = props;
     this.bubbleTwo = this.bubbleTwo.bind(this);
     this.bubbleSort = this.bubbleSort.bind(this);
   }
@@ -33,7 +33,6 @@ class TopBottom extends Component {
         if (productArr[i+1].revenue > temp.revenue) {
           productArr[i] = temp;
         }
-  
       }
       productArr = this.bubbleSort(productArr);
     }
@@ -42,28 +41,38 @@ class TopBottom extends Component {
 
   render() {
     const { bubbleSort } = this;
-    const { revenueByProduct } = this.props;
-    const sortedProducts = bubbleSort(revenueByProduct);
-    const topFive = [ sortedProducts[0], sortedProducts[1], sortedProducts[2], sortedProducts[3], sortedProducts[4] ]
-    const lastProduct = revenueByProduct.length-1;
-    const bottomFive = [ sortedProducts[lastProduct], sortedProducts[lastProduct-1], sortedProducts[lastProduct-2], sortedProducts[lastProduct-3], sortedProducts[lastProduct-4] ]
-    
-    console.log(topFive)
-
+    const { finalLineItems } = this.props;
+    const sortedProducts = bubbleSort(finalLineItems);
+    const bottomFive = [ sortedProducts[0], sortedProducts[1], sortedProducts[2], sortedProducts[3], sortedProducts[4] ]
+    const lastProduct = sortedProducts.length-1;
+    const topFive = [ sortedProducts[lastProduct], sortedProducts[lastProduct-1], sortedProducts[lastProduct-2], sortedProducts[lastProduct-3], sortedProducts[lastProduct-4] ]
     if(!topFive) {
       return null;
     }
     return (
       <div>
         <h2>Top Revenue Grossing Products</h2>
-        
         <ul className = 'list-group'>
           {
             topFive.map(product => {
               
               return (
-                <li key={product.id} className='list-group-item'>
-                  {product.name} {product.revenue}
+                <li key={product.name} className='list-group-item'>
+                  {product.id} {product.name} {product.revenue}
+                </li>
+              )
+            })
+          }
+        </ul>
+
+        <h2>Bottom Revenue Grossing Products</h2>
+        <ul className = 'list-group'>
+          {
+            bottomFive.map(product => {
+              
+              return (
+                <li key={product.name} className='list-group-item'>
+                  {product.id} {product.name} {product.revenue}
                 </li>
               )
             })
@@ -74,9 +83,8 @@ class TopBottom extends Component {
   }
 }
 
-/*const mapState = ({ lineItems, products }, {ownprops}) => { 
+const mapState = ({ lineItems, products }) => { 
   let newLineItems = [];
-  
   const newLineItemFn = 
     lineItems.forEach(lineItem => {
       const productForLineItem = products.find(product => product.id === lineItem.productId);
@@ -94,13 +102,30 @@ class TopBottom extends Component {
     return total;
   }, {})
 
+  const makeLineItemArr = (consolidatedLineItems) => {
+    const productNames = Object.keys(consolidatedLineItems);
+    let lineItemArr = [];
+    let productObj = {};
+    for (let i=0; i<productNames.length; i++) {
+      const product = products.find(product => product.name === productNames[i])
+      productObj = {
+        id: product.id,
+        name: productNames[i],        
+        revenue: consolidatedLineItems[productNames[i]]
+      }
+      lineItemArr = [...lineItemArr, productObj]
+    }
+    return lineItemArr
+  }
+
+  const finalLineItems = makeLineItemArr(consolidatedLineItems);
+  console.log(finalLineItems)
+  
   return {
-    consolidatedLineItems,
+    finalLineItems,
     products
   }
 
-}*/
+}
 
-export default TopBottom;
-
-//export default connect(mapState)(TopBottom);
+export default connect(mapState)(TopBottom);
